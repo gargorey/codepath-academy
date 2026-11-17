@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodePath Academy</title>
+<meta name="description" content="CodePath Academy أكاديمية برمجة أونلاين يقدّمها المدرب محمد صالح موسى، Senior Flutter Developer. تعلّم البرمجة وتطوير تطبيقات الجوال بـ Flutter من الصفر حتى الاحتراف بالعربية والإنجليزية.">
+<meta name="theme-color" content="#0a1124">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="CodePath Academy">
+<meta property="og:title" content="CodePath Academy | Learn • Practice • Build">
+<meta property="og:description" content="ابدأ رحلتك في عالم البرمجة من الصفر حتى الاحتراف. Learn programming and Flutter from zero to professional.">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='12' fill='%230a1124'/%3E%3Cpath d='M17 15 9 24l8 9M31 15l8 9-8 9' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 31l8-14' stroke='%23eef3ff' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one long scroll (RTL for Arabic, LTR for English); a glowing "path" line threads the roadmap; cards sit on a faint blueprint grid */
+:root{
+  --bg:#0a1124; --bg-2:#0d1730; --surface:#111d3a; --surface-2:#16244a;
+  --line:rgba(150,180,255,.14); --line-strong:rgba(150,180,255,.26);
+  --fg:#eef3ff; --muted:#a3b0cf; --dim:#7584a8;
+  --cyan:#22d3ee; --blue:#3b82f6; --violet:#8b5cf6;
+  --ok:#34d399; --warn:#fbbf24; --err:#f87171;
+  --grad:linear-gradient(120deg,var(--cyan),var(--blue) 45%,var(--violet));
+  --font:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:18px; --r-sm:12px;
+  --wrap:1180px;
+  color-scheme:dark;
+}
+:root[lang="en"]{--font:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{margin:0;line-height:1.3;text-wrap:balance;font-weight:700}
+:root[lang="en"] h1,:root[lang="en"] h2{letter-spacing:-.02em;line-height:1.15}
+p{margin:0}
+.mono{font-family:var(--mono)}
+/* English-only snippets inside either layout: keep LTR, align to the reading edge */
+.ltr{direction:ltr;unicode-bidi:isolate;text-align:right}
+:root[dir="ltr"] .ltr{text-align:left}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:16px;top:-60px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:8px;z-index:100;text-decoration:none;font-weight:600}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+
+.bg-fx{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 85% -10%,rgba(34,211,238,.16),transparent 60%),
+    radial-gradient(800px 600px at 0% 30%,rgba(139,92,246,.14),transparent 60%),
+    var(--bg)}
+.bg-fx::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;opacity:.35;
+  mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%)}
+
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{scroll-margin-top:88px}
+.section{padding-block:96px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan)}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--grad)}
+.sec-head{display:grid;gap:14px;max-width:720px;margin-bottom:48px}
+.sec-head h2{font-size:clamp(28px,4vw,42px)}
+.sec-head p{color:var(--muted);font-size:18px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.btn{--h:50px;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:var(--h);padding-inline:24px;border-radius:999px;border:1px solid transparent;font:600 16px/1 var(--font);text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+:root[dir="ltr"] .flip{transform:scaleX(-1)}
+.btn-primary{background:var(--grad);color:#06101f;box-shadow:0 10px 30px -10px rgba(34,211,238,.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(59,130,246,.7)}
+.btn-ghost{background:rgba(255,255,255,.03);border-color:var(--line-strong);color:var(--fg)}
+.btn-ghost:hover{border-color:var(--cyan);background:rgba(34,211,238,.08)}
+.btn-wa{background:#1fae5b;color:#fff}
+.btn-wa:hover{background:#1c9c52;transform:translateY(-2px)}
+.btn-sm{--h:40px;padding-inline:16px;font-size:14px}
+
+/* header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;border-bottom:1px solid transparent;transition:background .25s,border-color .25s}
+.site-header.scrolled{background:rgba(10,17,36,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:76px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;direction:ltr}
+.brand svg{width:40px;height:40px;flex:none}
+.brand-name{display:grid;line-height:1.15}
+.brand-name b{font-size:18px;letter-spacing:-.01em;font-family:"IBM Plex Sans","IBM Plex Sans Arabic",sans-serif}
+.brand-name small{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
+.nav-links a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:500;font-size:15px;transition:color .2s,background .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--fg);background:rgba(255,255,255,.06)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding-inline:12px;border-radius:999px;border:1px solid var(--line-strong);background:rgba(255,255,255,.03);color:var(--fg);font:600 14px/1 "IBM Plex Sans","IBM Plex Sans Arabic",sans-serif;cursor:pointer}
+.lang-btn:hover{border-color:var(--cyan)}
+.lang-btn svg{width:17px;height:17px;color:var(--cyan)}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-strong);background:transparent;color:var(--fg);cursor:pointer;align-items:center;justify-content:center}
+.menu-btn svg{width:22px;height:22px}
+
+/* hero */
+.hero{padding-block:56px 88px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero-copy{display:grid;gap:26px;min-width:0}
+.pill{justify-self:start;display:inline-flex;align-items:center;gap:10px;padding-block:6px;padding-inline:6px 14px;border:1px solid var(--line-strong);border-radius:999px;background:rgba(17,29,58,.6);font-size:14px;color:var(--muted)}
+.pill .dot{display:inline-grid;place-items:center;padding:3px 10px;border-radius:999px;background:rgba(34,211,238,.12);color:var(--cyan);font-family:var(--mono);font-size:12px}
+.hero h1{font-size:clamp(34px,5.6vw,64px);line-height:1.22;letter-spacing:-.01em}
+:root[lang="en"] .hero h1{font-size:clamp(34px,5.2vw,62px);line-height:1.1}
+.hero h1 .grad-text{display:block}
+.hero-lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:560px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.tagline{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:14px;color:var(--dim);direction:ltr;justify-content:flex-end}
+:root[dir="ltr"] .tagline{justify-content:flex-start}
+.tagline span{display:inline-flex;align-items:center;gap:8px}
+.tagline span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.tagline span:nth-child(2)::before{background:var(--blue);box-shadow:0 0 10px var(--blue)}
+.tagline span:nth-child(3)::before{background:var(--violet);box-shadow:0 0 10px var(--violet)}
+
+.hero-visual{position:relative;min-width:0;display:grid;justify-items:center}
+.portrait{position:relative;width:min(380px,100%);aspect-ratio:4/5;border-radius:28px;padding:2px;background:linear-gradient(160deg,rgba(34,211,238,.7),rgba(59,130,246,.2) 40%,rgba(139,92,246,.7))}
+.portrait-inner{position:relative;height:100%;border-radius:26px;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,#1b2d5c,var(--bg-2) 70%)}
+.portrait-inner img{width:100%;height:100%;object-fit:cover}
+.monogram{position:absolute;inset:0;display:grid;justify-items:center;align-content:start;gap:8px;text-align:center;padding:14% 24px 24px}
+.monogram .initial{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;font-size:62px;font-weight:700;background:rgba(10,17,36,.6);border:1px solid var(--line-strong);box-shadow:0 0 0 10px rgba(34,211,238,.05),0 0 60px -10px rgba(34,211,238,.5);margin-bottom:10px}
+.monogram .initial span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.monogram strong{font-size:20px}
+.monogram small{font-size:13.5px;color:var(--muted);line-height:1.4}
+.code-card{position:absolute;inset-inline-start:-36px;bottom:-56px;width:min(300px,78%);background:rgba(13,23,48,.92);border:1px solid var(--line-strong);border-radius:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);backdrop-filter:blur(8px);overflow:hidden;direction:ltr;text-align:left}
+.code-top{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.code-top i{width:9px;height:9px;border-radius:50%;background:#33415f}
+.code-top i:first-child{background:#f87171}.code-top i:nth-child(2){background:#fbbf24}.code-top i:nth-child(3){background:#34d399}
+.code-top span{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--dim)}
+.code-card pre{margin:0;padding:14px 16px;font:12.5px/1.75 var(--mono);color:#cdd8f5;white-space:pre;overflow:hidden}
+.code-card .k{color:#c4a1ff}.code-card .s{color:#7ee0a5}.code-card .f{color:#5ad8f2}
+.code-card pre span.line{display:block;animation:typeIn .5s both}
+.cursor{display:inline-block;width:7px;height:14px;background:var(--cyan);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.float-chip{position:absolute;padding:7px 12px;border-radius:999px;background:rgba(13,23,48,.9);border:1px solid var(--line-strong);font-family:var(--mono);font-size:12.5px;direction:ltr;box-shadow:0 10px 30px -12px rgba(0,0,0,.6);animation:bob 6s ease-in-out infinite}
+.float-chip b{color:var(--cyan);font-weight:500}
+.fc-1{top:8%;inset-inline-end:-18px}
+.fc-2{top:34%;inset-inline-end:-34px;animation-delay:-2s}
+.fc-2 b{color:var(--violet)}
+@keyframes bob{50%{transform:translateY(-8px)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes typeIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-copy>*{animation:rise .7s both}
+.hero-copy>*:nth-child(2){animation-delay:.08s}.hero-copy>*:nth-child(3){animation-delay:.16s}.hero-copy>*:nth-child(4){animation-delay:.24s}.hero-copy>*:nth-child(5){animation-delay:.32s}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}
+.about-card{position:sticky;top:110px;padding:28px;border-radius:var(--r);background:linear-gradient(180deg,var(--surface),var(--bg-2));border:1px solid var(--line);display:grid;gap:18px}
+.about-card .who{display:flex;align-items:center;gap:16px}
+.avatar{width:64px;height:64px;border-radius:18px;flex:none;display:grid;place-items:center;font-size:24px;font-weight:700;background:var(--grad);color:#06101f;overflow:hidden;font-family:"IBM Plex Sans",sans-serif}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.about-card h3{font-size:22px}
+.role{font-family:var(--mono);font-size:12.5px;color:var(--cyan);line-height:1.6;margin-top:4px}
+.loc{font-size:14px;color:var(--muted);margin-top:2px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{padding:12px 10px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid var(--line);display:grid;gap:2px;text-align:center;align-content:start}
+.kpi b{font-size:20px;line-height:1.3;font-variant-numeric:tabular-nums}
+.kpi small{font-size:12px;color:var(--muted);line-height:1.45}
+.skills{display:grid;gap:12px;margin:0;padding:16px 0 0;border-top:1px solid var(--line);list-style:none}
+.skills>li{display:grid;gap:6px}
+.skills>li>span{font-size:13px;color:var(--dim)}
+.skills .chips li{font-size:11.5px}
+.about-links{display:flex;flex-wrap:wrap;gap:8px}
+.about-links .btn{flex:1}
+.about-copy{display:grid;gap:22px;font-size:18px;color:var(--muted);min-width:0}
+.about-copy h2{font-size:clamp(28px,4vw,42px);color:var(--fg)}
+.about-copy p strong{color:var(--fg);font-weight:600}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
+.principle{padding:20px;border-radius:var(--r-sm);border:1px solid var(--line);background:rgba(17,29,58,.5);display:grid;gap:6px}
+.principle .mono{font-size:12px;color:var(--cyan)}
+.principle h4{font-size:17px;color:var(--fg)}
+.principle p{font-size:15px;line-height:1.7}
+.sub-h{font-size:20px;color:var(--fg);margin-top:14px;display:flex;align-items:center;gap:14px}
+.sub-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.timeline{list-style:none;margin:0;padding:0;display:grid}
+.timeline li{position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding-block:12px 16px;padding-inline-start:24px;border-inline-start:2px solid var(--line-strong)}
+.timeline li::before{content:"";position:absolute;inset-inline-start:-7px;top:19px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan)}
+.timeline li.now::before{background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.timeline .t-role{font-size:17px;font-weight:600;color:var(--fg);line-height:1.5}
+.timeline .t-date{font-family:var(--mono);font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap;direction:ltr;align-self:center}
+.timeline .t-org{grid-column:1/-1;font-size:15px;color:var(--cyan);opacity:.85}
+.timeline .t-note{grid-column:1/-1;font-size:15px;color:var(--muted);line-height:1.7}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.app{display:grid;gap:2px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(17,29,58,.5);text-decoration:none;transition:border-color .2s,transform .2s;min-width:0}
+.app:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.app b{font-size:15px;color:var(--fg);font-weight:600}
+.app small{font-size:12.5px;color:var(--muted);line-height:1.5}
+.app .store{font-family:var(--mono);font-size:11px;color:var(--cyan)}
+
+/* courses */
+.course-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.course{position:relative;display:flex;flex-direction:column;gap:16px;padding:26px;border-radius:var(--r);background:linear-gradient(180deg,rgba(22,36,74,.85),rgba(13,23,48,.85));border:1px solid var(--line);transition:transform .25s,border-color .25s,box-shadow .25s;min-width:0}
+.course:hover{transform:translateY(-4px);border-color:var(--line-strong);box-shadow:0 24px 50px -24px rgba(34,211,238,.35)}
+.course-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.level{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;border:1px solid}
+.level::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.lv-beg{color:var(--ok);border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.08)}
+.lv-mid{color:var(--warn);border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08)}
+.lv-adv{color:#f0abfc;border-color:rgba(240,171,252,.35);background:rgba(240,171,252,.08)}
+.track{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.course h3{font-size:22px}
+.en-title{display:block;margin-top:4px;font-family:var(--mono);font-size:13px;font-weight:400;color:var(--cyan)}
+.course p.ov{color:var(--muted);font-size:15.5px;line-height:1.8}
+.chips{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.chips li{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#cdd8f5;direction:ltr}
+.chips li.more{color:var(--cyan)}
+.course-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:auto;padding-top:16px;border-top:1px dashed var(--line-strong);font-size:14px;color:var(--muted)}
+.course-meta span{display:inline-flex;align-items:center;gap:6px}
+.course-meta svg{width:16px;height:16px;color:var(--dim)}
+.course-actions{display:flex;gap:10px;flex-wrap:wrap}
+.course-actions .btn{flex:1}
+
+/* roadmap */
+.roadmap{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;align-items:stretch}
+.roadmap::before{content:"";position:absolute;inset-inline:6%;top:50%;height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--violet));opacity:.6;box-shadow:0 0 18px rgba(59,130,246,.6)}
+:root[dir="rtl"] .roadmap::before{background:linear-gradient(270deg,var(--cyan),var(--blue),var(--violet))}
+.step{position:relative;padding:22px 20px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line-strong);display:flex;flex-direction:column;gap:8px;min-width:0}
+.step .num{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+.step h3{font-size:18px}
+.step p{font-size:14px;color:var(--muted);line-height:1.7}
+.step .en{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.step a{margin-top:auto;padding-top:6px;font-size:13.5px;color:var(--cyan);text-decoration:none;font-weight:500}
+.step a:hover{text-decoration:underline}
+.step.mobile{border-color:rgba(34,211,238,.45)}
+.step.final{background:linear-gradient(160deg,rgba(34,211,238,.18),rgba(139,92,246,.22)),var(--surface);border-color:rgba(139,92,246,.5)}
+
+/* why */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.why{padding:30px;background:var(--bg-2);display:grid;gap:12px;align-content:start}
+.why .ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(34,211,238,.1);color:var(--cyan)}
+.why:nth-child(even) .ico{background:rgba(139,92,246,.12);color:#b79bff}
+.why .ico svg{width:24px;height:24px}
+.why h3{font-size:19px}
+.why p{color:var(--muted);font-size:15.5px}
+
+/* projects */
+.notice{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;border-radius:var(--r-sm);border:1px dashed rgba(251,191,36,.45);background:rgba(251,191,36,.06);color:#fde7a8;font-size:15px;margin-bottom:28px}
+.notice svg{width:20px;height:20px;flex:none;margin-top:4px}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proj{border-radius:var(--r);border:1px solid var(--line);background:var(--surface);overflow:hidden;display:flex;flex-direction:column}
+.proj-shot{position:relative;aspect-ratio:16/10;max-width:100%;background:repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 12px,transparent 12px 24px),linear-gradient(160deg,#162a57,#0d1730);display:grid;place-items:center;border-bottom:1px solid var(--line)}
+.proj-shot .tag{position:absolute;top:12px;inset-inline-start:12px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(251,191,36,.14);color:#fcd77a;border:1px solid rgba(251,191,36,.35)}
+.mock{height:80%;aspect-ratio:9/16;border-radius:14px;border:2px solid rgba(255,255,255,.18);background:rgba(10,17,36,.7);padding:10px 8px;display:grid;gap:6px;align-content:start}
+.mock.wide{height:auto;width:70%;aspect-ratio:16/10;border-radius:8px}
+.mock i{display:block;height:8px;border-radius:4px;background:rgba(255,255,255,.12)}
+.mock i.a{background:var(--grad);opacity:.8;height:12px;width:60%}
+.mock i.s{width:75%}.mock i.t{width:45%}
+.mock i.b{height:26px;border-radius:6px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)}
+.proj-body{padding:20px;display:grid;gap:6px}
+.proj-body h3{font-size:17px}
+.proj-body p{font-size:14px;color:var(--muted)}
+.proj-body .mono{font-size:12px;color:var(--dim)}
+
+/* faq */
+.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start}
+.faq-list{display:grid;gap:12px;min-width:0}
+details{border:1px solid var(--line);border-radius:var(--r-sm);background:rgba(17,29,58,.55);transition:border-color .2s,background .2s}
+details[open]{border-color:var(--line-strong);background:var(--surface)}
+summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;font-weight:600;font-size:17px}
+summary::-webkit-details-marker{display:none}
+summary .pm{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.05);color:var(--cyan);transition:transform .25s}
+details[open] summary .pm{transform:rotate(45deg)}
+details .ans{padding:0 20px 20px;color:var(--muted);font-size:16px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+.contact-side{display:grid;gap:16px;min-width:0}
+.wa-card{padding:28px;border-radius:var(--r);background:linear-gradient(160deg,rgba(31,174,91,.18),rgba(13,23,48,.9) 60%);border:1px solid rgba(31,174,91,.35);display:grid;gap:16px}
+.wa-card h3{font-size:22px}
+.wa-card p{color:var(--muted)}
+.num-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num-row .mono{font-size:20px;font-weight:500;user-select:all;color:var(--fg);direction:ltr;unicode-bidi:isolate}
+.copy-btn{border:1px solid var(--line-strong);background:transparent;color:var(--muted);border-radius:8px;padding:5px 10px;font:500 13px var(--font);cursor:pointer}
+.copy-btn:hover{color:var(--fg);border-color:var(--cyan)}
+.links-card{padding:22px 24px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg-2);display:grid;gap:14px}
+.links-card a{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted);min-width:0}
+.links-card a span{overflow-wrap:anywhere}
+.links-card a:hover{color:var(--fg)}
+.links-card svg{width:20px;height:20px;color:var(--cyan);flex:none}
+.form-card{padding:30px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line-strong);display:grid;gap:20px;min-width:0}
+.form-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.form-head h3{font-size:22px}
+.demo-badge{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(251,191,36,.12);color:#fcd77a;border:1px solid rgba(251,191,36,.35)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-size:14px;font-weight:500;color:var(--fg)}
+label .req{color:var(--cyan)}
+input,select,textarea{width:100%;font:16px/1.5 var(--font);color:var(--fg);background:var(--bg-2);border:1px solid var(--line-strong);border-radius:12px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+input[type=email],input[type=tel]{direction:ltr;text-align:right}
+:root[dir="ltr"] input[type=email],:root[dir="ltr"] input[type=tel]{text-align:left}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a3b0cf' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 12px center;background-size:18px;padding-left:40px}
+:root[dir="ltr"] select{background-position:right 12px center;padding-left:14px;padding-right:40px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.18)}
+.field.invalid input,.field.invalid select{border-color:var(--err)}
+.err{font-size:13px;color:var(--err)}
+textarea{min-height:110px;resize:vertical}
+.form-foot{grid-column:1/-1;display:grid;gap:12px}
+.status{border-radius:12px;padding:16px 18px;font-size:15px;display:grid;gap:12px}
+.status.info{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);color:#fde7a8}
+.status.ok{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.4);color:#a7f3d0}
+.status.bad{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.4);color:#fecaca}
+.status .btn{justify-self:start}
+
+.site-footer{border-top:1px solid var(--line);padding-block:40px;color:var(--muted);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot nav a{text-decoration:none}
+.foot nav a:hover{color:var(--fg)}
+
+/* course dialog */
+dialog{width:min(760px,calc(100% - 32px));max-height:calc(100dvh - 48px);padding:0;border:1px solid var(--line-strong);border-radius:22px;background:var(--bg-2);color:var(--fg);box-shadow:0 40px 80px -20px rgba(0,0,0,.7)}
+dialog::backdrop{background:rgba(5,9,20,.72);backdrop-filter:blur(4px)}
+dialog[open]{animation:rise .3s both}
+.dlg-head{position:relative;padding:30px 30px 24px;background:linear-gradient(160deg,rgba(34,211,238,.14),rgba(139,92,246,.14));border-bottom:1px solid var(--line);display:grid;gap:12px}
+.dlg-head h2{font-size:clamp(22px,3.5vw,30px);padding-inline-end:48px}
+.dlg-close{position:absolute;top:16px;inset-inline-end:16px;width:40px;height:40px;border-radius:12px;border:1px solid var(--line-strong);background:rgba(10,17,36,.6);color:var(--fg);cursor:pointer;display:grid;place-items:center}
+.dlg-close svg{width:20px;height:20px}
+.dlg-head .course-top{padding-inline-end:48px;flex-wrap:wrap}
+.dlg-body{padding:26px 30px 30px;display:grid;gap:24px}
+.dlg-body h4{font-size:15px;color:var(--cyan);font-weight:600;margin-bottom:10px}
+.topic-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.topic-list li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.035);border:1px solid var(--line);font-size:15px;min-width:0}
+.topic-list li bdi{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fact{padding:14px;border-radius:12px;border:1px dashed var(--line-strong);display:grid;gap:4px}
+.fact small{color:var(--dim);font-size:12.5px}
+.fact b{font-size:15px;font-weight:600}
+.fact b.tbd{color:var(--muted);font-weight:500}
+.dlg-project{padding:16px 18px;border-radius:12px;background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.25);color:var(--fg)}
+
+@media (max-width:1120px){
+  .nav-links a{padding:8px 8px;font-size:14px}
+}
+@media (max-width:1020px){
+  .menu-btn{display:inline-flex}
+  .nav-links{position:fixed;top:calc(76px + env(safe-area-inset-top,0px));inset-inline:0;flex-direction:column;align-items:stretch;gap:2px;padding:12px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px));background:rgba(10,17,36,.97);border-bottom:1px solid var(--line);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.2s}
+  .nav-links.open{transform:none;opacity:1;visibility:visible}
+  .nav-links a{padding:14px 16px;font-size:17px;border-radius:12px}
+  .site-header.menu-open{background:rgba(10,17,36,.97)}
+  .roadmap{grid-template-columns:1fr;padding-inline-start:26px}
+  .roadmap::before,:root[dir="rtl"] .roadmap::before{inset-inline:auto;inset-inline-start:7px;top:10px;bottom:10px;height:auto;width:2px;background:linear-gradient(180deg,var(--cyan),var(--blue),var(--violet))}
+}
+@media (max-width:960px){
+  .nav-cta .btn-primary{display:none}
+  .hero-grid,.about-grid,.faq-wrap,.contact-grid{grid-template-columns:1fr}
+  .hero-visual{margin-top:12px;padding-bottom:56px}
+  .portrait{width:min(310px,88%)}
+  .about-card{position:static}
+  .about-copy{order:-1}
+  .why-grid,.proj-grid{grid-template-columns:1fr 1fr}
+  .principles{grid-template-columns:1fr}
+  .apps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .section{padding-block:68px}
+  .sec-head{margin-bottom:32px}
+  .hero{padding-block:28px 56px}
+  .hero-actions .btn{flex:1 1 100%}
+  :root[dir="rtl"] .tagline{justify-content:flex-start;direction:rtl}
+  .code-card{inset-inline-start:-6px;bottom:-40px;width:84%}
+  .fc-1{inset-inline-end:-4px}.fc-2{inset-inline-end:-6px}
+  .brand-name small{display:none}
+  .brand-name b{font-size:16px}
+  .course-grid,.why-grid,.proj-grid{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  .form-card,.about-card,.wa-card{padding:22px}
+  .topic-list{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .dlg-head,.dlg-body{padding-inline:20px}
+  .why{padding:24px}
+  .timeline li{grid-template-columns:1fr}
+  .timeline .t-date{grid-row:2}
+}
+@media (max-width:400px){
+  .brand-name b{font-size:14px}
+  .brand svg{width:34px;height:34px}
+  .lang-btn{padding-inline:10px}
+  .apps{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">تخطَّ إلى المحتوى</a>
+<div class="bg-fx" aria-hidden="true"></div>
+
+<header class="site-header" id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="CodePath Academy">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="12" fill="#0d1730" stroke="url(#lg)" stroke-opacity=".6"/><path d="M17 15 9 24l8 9M31 15l8 9-8 9" fill="none" stroke="url(#lg)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 31l8-14" stroke="#eef3ff" stroke-width="3.2" stroke-linecap="round"/></svg>
+      <span class="brand-name"><b>CodePath Academy</b><small>Learn • Practice • Build</small></span>
+    </a>
+    <nav data-i18n-aria="navMain" aria-label="القائمة الرئيسية">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" data-i18n="navHome">الرئيسية</a></li>
+        <li><a href="#about" data-i18n="navAbout">عن المدرب</a></li>
+        <li><a href="#courses" data-i18n="navCourses">الدورات</a></li>
+        <li><a href="#roadmap" data-i18n="navPath">مسار التعلم</a></li>
+        <li><a href="#faq" data-i18n="navFaq">الأسئلة الشائعة</a></li>
+        <li><a href="#contact" data-i18n="navContact">تواصل معنا</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <button class="lang-btn" id="langBtn" type="button" lang="en" aria-label="Switch to English">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
+        <span id="langLabel">EN</span>
+      </button>
+      <a class="btn btn-primary btn-sm" href="#contact" data-i18n="ctaRegister">سجّل الآن</a>
+      <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M10 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="pill"><span class="dot">online</span> <span data-i18n="heroPill">تعلّم البرمجة أونلاين بالعربية والإنجليزية</span></span>
+      <h1 data-i18n="heroTitle">ابدأ رحلتك في عالم البرمجة <span class="grad-text">من الصفر حتى الاحتراف</span></h1>
+      <p class="hero-lead" data-i18n="heroLead">تعلّم عملي أونلاين، خطوة بخطوة، مع مشاريع حقيقية. من أساسيات البرمجة حتى نشر تطبيقات Flutter على المتاجر، مع المصطلحات التقنية بالإنجليزية كما ستستخدمها في سوق العمل.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#courses"><span data-i18n="heroBtn1">استكشف الدورات</span>
+          <svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#about" data-i18n="heroBtn2">تعرّف على المدرب</a>
+      </div>
+      <div class="tagline" aria-label="Learn, Practice, Build"><span>Learn</span><span>Practice</span><span>Build</span></div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="portrait"><div class="portrait-inner" id="heroPortrait"></div></div>
+      <div class="float-chip fc-1" aria-hidden="true"><b>Flutter</b> &amp; Dart</div>
+      <div class="float-chip fc-2" aria-hidden="true"><b>5+ yrs</b> experience</div>
+      <div class="code-card" aria-hidden="true">
+        <div class="code-top"><i></i><i></i><i></i><span>main.dart</span></div>
+<pre><span class="line" style="animation-delay:.3s"><span class="k">void</span> <span class="f">main</span>() {</span><span class="line" style="animation-delay:.5s">  <span class="k">final</span> path = [<span class="s">'Learn'</span>,</span><span class="line" style="animation-delay:.7s">    <span class="s">'Practice'</span>, <span class="s">'Build'</span>];</span><span class="line" style="animation-delay:.9s">  <span class="k">for</span> (<span class="k">final</span> step <span class="k">in</span> path) {</span><span class="line" style="animation-delay:1.1s">    <span class="f">print</span>(<span class="s">'CodePath → $step'</span>);</span><span class="line" style="animation-delay:1.3s">  }</span><span class="line" style="animation-delay:1.5s">} <span class="cursor"></span></span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="wrap about-grid">
+    <aside class="about-card">
+      <div class="who">
+        <div class="avatar" id="aboutAvatar">MS</div>
+        <div>
+          <h3 data-i18n="name">محمد صالح موسى</h3>
+          <div class="role ltr">Senior Flutter Developer<br>Programming Instructor</div>
+          <div class="loc" data-i18n="location">الرياض، المملكة العربية السعودية</div>
+        </div>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><b dir="ltr">5+</b><small data-i18n="kpi1">سنوات خبرة في Flutter</small></div>
+        <div class="kpi"><b data-i18n="kpi2v">ماجستير</b><small data-i18n="kpi2">في تقنية المعلومات والاتصالات</small></div>
+        <div class="kpi"><b dir="ltr">3</b><small data-i18n="kpi3">متاجر نشر: Google Play و App Store و AppGallery</small></div>
+      </div>
+      <ul class="skills" id="skills"></ul>
+      <div class="about-links">
+        <a class="btn btn-wa btn-sm" data-wa href="https://wa.me/966531104828" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3Z"/></svg>
+          <span data-i18n="waInstructor">واتساب</span></a>
+        <a class="btn btn-ghost btn-sm" id="liBtn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </aside>
+
+    <div class="about-copy">
+      <span class="eyebrow">About the instructor</span>
+      <h2 id="about-title" data-i18n="aboutTitle">تعلّم من مطوّر يبني تطبيقات حقيقية ويعلّمها</h2>
+      <p data-i18n="aboutP1"><strong>محمد صالح موسى</strong> مطوّر Flutter أول (Senior Flutter Developer) ومدرّب برمجة، ومؤسس CodePath Academy. لديه أكثر من 5 سنوات من الخبرة في تصميم وتطوير ونشر تطبيقات جوال متعددة المنصات، وقاد فرق تطوير، ويشرف على المطوّرين المبتدئين ويراجع جودة الكود.</p>
+      <p data-i18n="aboutP2">يعمل يومياً بالأدوات والمفاهيم التي يدرّسها في الأكاديمية: Clean Architecture و MVVM و SOLID، وإدارة الحالة بـ GetX و BLoC، وكتابة Unit Tests، والنشر على Google Play و App Store و AppGallery. لذلك يركّز في التدريس على ما يحتاجه المطوّر فعلاً في بيئة العمل، ويقود المتعلّم خطوة بخطوة من أول سطر كود حتى أول تطبيق منشور.</p>
+      <div class="principles">
+        <div class="principle"><span class="mono ltr">01 · Learn</span><h4 data-i18n="pr1t">افهم المفهوم</h4><p data-i18n="pr1">شرح واضح يبني الأساس قبل الانتقال لما بعده.</p></div>
+        <div class="principle"><span class="mono ltr">02 · Practice</span><h4 data-i18n="pr2t">طبّق بيدك</h4><p data-i18n="pr2">تمارين بعد كل درس لتثبيت ما تعلّمته.</p></div>
+        <div class="principle"><span class="mono ltr">03 · Build</span><h4 data-i18n="pr3t">ابنِ مشروعاً</h4><p data-i18n="pr3">كل دورة تنتهي بمشروع عملي تضيفه لملفك.</p></div>
+      </div>
+
+      <h3 class="sub-h" data-i18n="expTitle">الخبرة العملية والتعليم</h3>
+      <ol class="timeline" id="timeline"></ol>
+
+      <h3 class="sub-h" data-i18n="appsTitle">تطبيقات شارك في تطويرها</h3>
+      <div class="apps" id="apps"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="courses" aria-labelledby="courses-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Courses</span>
+      <h2 id="courses-title" data-i18n="coursesTitle">أربع دورات، مسار واحد متصل</h2>
+      <p data-i18n="coursesLead">من أساسيات البرمجة إلى تطبيقات Flutter بمستوى الإنتاج. كل دورة تبني على ما قبلها، فابدأ من حيث يناسب مستواك.</p>
+    </div>
+    <div class="course-grid" id="courseGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="roadmap" aria-labelledby="roadmap-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Learning path</span>
+      <h2 id="roadmap-title" data-i18n="pathTitle">مسار التعلّم: من أول سطر كود إلى تطبيق منشور</h2>
+      <p data-i18n="pathLead">خمس محطات واضحة. كل محطة تجهّزك للتي بعدها، وتنتهي بملف أعمال تعرضه على أصحاب العمل.</p>
+    </div>
+    <ol class="roadmap" id="roadmapList"></ol>
+  </div>
+</section>
+
+<section class="section" id="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Why CodePath</span>
+      <h2 id="why-title" data-i18n="whyTitle">لماذا تتعلّم معنا؟</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 7 8M11 5c-1 4-4 7-7 8M13 21l4-9 4 9M14.5 18h5"/></svg></span><h3 data-i18n="w1t">شرح عربي بمصطلحات إنجليزية</h3><p data-i18n="w1">تفهم الفكرة بلغتك، وتتعلّم المصطلح كما يُكتب في الكود والتوثيق، فلا تتوه حين تقرأ مصدراً إنجليزياً.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></span><h3 data-i18n="w2t">تمارين عملية</h3><p data-i18n="w2">كل مفهوم يتبعه تمرين تكتبه بنفسك، لأن البرمجة تُتعلّم بالممارسة لا بالمشاهدة فقط.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9l2 2-2 2M12 13h4"/></svg></span><h3 data-i18n="w3t">مشاريع حقيقية</h3><p data-i18n="w3">تنتهي كل دورة بمشروع متكامل يجمع ما تعلّمته، ويصلح أن يكون بداية ملف أعمالك.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 10 5-3v10l-5-3"/><rect x="3" y="6" width="13" height="12" rx="2"/></svg></span><h3 data-i18n="w4t">جلسات مباشرة أونلاين</h3><p data-i18n="w4">محاضرات تفاعلية مباشرة تسأل فيها وتناقش وتكتب الكود مع المدرب، من أي مكان.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/></svg></span><h3 data-i18n="w5t">تسجيلات عند توفرها</h3><p data-i18n="w5">يمكنك الرجوع إلى تسجيلات المحاضرات عند توفرها لمراجعة ما فاتك أو تثبيت ما تعلّمته.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12Z"/><path d="M9 11h6M9 14h4"/></svg></span><h3 data-i18n="w6t">دعم للمتعلّمين</h3><p data-i18n="w6">متابعة للأسئلة والتمارين خلال الدورة، حتى لا تبقى عالقاً أمام خطأ لا تفهمه.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Student projects</span>
+      <h2 id="projects-title" data-i18n="projTitle">معرض مشاريع الطلاب</h2>
+      <p data-i18n="projLead">هنا ستُعرض المشاريع التي يبنيها طلاب الأكاديمية خلال الدورات.</p>
+    </div>
+    <div class="notice" role="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <span data-i18n="projNotice">البطاقات التالية أمثلة توضيحية لنوع المشاريع التي تُبنى في كل دورة، وليست أعمالاً لطلاب حقيقيين. ستُستبدل بمشاريع الطلاب الفعلية بعد اكتمال الدفعات الأولى.</span>
+    </div>
+    <div class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq-wrap">
+    <div class="sec-head" style="margin:0">
+      <span class="eyebrow">FAQ</span>
+      <h2 id="faq-title" data-i18n="faqTitle">أسئلة شائعة</h2>
+      <p data-i18n="faqLead">لم تجد إجابتك؟ راسلنا على واتساب وسنرد عليك.</p>
+      <div><a class="btn btn-ghost btn-sm" data-wa href="https://wa.me/966531104828" target="_blank" rel="noopener" data-i18n="faqBtn">اسأل على واتساب</a></div>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Contact &amp; registration</span>
+      <h2 id="contact-title" data-i18n="contactTitle">جاهز تبدأ؟ تواصل معنا</h2>
+      <p data-i18n="contactLead">أرسل استفسارك أو طلب التسجيل، وسنعود إليك بتفاصيل الدورة والمواعيد والرسوم.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-side">
+        <div class="wa-card">
+          <h3 data-i18n="waTitle">الأسرع: واتساب</h3>
+          <p data-i18n="waLead">اضغط للمحادثة مباشرة، أو انسخ الرقم.</p>
+          <div class="num-row">
+            <span class="mono" id="waDisplay">+966 53 110 4828</span>
+            <button class="copy-btn" type="button" id="copyNum" data-i18n="copy">نسخ الرقم</button>
+          </div>
+          <a class="btn btn-wa" data-wa href="https://wa.me/966531104828" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3Z"/></svg>
+            <span data-i18n="waBtn">ابدأ محادثة على واتساب</span></a>
+        </div>
+        <div class="links-card" id="linksCard" hidden></div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-head">
+          <h3 data-i18n="formTitle">نموذج الاستفسار والتسجيل</h3>
+          <span class="demo-badge" id="demoBadge" data-i18n="demo">نموذج تجريبي</span>
+        </div>
+        <form id="enquiry" novalidate>
+          <div class="field"><label for="f-name"><span data-i18n="fName">الاسم الكامل</span> <span class="req">*</span></label><input id="f-name" name="name" autocomplete="name" required><span class="err" id="e-name"></span></div>
+          <div class="field"><label for="f-phone"><span data-i18n="fPhone">رقم الجوال / واتساب</span> <span class="req">*</span></label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+966 5x xxx xxxx" required><span class="err" id="e-phone"></span></div>
+          <div class="field full"><label for="f-email"><span data-i18n="fEmail">البريد الإلكتروني</span> <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required><span class="err" id="e-email"></span></div>
+          <div class="field"><label for="f-course"><span data-i18n="fCourse">الدورة المطلوبة</span> <span class="req">*</span></label><select id="f-course" name="course" required></select><span class="err" id="e-course"></span></div>
+          <div class="field"><label for="f-level"><span data-i18n="fLevel">مستواك الحالي</span> <span class="req">*</span></label><select id="f-level" name="level" required></select><span class="err" id="e-level"></span></div>
+          <div class="field full"><label for="f-msg" data-i18n="fMsg">رسالتك (اختياري)</label><textarea id="f-msg" name="message" data-i18n-ph="fMsgPh" placeholder="أخبرنا بهدفك من التعلّم أو أي سؤال لديك"></textarea></div>
+          <div class="form-foot">
+            <button class="btn btn-primary" type="submit" id="submitBtn" data-i18n="submit">أرسل الطلب</button>
+            <div id="formStatus" aria-live="polite"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <a class="brand" href="#home" aria-label="CodePath Academy">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="1" y="1" width="46" height="46" rx="12" fill="#0d1730" stroke="url(#lg)" stroke-opacity=".6"/><path d="M17 15 9 24l8 9M31 15l8 9-8 9" fill="none" stroke="url(#lg)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 31l8-14" stroke="#eef3ff" stroke-width="3.2" stroke-linecap="round"/></svg>
+      <span class="brand-name"><b>CodePath Academy</b><small>Learn • Practice • Build</small></span>
+    </a>
+    <nav data-i18n-aria="navFoot" aria-label="روابط التذييل">
+      <a href="#courses" data-i18n="navCourses">الدورات</a><a href="#roadmap" data-i18n="navPath">مسار التعلم</a><a href="#faq" data-i18n="navFaq">الأسئلة الشائعة</a><a href="#contact" data-i18n="navContact">تواصل معنا</a>
+    </nav>
+    <p>© <span id="year">2026</span> CodePath Academy</p>
+  </div>
+</footer>
+
+<dialog id="courseDlg" aria-labelledby="dlgTitle"></dialog>
+
+<script>
+/* =========================================================
+   محتوى الموقع القابل للتعديل  |  EDITABLE SITE CONTENT
+   كل نص له نسخة عربية (ar) وإنجليزية (en).
+   Every text has an Arabic (ar) and English (en) version.
+   ========================================================= */
+const SITE = {
+  whatsapp: "966531104828",
+  whatsappDisplay: "+966 53 110 4828",
+  email: "medomax215@gmail.com",
+  linkedin: "https://www.linkedin.com/in/mohammed-salih-868840242",
+  socials: [                             // روابط إضافية، الفارغة لا تظهر
+    { name: "YouTube",   url: "" },
+    { name: "Instagram", url: "" },
+    { name: "X",         url: "" },
+    { name: "GitHub",    url: "" }
+  ],
+  instructorPhoto: "",                   // مثال: "assets/instructor.jpg"
+  formEndpoint: "",                      // Formspree URL. فارغ = وضع تجريبي / empty = demo mode
+  defaultLang: "ar"
+};
+
+const COURSES = [
+  { id:"fundamentals", lv:"beg", track:"Foundations",
+    title:{ar:"أساسيات البرمجة", en:"Programming Fundamentals"},
+    level:{ar:"مبتدئ", en:"Beginner"},
+    short:{ar:"التفكير المنطقي والخوارزميات وأساسيات أي لغة.", en:"Logical thinking, algorithms and the basics of any language."},
+    overview:{ar:"نقطة البداية لكل من يدخل عالم البرمجة. تتعلّم كيف تفكّر كمبرمج، وتحوّل المشكلة إلى خطوات واضحة، ثم تكتبها كوداً يعمل.",
+              en:"The starting point for anyone new to programming. Learn to think like a developer, break a problem into clear steps, and turn them into working code."},
+    topics:[["المنطق والخوارزميات","Logic & Algorithms"],["المتغيرات","Variables"],["أنواع البيانات","Data Types"],["العوامل","Operators"],["الشروط","Conditions"],["الحلقات","Loops"],["المصفوفات","Arrays"],["الدوال","Functions"],["حل المشكلات","Problem Solving"]],
+    project:{ar:"مشروع Console صغير يجمع كل ما تعلّمته في الدورة.", en:"A small console project that brings together everything from the course."},
+    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
+  { id:"oop", lv:"mid", track:"Foundations",
+    title:{ar:"البرمجة كائنية التوجه", en:"Object-Oriented Programming (OOP)"},
+    level:{ar:"مبتدئ / متوسط", en:"Beginner / Intermediate"},
+    short:{ar:"تنظيم الكود في أصناف وكائنات قابلة لإعادة الاستخدام.", en:"Organising code into reusable classes and objects."},
+    overview:{ar:"انتقل من كتابة أوامر متتابعة إلى تصميم برامج منظّمة قابلة للتوسّع، باستخدام المفاهيم التي تقوم عليها معظم اللغات وأطر العمل الحديثة.",
+              en:"Move from writing step-by-step instructions to designing organised, scalable programs using the concepts behind most modern languages and frameworks."},
+    topics:[["الأصناف","Classes"],["الكائنات","Objects"],["دوال البناء","Constructors"],["الدوال","Methods"],["التغليف","Encapsulation"],["الوراثة","Inheritance"],["تعدد الأشكال","Polymorphism"],["التجريد","Abstraction"],["الواجهات","Interfaces"],["مقدمة في مبادئ SOLID","SOLID Intro"]],
+    project:{ar:"مشروع عملي مبني بأسلوب OOP من التصميم حتى التنفيذ.", en:"A practical project built the OOP way, from design to implementation."},
+    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
+  { id:"flutter-beginner", lv:"beg", track:"Mobile",
+    title:{ar:"تطوير تطبيقات Flutter: المستوى المبتدئ", en:"Flutter Development – Beginner"},
+    level:{ar:"مبتدئ", en:"Beginner"},
+    short:{ar:"أول تطبيق جوال لـ Android و iOS بكود واحد.", en:"Your first Android and iOS app from one codebase."},
+    overview:{ar:"ابدأ بناء تطبيقات الجوال لنظامي Android و iOS بكود واحد، من أساسيات Dart حتى تطبيق يتصل بالإنترنت ويحفظ البيانات.",
+              en:"Start building mobile apps for Android and iOS from one codebase, from Dart basics to an app that talks to an API and stores data."},
+    topics:[["أساسيات لغة Dart","Dart Fundamentals"],["تجهيز بيئة العمل","Flutter Setup"],["العناصر","Widgets"],["التخطيط","Layouts"],["التنقل بين الشاشات","Navigation"],["النماذج والتحقق","Forms & Validation"],["القوائم","Lists"],["إدارة الحالة الأساسية","State Management"],["التعامل مع الخوادم","REST APIs"],["تحليل البيانات","JSON"],["البرمجة غير المتزامنة","Async Programming"],["التخزين المحلي","Local Storage"]],
+    project:{ar:"تطبيق جوال عملي متكامل يستخدم API ويحفظ البيانات محلياً.", en:"A complete, practical mobile app that uses an API and stores data locally."},
+    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
+  { id:"flutter-advanced", lv:"adv", track:"Mobile",
+    title:{ar:"تطوير تطبيقات Flutter: المستوى المتقدم", en:"Flutter Development – Advanced"},
+    level:{ar:"متقدم", en:"Advanced"},
+    short:{ar:"البنية النظيفة والاختبارات والأداء والنشر على المتاجر.", en:"Clean architecture, testing, performance and store release."},
+    overview:{ar:"للمطوّرين الذين يبنون بـ Flutter ويريدون الوصول إلى مستوى التطبيقات الاحترافية: بنية نظيفة، اختبارات، أداء، ونشر على المتاجر.",
+              en:"For developers already building with Flutter who want production-grade skills: clean architecture, testing, performance and store publishing."},
+    topics:[["بنية التطبيقات","App Architecture"],["البنية النظيفة","Clean Architecture"],["مبادئ SOLID","SOLID"],["خيارات إدارة الحالة","GetX / BLoC / Riverpod"],["حقن الاعتماديات","Dependency Injection"],["ربط الـ API ومعالجة الأخطاء","API & Error Handling"],["خدمات Firebase","Firebase"],["الإشعارات","Notifications"],["المدفوعات والاشتراكات","Payments & Subscriptions"],["الاختبارات","Testing"],["تحسين الأداء","Performance"],["التكامل والنشر المستمر","CI/CD"],["النشر على المتاجر","Publishing"]],
+    project:{ar:"مشروع بمواصفات الإنتاج (Production-style) من البنية حتى النشر.", en:"A production-style project, from architecture to release."},
+    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} }
+];
+
+/* From the instructor's CV */
+const EXPERIENCE = [
+  { now:true, role:"Senior Flutter Developer", org:{ar:"المؤسسة العامة للتأمينات الاجتماعية (GOSI)، الرياض", en:"General Organization for Social Insurance (GOSI), Riyadh"}, date:"Jul 2024 – Present",
+    note:{ar:"تطوير تطبيق متعدد المنصات مع تركيز على الأداء وقابلية التوسّع، والإشراف على المطوّرين المبتدئين ومراجعة الكود.", en:"Cross-platform app development focused on performance and scalability; mentoring junior developers and reviewing code."} },
+  { role:"Senior Flutter Developer & Team Lead", org:{ar:"Eitmed Finance، الرياض", en:"Eitmed Finance, Riyadh"}, date:"Jan 2023 – Jul 2024",
+    note:{ar:"قاد فريق تطوير الجوال وبنى تطبيق التمويل من الصفر حتى إطلاق الـ MVP وتطويره بناءً على ملاحظات المستخدمين.", en:"Led the mobile team and built the financing app from scratch, shipping the MVP and iterating on user feedback."} },
+  { role:"Senior Flutter Developer", org:{ar:"First Logo، الرياض", en:"First Logo, Riyadh"}, date:"Oct 2022 – Jul 2024",
+    note:{ar:"تطوير وصيانة تطبيقات Android و iOS ونشرها على Google Play و App Store و AppGallery.", en:"Built and maintained Android and iOS apps and published them to Google Play, the App Store and AppGallery."} },
+  { role:"Flutter Developer", org:{ar:"Info Touch، الخرطوم", en:"Info Touch, Khartoum"}, date:"May 2020 – May 2022",
+    note:{ar:"جمع متطلبات التطبيقات وتنفيذ الواجهات وربطها بالـ API، والمساهمة في القرارات المعمارية.", en:"Gathered requirements, built UIs and API integrations, and contributed to architecture decisions."} },
+  { role:"Teaching Assistant", org:{ar:"Global Training Center، كسلا", en:"Global Training Center, Kassala"}, date:"Mar 2021 – May 2021",
+    note:{ar:"تقديم أساسيات تقنية المعلومات والتدريب على البرمجيات للمتدربين.", en:"Delivered IT basics and software training to participants."} },
+  { role:"M.Sc. in ICT", org:{ar:"جامعة العلوم والتقانة، أم درمان", en:"University of Science and Technology, Omdurman"}, date:"2021",
+    note:{ar:"ماجستير في تقنية المعلومات والاتصالات.", en:"Master's degree in Information and Communications Technology."} }
+];
+
+const APPS = [
+  { name:"GOSI", desc:{ar:"تطبيق التأمينات الاجتماعية", en:"Social insurance app"}, store:"App Store", url:"https://apps.apple.com/sa/app/gosi/id6467094116" },
+  { name:"Eitmed Finance", desc:{ar:"تطبيق تمويل", en:"Financing app"}, store:"App Store", url:"https://apps.apple.com/sa/developer/eitmed-finance-company/id1695310972" },
+  { name:"Spacetime", desc:{ar:"حجز خدمات العناية بالسيارات", en:"Car care booking"}, store:"Google Play", url:"https://play.google.com/store/apps/details?id=com.space.time.app" },
+  { name:"Regal Eyes", desc:{ar:"متجر نظارات إلكتروني", en:"Eyewear e-commerce"}, store:"Google Play", url:"https://play.google.com/store/apps/details?id=com.new_regaleyes.app" },
+  { name:"Delta Food", desc:{ar:"تطبيق التجّار", en:"Merchant app"}, store:"Google Play", url:"https://play.google.com/store/apps/details?id=com.x21Techis.delta.delta" },
+  { name:"MDT", desc:{ar:"متجر مستلزمات طبية", en:"Medical e-commerce"}, store:"Google Play", url:"https://play.google.com/store/apps/details?id=com.mdt.lounge" },
+  { name:"Al Ojaimi", desc:{ar:"تتبّع الحضور", en:"Attendance tracking"}, store:"Google Play", url:"https://play.google.com/store/apps/details?id=com.alojaimihader" },
+  { name:"Childhood Steps · Parents", desc:{ar:"تطبيق أولياء الأمور", en:"Parents app"}, store:"Google Play", url:"https://play.google.com/store/apps/details?id=com.childhoodsteps.parents.childhoodsteps" },
+  { name:"Childhood Steps · Teachers", desc:{ar:"تطبيق المعلّمين", en:"Teachers app"}, store:"Google Play", url:"https://play.google.com/store/apps/details?id=com.childhoodsteps.teachers" }
+];
+
+const SKILLS = [
+  { label:{ar:"تطوير الجوال", en:"Mobile"}, items:["Flutter","Dart","GetX","BLoC","Provider","Firebase","Google Maps","HMS"] },
+  { label:{ar:"البنية والأنماط", en:"Architecture"}, items:["Clean Architecture","MVVM","MVC","SOLID"] },
+  { label:{ar:"الخوادم والبيانات", en:"Backend & data"}, items:["REST APIs","Dio","PHP","MySQL","SQLite"] },
+  { label:{ar:"الجودة والأدوات", en:"Quality & tools"}, items:["Unit Testing","Mocking","CI/CD","Git","Jira"] }
+];
+
+const PROJECTS = [
+  { title:{ar:"آلة حاسبة ومحوّل وحدات", en:"Calculator & unit converter"}, tag:"Console App", course:"fundamentals", mock:"wide",
+    desc:{ar:"برنامج يعمل في الطرفية يطبّق الشروط والحلقات والدوال.", en:"A terminal program that puts conditions, loops and functions to work."} },
+  { title:{ar:"نظام إدارة مكتبة", en:"Library management system"}, tag:"OOP Project", course:"oop", mock:"wide",
+    desc:{ar:"أصناف للكتب والأعضاء والإعارة مع الوراثة والواجهات.", en:"Classes for books, members and loans using inheritance and interfaces."} },
+  { title:{ar:"نظام حسابات بنكية", en:"Bank account system"}, tag:"OOP · Encapsulation", course:"oop", mock:"wide",
+    desc:{ar:"حسابات وعمليات إيداع وسحب تطبّق التغليف وتعدد الأشكال.", en:"Accounts, deposits and withdrawals applying encapsulation and polymorphism."} },
+  { title:{ar:"تطبيق مهام يومية", en:"Daily to-do app"}, tag:"Flutter · Local Storage", course:"flutter-beginner", mock:"phone",
+    desc:{ar:"قائمة مهام تحفظ البيانات على الجهاز.", en:"A task list that saves data on the device."} },
+  { title:{ar:"تطبيق طقس", en:"Weather app"}, tag:"Flutter · REST API", course:"flutter-beginner", mock:"phone",
+    desc:{ar:"يجلب بيانات الطقس من API ويعرضها بتصميم بسيط.", en:"Fetches weather data from an API and shows it in a clean UI."} },
+  { title:{ar:"تطبيق متجر باشتراكات", en:"Store app with subscriptions"}, tag:"Clean Architecture · Firebase", course:"flutter-advanced", mock:"phone",
+    desc:{ar:"بنية نظيفة مع إدارة حالة واختبارات ونشر.", en:"Clean architecture with state management, tests and release."} }
+];
+
+const FAQ = [
+  [{ar:"لمن هذه الدورات؟", en:"Who are these courses for?"},
+   {ar:"للمبتدئين تماماً، ولطلاب الجامعات والخرّيجين، وللمهنيين الذين يريدون الانتقال إلى مجال البرمجة، ولكل من يهتم بتعلّمها. كل دورة موضّح مستواها لتختار ما يناسبك.",
+    en:"Complete beginners, university students and graduates, professionals switching careers, and anyone interested in learning to code. Each course shows its level so you can pick the right one."}],
+  [{ar:"هل أحتاج خبرة سابقة؟", en:"Do I need prior experience?"},
+   {ar:"دورة أساسيات البرمجة لا تتطلب أي خبرة. دورة OOP تفترض معرفة الأساسيات، ودورة Flutter للمبتدئين تبدأ معك من أساسيات Dart، أما دورة Flutter المتقدمة فموجّهة لمن يبني تطبيقات Flutter بالفعل. إن لم تكن متأكداً، اذكر مستواك في نموذج التسجيل وسنقترح عليك نقطة البداية.",
+    en:"Programming Fundamentals needs no experience. OOP assumes you know the basics, Flutter Beginner starts from Dart fundamentals, and Flutter Advanced is for people already building Flutter apps. Not sure? Tell us your level in the form and we'll suggest where to start."}],
+  [{ar:"كيف تُقدَّم الدورات؟", en:"How are the courses delivered?"},
+   {ar:"الدورات أونلاين بالكامل عبر جلسات مباشرة، يمكنك حضورها من أي مكان. تُرسل تفاصيل المنصة والمواعيد للمسجلين قبل بداية كل دورة.",
+    en:"Fully online through live sessions you can join from anywhere. Platform details and schedules are sent to registered learners before each course starts."}],
+  [{ar:"هل تتوفر تسجيلات للمحاضرات؟", en:"Are recordings available?"},
+   {ar:"تُتاح التسجيلات عند توفرها. تفاصيل إتاحة التسجيلات لكل دورة تُوضَّح عند التسجيل.",
+    en:"Recordings are shared when available. Details for each course are confirmed when you register."}],
+  [{ar:"هل سأبني مشاريع حقيقية؟", en:"Will I build real projects?"},
+   {ar:"نعم. كل دورة تنتهي بمشروع عملي يجمع ما تعلّمته، إضافة إلى تمارين تطبيقية خلال الدروس.",
+    en:"Yes. Every course ends with a practical project that brings together what you learned, plus hands-on exercises during the lessons."}],
+  [{ar:"هل أحصل على شهادة؟", en:"Do I get a certificate?"},
+   {ar:"تفاصيل الشهادات، إن وُجدت لدورة معينة، تُعلن مع تفاصيل تلك الدورة. تواصل معنا للاستفسار عن دورة محددة.",
+    en:"Certificate details, where offered, are announced with each course. Contact us to ask about a specific course."}],
+  [{ar:"كيف أسجّل في دورة؟", en:"How do I register?"},
+   {ar:"املأ نموذج الاستفسار في أسفل الصفحة أو راسلنا مباشرة على واتساب، وسنتواصل معك بتفاصيل الدورة وخطوات التسجيل.",
+    en:"Fill in the enquiry form below or message us on WhatsApp, and we'll get back to you with course details and next steps."}],
+  [{ar:"ما الرسوم وطرق الدفع؟", en:"What are the fees and payment options?"},
+   {ar:"تُرسل الرسوم وطرق الدفع المتاحة عند التواصل معنا، لأنها قد تختلف حسب الدورة وموعدها.",
+    en:"Fees and payment options are shared when you contact us, as they can vary by course and cohort."}]
+];
+
+/* English text for the fixed parts of the page (the Arabic is read from the HTML) */
+const EN = {
+  skip:"Skip to content", navMain:"Main menu", navFoot:"Footer links",
+  navHome:"Home", navAbout:"About", navCourses:"Courses", navPath:"Learning Path", navFaq:"FAQ", navContact:"Contact", ctaRegister:"Register now",
+  heroPill:"Learn to code online, in Arabic and English",
+  heroTitle:'Start your coding journey <span class="grad-text">from zero to professional</span>',
+  heroLead:"Practical online learning, step by step, with real projects. From programming basics to publishing Flutter apps on the stores, with the technical terms you'll actually use at work.",
+  heroBtn1:"Explore courses", heroBtn2:"Meet the instructor",
+  name:"Mohammed Salih Musa", location:"Riyadh, Saudi Arabia",
+  kpi1:"years of Flutter experience", kpi2v:"M.Sc.", kpi2:"in Information & Communications Technology", kpi3:"app stores: Google Play, App Store, AppGallery",
+  waInstructor:"WhatsApp",
+  aboutTitle:"Learn from a developer who ships real apps",
+  aboutP1:"<strong>Mohammed Salih Musa</strong> is a Senior Flutter Developer, programming instructor and the founder of CodePath Academy. He has more than 5 years of experience designing, building and releasing cross-platform mobile apps, has led development teams, and mentors junior developers through code reviews.",
+  aboutP2:"The tools he teaches are the ones he uses every day: Clean Architecture, MVVM, SOLID, state management with GetX and BLoC, unit testing, and publishing to Google Play, the App Store and AppGallery. His teaching focuses on what developers really need on the job, guiding learners step by step from their first line of code to their first published app.",
+  pr1t:"Understand the concept", pr1:"Clear explanations that build a solid base before moving on.",
+  pr2t:"Practice hands-on", pr2:"Exercises after every lesson to lock in what you learned.",
+  pr3t:"Build a project", pr3:"Every course ends with a project for your portfolio.",
+  expTitle:"Experience & education", appsTitle:"Apps he has worked on",
+  coursesTitle:"Four courses, one connected path",
+  coursesLead:"From programming basics to production-grade Flutter apps. Each course builds on the one before, so start wherever fits your level.",
+  pathTitle:"Learning path: from your first line of code to a published app",
+  pathLead:"Five clear stages. Each one prepares you for the next and ends with a portfolio you can show employers.",
+  whyTitle:"Why learn with us?",
+  w1t:"Arabic explanations, English terms", w1:"Understand ideas in Arabic while learning each term exactly as it appears in code and documentation, so English resources never feel foreign.",
+  w2t:"Practical exercises", w2:"Every concept is followed by an exercise you write yourself, because programming is learned by doing, not just watching.",
+  w3t:"Real projects", w3:"Each course ends with a complete project that ties everything together and can start your portfolio.",
+  w4t:"Live online sessions", w4:"Interactive live classes where you ask, discuss and write code with the instructor from anywhere.",
+  w5t:"Recordings when available", w5:"Go back to lecture recordings, when available, to catch up or review.",
+  w6t:"Learner support", w6:"Help with questions and exercises during the course, so you're never stuck on an error you don't understand.",
+  projTitle:"Student projects", projLead:"This is where projects built by academy students will be showcased.",
+  projNotice:"The cards below are illustrative examples of the kind of project built in each course, not work by real students. They will be replaced with real student projects once the first cohorts finish.",
+  faqTitle:"Frequently asked questions", faqLead:"Didn't find your answer? Message us on WhatsApp.", faqBtn:"Ask on WhatsApp",
+  contactTitle:"Ready to start? Get in touch", contactLead:"Send an enquiry or registration request and we'll reply with course details, schedules and fees.",
+  waTitle:"Fastest: WhatsApp", waLead:"Tap to chat now, or copy the number.", copy:"Copy number", waBtn:"Chat on WhatsApp",
+  formTitle:"Enquiry & registration form", demo:"Demo form",
+  fName:"Full name", fPhone:"Mobile / WhatsApp", fEmail:"Email", fCourse:"Course", fLevel:"Your current level", fMsg:"Message (optional)",
+  fMsgPh:"Tell us your goal or any question you have", submit:"Send request"
+};
+
+/* Strings used by the scripts below */
+const UI = {
+  ar:{ tbd:"يُحدَّد لاحقاً", duration:"المدة", price:"الرسوم", start:"موعد البدء", avail:"التوفر", topics:"محاور الدورة", finalProject:"المشروع الختامي",
+       details:"التفاصيل", enroll:"استفسر وسجّل", enrollLong:"سجّل اهتمامك بالدورة", askWa:"استفسر على واتساب", topicsCount:n=>`${n} محوراً + مشروع`,
+       topicsLabel:"أبرز المحاور", close:"إغلاق", example:"مثال توضيحي", fromCourse:"من دورة", chooseCourse:"اختر الدورة", unsure:"لم أحدد بعد، أحتاج استشارة",
+       chooseLevel:"اختر مستواك", levels:["لا توجد لدي خبرة سابقة","أعرف الأساسيات","لدي خبرة متوسطة","لدي خبرة متقدمة"],
+       waCourse:"مرحباً، أرغب في الاستفسار عن دورة: ", copied:"تم النسخ", selectCopy:"حدّد الرقم وانسخه",
+       errName:"اكتب اسمك الكامل.", errPhone:"اكتب رقماً صحيحاً مع رمز الدولة، مثل +966 5x xxx xxxx.", errEmail:"اكتب بريداً إلكترونياً صحيحاً، مثل name@example.com.",
+       errCourse:"اختر الدورة التي تهتم بها.", errLevel:"اختر مستواك الحالي.", fixFields:"يرجى تصحيح الحقول المظللة بالأحمر ثم الإرسال مرة أخرى.",
+       demoTitle:"هذا نموذج تجريبي ولم يُرسَل طلبك إلى أي جهة.", demoText:"بياناتك سليمة. لإكمال طلبك الآن، أرسله عبر واتساب وستجد الرسالة جاهزة بالبيانات التي أدخلتها.",
+       demoBtn:"أرسل الطلب عبر واتساب", sending:"جارٍ الإرسال…", okTitle:"تم استلام طلبك.", okText:"سنتواصل معك قريباً على الرقم أو البريد الذي أدخلته.",
+       badTitle:"تعذّر إرسال الطلب.", badText:"تحقق من اتصالك بالإنترنت وحاول مرة أخرى، أو أرسل طلبك مباشرة عبر واتساب.", badBtn:"أرسل عبر واتساب",
+       sumHead:"مرحباً، أرغب في التسجيل / الاستفسار:", sumName:"الاسم", sumPhone:"الجوال", sumEmail:"البريد", sumCourse:"الدورة", sumLevel:"المستوى", sumMsg:"رسالة",
+       menuOpen:"فتح القائمة", menuClose:"إغلاق القائمة", seeCourse:"تفاصيل الدورة", portfolio:"ملف الأعمال", portfolioText:"مشاريع حقيقية تعرضها على أصحاب العمل.",
+       photoAlt:"المدرب محمد صالح موسى", langSwitch:"Switch to English", instructor:"مدرّب برمجة", initial:"م" },
+  en:{ tbd:"To be announced", duration:"Duration", price:"Fee", start:"Start date", avail:"Availability", topics:"Course topics", finalProject:"Final project",
+       details:"Details", enroll:"Enquire & register", enrollLong:"Register your interest", askWa:"Ask on WhatsApp", topicsCount:n=>`${n} topics + project`,
+       topicsLabel:"Key topics", close:"Close", example:"Illustrative example", fromCourse:"From", chooseCourse:"Choose a course", unsure:"Not sure yet, I'd like advice",
+       chooseLevel:"Choose your level", levels:["No prior experience","I know the basics","Intermediate","Advanced"],
+       waCourse:"Hello, I'd like to ask about the course: ", copied:"Copied", selectCopy:"Select and copy the number",
+       errName:"Enter your full name.", errPhone:"Enter a valid number with country code, e.g. +966 5x xxx xxxx.", errEmail:"Enter a valid email, e.g. name@example.com.",
+       errCourse:"Choose the course you're interested in.", errLevel:"Choose your current level.", fixFields:"Please fix the fields marked in red and send again.",
+       demoTitle:"This is a demo form, so your request was not sent anywhere.", demoText:"Your details look good. To complete your request now, send it on WhatsApp; the message is pre-filled with what you entered.",
+       demoBtn:"Send request on WhatsApp", sending:"Sending…", okTitle:"Request received.", okText:"We'll contact you soon on the number or email you entered.",
+       badTitle:"Your request couldn't be sent.", badText:"Check your connection and try again, or send your request on WhatsApp.", badBtn:"Send on WhatsApp",
+       sumHead:"Hello, I'd like to register / enquire:", sumName:"Name", sumPhone:"Phone", sumEmail:"Email", sumCourse:"Course", sumLevel:"Level", sumMsg:"Message",
+       menuOpen:"Open menu", menuClose:"Close menu", seeCourse:"Course details", portfolio:"Portfolio", portfolioText:"Real projects you can show to employers.",
+       photoAlt:"Instructor Mohammed Salih Musa", langSwitch:"التبديل إلى العربية", instructor:"Programming Instructor", initial:"MS" }
+};
+
+/* ===================== التطبيق | APP ===================== */
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const waLink = text => "https://wa.me/" + SITE.whatsapp + (text ? "?text=" + encodeURIComponent(text) : "");
+let lang = SITE.defaultLang;
+try { const saved = localStorage.getItem("cp-lang"); if (saved === "ar" || saved === "en") lang = saved; } catch {}
+const L = o => (o && typeof o === "object") ? (o[lang] || o.ar || "") : (o || "");
+const t = k => UI[lang][k];
+const icon = {
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  code:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3"/></svg>',
+  close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
+  li:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4V9.5Z"/></svg>'
+};
+const lvClass = {beg:"lv-beg", mid:"lv-mid", adv:"lv-adv"};
+
+/* Keep the Arabic text that lives in the HTML */
+const AR = {};
+document.querySelectorAll("[data-i18n]").forEach(el => AR[el.dataset.i18n] = el.innerHTML);
+document.querySelectorAll("[data-i18n-ph]").forEach(el => AR[el.dataset.i18nPh] = el.placeholder);
+document.querySelectorAll("[data-i18n-aria]").forEach(el => AR[el.dataset.i18nAria] = el.getAttribute("aria-label"));
+
+function applyStatic(){
+  const D = lang === "en" ? EN : AR;
+  document.querySelectorAll("[data-i18n]").forEach(el => { const v = D[el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => { const v = D[el.dataset.i18nPh]; if (v != null) el.placeholder = v; });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => { const v = D[el.dataset.i18nAria]; if (v != null) el.setAttribute("aria-label", v); });
+}
+
+function renderPortrait(){
+  if (SITE.instructorPhoto){
+    $("#heroPortrait").innerHTML = `<img src="${esc(SITE.instructorPhoto)}" alt="${esc(t("photoAlt"))}" width="380" height="475" fetchpriority="high">`;
+    $("#aboutAvatar").innerHTML = `<img src="${esc(SITE.instructorPhoto)}" alt="" loading="lazy">`;
+  } else {
+    const name = lang === "en" ? EN.name : AR.name;
+    $("#heroPortrait").innerHTML = `<div class="monogram"><div class="initial"><span>${esc(t("initial"))}</span></div><strong>${esc(name)}</strong><small dir="ltr">Senior Flutter Developer</small><small>${esc(t("instructor"))}</small></div>`;
+  }
+}
+
+function renderAbout(){
+  $("#skills").innerHTML = SKILLS.map(s => `<li><span>${esc(L(s.label))}</span><ul class="chips">${s.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul></li>`).join("");
+  $("#timeline").innerHTML = EXPERIENCE.map(e => `<li class="${e.now?"now":""}"><span class="t-role ltr">${esc(e.role)}</span><span class="t-date">${esc(e.date)}</span><span class="t-org">${esc(L(e.org))}</span><span class="t-note">${esc(L(e.note))}</span></li>`).join("");
+  $("#apps").innerHTML = APPS.map(a => `<a class="app" href="${esc(a.url)}" target="_blank" rel="noopener"><b class="ltr">${esc(a.name)}</b><small>${esc(L(a.desc))}</small><span class="store ltr">${esc(a.store)} ↗</span></a>`).join("");
+}
+
+function renderCourses(){
+  $("#courseGrid").innerHTML = COURSES.map(c => {
+    const shown = c.topics.slice(0,6), more = c.topics.length - shown.length;
+    const secondary = lang === "ar" ? `<span class="en-title ltr">${esc(c.title.en)}</span>` : "";
+    return `<article class="course" aria-labelledby="c-${c.id}">
+      <div class="course-top"><span class="level ${lvClass[c.lv]}">${esc(L(c.level))}</span><span class="track">${esc(c.track)}</span></div>
+      <h3 id="c-${c.id}">${esc(L(c.title))}${secondary}</h3>
+      <p class="ov">${esc(L(c.overview))}</p>
+      <ul class="chips" aria-label="${esc(t("topicsLabel"))}">${shown.map(x => `<li>${esc(x[1])}</li>`).join("")}${more>0?`<li class="more">+${more}</li>`:""}</ul>
+      <div class="course-meta"><span>${icon.clock} ${esc(t("duration"))}: ${esc(L(c.duration) || t("tbd"))}</span><span>${icon.code} ${esc(t("topicsCount")(c.topics.length))}</span></div>
+      <div class="course-actions">
+        <a class="btn btn-ghost btn-sm" href="#course-${c.id}">${esc(t("details"))}</a>
+        <a class="btn btn-primary btn-sm" href="#contact" data-enroll="${c.id}">${esc(t("enroll"))}</a>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function renderRoadmap(){
+  const arrow = lang === "ar" ? "←" : "→";
+  const steps = COURSES.map((c,i) => `<li class="step ${c.track==="Mobile"?"mobile":""}"><span class="num ltr">STEP 0${i+1}</span><h3>${esc(L(c.title))}</h3><span class="en ltr">${esc(lang==="ar" ? c.title.en : c.track)}</span><p>${esc(L(c.short))}</p><a href="#course-${c.id}">${esc(t("seeCourse"))} ${arrow}</a></li>`);
+  steps.push(`<li class="step final"><span class="num ltr">STEP 0${COURSES.length+1}</span><h3>${esc(t("portfolio"))}</h3><span class="en ltr">Portfolio / Real Projects</span><p>${esc(t("portfolioText"))}</p></li>`);
+  $("#roadmapList").innerHTML = steps.join("");
+}
+
+function renderProjects(){
+  $("#projGrid").innerHTML = PROJECTS.map(p => {
+    const c = COURSES.find(x => x.id === p.course);
+    const mock = `<div class="mock ${p.mock==="wide"?"wide":""}"><i class="a"></i><i class="s"></i><i class="t"></i><i class="b"></i><i class="b"></i>${p.mock==="wide"?"":'<i class="b"></i>'}</div>`;
+    return `<article class="proj"><div class="proj-shot" aria-hidden="true"><span class="tag">${esc(t("example"))}</span>${mock}</div>
+      <div class="proj-body"><h3>${esc(L(p.title))}</h3><span class="mono ltr">${esc(p.tag)}</span><p>${esc(L(p.desc))} ${esc(t("fromCourse"))} ${esc(c ? L(c.title) : "")}.</p></div></article>`;
+  }).join("");
+}
+
+function renderFaq(){
+  $("#faqList").innerHTML = FAQ.map(([q,a]) => `<details><summary>${esc(L(q))}<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">${esc(L(a))}</div></details>`).join("");
+}
+
+function renderContact(){
+  document.querySelectorAll("[data-wa]").forEach(a => a.href = waLink());
+  $("#waDisplay").textContent = SITE.whatsappDisplay;
+  const li = $("#liBtn"); li.hidden = !SITE.linkedin; if (SITE.linkedin) li.href = SITE.linkedin;
+  const items = [];
+  if (SITE.email) items.push(`<a href="mailto:${esc(SITE.email)}">${icon.mail}<span class="mono" dir="ltr">${esc(SITE.email)}</span></a>`);
+  if (SITE.linkedin) items.push(`<a href="${esc(SITE.linkedin)}" target="_blank" rel="noopener">${icon.li}<span>LinkedIn</span></a>`);
+  SITE.socials.filter(s => s.url).forEach(s => items.push(`<a href="${esc(s.url)}" target="_blank" rel="noopener">${icon.link}<span>${esc(s.name)}</span></a>`));
+  const card = $("#linksCard"); card.innerHTML = items.join(""); card.hidden = !items.length;
+}
+
+function renderFormOptions(){
+  const cs = $("#f-course"), lv = $("#f-level"), cv = cs.value, li = lv.selectedIndex;
+  cs.innerHTML = `<option value="">${esc(t("chooseCourse"))}</option>` + COURSES.map(c => `<option value="${c.id}">${esc(L(c.title))}</option>`).join("") + `<option value="unsure">${esc(t("unsure"))}</option>`;
+  lv.innerHTML = `<option value="">${esc(t("chooseLevel"))}</option>` + t("levels").map((l,i) => `<option value="${i+1}">${esc(l)}</option>`).join("");
+  cs.value = cv; lv.selectedIndex = li < 0 ? 0 : li;
+}
+
+/* Course detail dialog (#course-<id>) */
+const dlg = $("#courseDlg");
+let openId = null;
+function openCourse(id){
+  const c = COURSES.find(x => x.id === id); if (!c) return;
+  openId = id;
+  const fact = (k,v) => `<div class="fact"><small>${esc(t(k))}</small><b class="${v?"":"tbd"}">${esc(v || t("tbd"))}</b></div>`;
+  const secondary = lang === "ar" ? `<span class="en-title ltr" style="font-size:14px;margin-top:6px">${esc(c.title.en)}</span>` : "";
+  dlg.innerHTML = `<div class="dlg-head">
+      <button class="dlg-close" type="button" aria-label="${esc(t("close"))}" data-close>${icon.close}</button>
+      <div class="course-top" style="justify-content:flex-start;gap:12px"><span class="level ${lvClass[c.lv]}">${esc(L(c.level))}</span><span class="track">${esc(c.track)}</span></div>
+      <h2 id="dlgTitle">${esc(L(c.title))}${secondary}</h2>
+      <p style="color:var(--muted)">${esc(L(c.overview))}</p>
+    </div>
+    <div class="dlg-body">
+      <div class="facts">${fact("duration",L(c.duration))}${fact("price",L(c.price))}${fact("start",L(c.startDate))}${fact("avail",L(c.availability))}</div>
+      <div><h4>${esc(t("topics"))}</h4><ul class="topic-list">${c.topics.map(x => lang==="ar" ? `<li><span>${esc(x[0])}</span><bdi>${esc(x[1])}</bdi></li>` : `<li><span>${esc(x[1])}</span></li>`).join("")}</ul></div>
+      <div><h4>${esc(t("finalProject"))}</h4><p class="dlg-project">${esc(L(c.project))}</p></div>
+      <div class="course-actions">
+        <a class="btn btn-primary" href="#contact" data-enroll="${c.id}">${esc(t("enrollLong"))}</a>
+        <a class="btn btn-wa" target="_blank" rel="noopener" href="${waLink(t("waCourse") + L(c.title) + (lang==="ar" ? " (" + c.title.en + ")" : ""))}">${esc(t("askWa"))}</a>
+      </div>
+    </div>`;
+  if (!dlg.open) dlg.showModal();
+}
+function closeDlg(){ if (dlg.open) dlg.close(); }
+dlg.addEventListener("click", e => { if (e.target === dlg || e.target.closest("[data-close]")) closeDlg(); });
+dlg.addEventListener("close", () => { openId = null; if (location.hash.startsWith("#course-")) history.replaceState(null, "", "#courses"); });
+function route(){ const h = location.hash; if (h.startsWith("#course-")) openCourse(h.slice(8)); else closeDlg(); }
+addEventListener("hashchange", route);
+document.addEventListener("click", e => { const en = e.target.closest("[data-enroll]"); if (en){ $("#f-course").value = en.dataset.enroll; closeDlg(); } });
+
+/* Copy number */
+$("#copyNum").addEventListener("click", async e => {
+  const b = e.currentTarget;
+  try { await navigator.clipboard.writeText("+" + SITE.whatsapp); b.textContent = t("copied"); }
+  catch { const r = document.createRange(); r.selectNodeContents($("#waDisplay")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = t("selectCopy"); }
+  setTimeout(() => b.textContent = lang === "en" ? EN.copy : AR.copy, 2200);
+});
+
+/* Header: scroll state, mobile menu, active link */
+const header = $(".site-header"), menuBtn = $("#menuBtn"), navLinks = $("#navLinks");
+const onScroll = () => header.classList.toggle("scrolled", scrollY > 8);
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
+function setMenu(open){ navLinks.classList.toggle("open", open); header.classList.toggle("menu-open", open); menuBtn.setAttribute("aria-expanded", open); menuBtn.setAttribute("aria-label", t(open ? "menuClose" : "menuOpen")); }
+menuBtn.addEventListener("click", () => setMenu(!navLinks.classList.contains("open")));
+navLinks.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+if ("IntersectionObserver" in window){
+  const links = [...navLinks.querySelectorAll("a")];
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting) links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + en.target.id));
+  }), {rootMargin:"-45% 0px -50% 0px"});
+  ["home","about","courses","roadmap","faq","contact"].forEach(id => { const s = document.getElementById(id); if (s) io.observe(s); });
+}
+
+/* Enquiry form */
+const form = $("#enquiry"), status = $("#formStatus");
+const rules = {
+  name:  v => v.trim().length >= 3 || t("errName"),
+  phone: v => /^\+?[0-9\s-]{8,16}$/.test(v.trim()) || t("errPhone"),
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || t("errEmail"),
+  course:v => !!v || t("errCourse"),
+  level: v => !!v || t("errLevel")
+};
+function check(name){
+  const el = form.elements[name], r = rules[name](el.value), ok = r === true;
+  el.closest(".field").classList.toggle("invalid", !ok);
+  el.setAttribute("aria-invalid", !ok);
+  $("#e-" + name).textContent = ok ? "" : r;
+  el.setAttribute("aria-describedby", "e-" + name);
+  return ok;
+}
+Object.keys(rules).forEach(n => {
+  form.elements[n].addEventListener("blur", () => { if (form.elements[n].value) check(n); });
+  form.elements[n].addEventListener("input", () => { if (form.elements[n].closest(".field").classList.contains("invalid")) check(n); });
+});
+function summary(d){
+  const c = COURSES.find(x => x.id === d.course);
+  return [t("sumHead"), `${t("sumName")}: ${d.name}`, `${t("sumPhone")}: ${d.phone}`, `${t("sumEmail")}: ${d.email}`,
+    `${t("sumCourse")}: ${c ? L(c.title) : t("unsure")}`, `${t("sumLevel")}: ${t("levels")[+d.level - 1] || ""}`,
+    d.message ? `${t("sumMsg")}: ${d.message}` : ""].filter(Boolean).join("\n");
+}
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const bad = Object.keys(rules).filter(n => !check(n));
+  if (bad.length){ status.innerHTML = `<div class="status bad">${esc(t("fixFields"))}</div>`; form.elements[bad[0]].focus(); return; }
+  const data = Object.fromEntries(new FormData(form));
+  if (!SITE.formEndpoint){
+    status.innerHTML = `<div class="status info"><b>${esc(t("demoTitle"))}</b><span>${esc(t("demoText"))}</span><a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${waLink(summary(data))}">${esc(t("demoBtn"))}</a></div>`;
+    return;
+  }
+  const btn = $("#submitBtn"), label = btn.textContent; btn.disabled = true; btn.textContent = t("sending");
+  try {
+    const res = await fetch(SITE.formEndpoint, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify({...data, level:t("levels")[+data.level-1], lang})});
+    if (!res.ok) throw new Error(res.status);
+    form.reset();
+    status.innerHTML = `<div class="status ok"><b>${esc(t("okTitle"))}</b><span>${esc(t("okText"))}</span></div>`;
+  } catch {
+    status.innerHTML = `<div class="status bad"><b>${esc(t("badTitle"))}</b><span>${esc(t("badText"))}</span><a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${waLink(summary(data))}">${esc(t("badBtn"))}</a></div>`;
+  } finally { btn.disabled = false; btn.textContent = label; }
+});
+
+/* Language switch */
+function setLang(next, save){
+  lang = next;
+  const root = document.documentElement;
+  root.lang = lang; root.dir = lang === "ar" ? "rtl" : "ltr";
+  if (save) { try { localStorage.setItem("cp-lang", lang); } catch {} }
+  $("#langLabel").textContent = lang === "ar" ? "EN" : "ع";
+  const lb = $("#langBtn"); lb.setAttribute("aria-label", t("langSwitch")); lb.lang = lang === "ar" ? "en" : "ar";
+  applyStatic(); renderPortrait(); renderAbout(); renderCourses(); renderRoadmap(); renderProjects(); renderFaq(); renderContact(); renderFormOptions();
+  $("#demoBadge").hidden = !!SITE.formEndpoint;
+  menuBtn.setAttribute("aria-label", t(navLinks.classList.contains("open") ? "menuClose" : "menuOpen"));
+  Object.keys(rules).forEach(n => { if (form.elements[n].closest(".field").classList.contains("invalid")) check(n); });
+  status.innerHTML = "";
+  if (openId) openCourse(openId);
+}
+$("#langBtn").addEventListener("click", () => setLang(lang === "ar" ? "en" : "ar", true));
+$("#year").textContent = new Date().getFullYear();
+setLang(lang, false);
+route();
+</script>
+</body>
+</html>
