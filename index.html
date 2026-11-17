@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CodePath Academy</title>
-<meta name="description" content="CodePath Academy أكاديمية برمجة أونلاين يقدّمها المدرب محمد صالح موسى، Senior Flutter Developer. تعلّم البرمجة وتطوير تطبيقات الجوال بـ Flutter من الصفر حتى الاحتراف بالعربية والإنجليزية.">
+<meta name="description" content="CodePath Academy أكاديمية برمجة أونلاين يقدّمها المدرب محمد صالح موسى، Senior Mobile App Developer | Flutter. تعلّم البرمجة وتطوير تطبيقات الجوال بـ Flutter من الصفر حتى الاحتراف بالعربية والإنجليزية.">
 <meta name="theme-color" content="#0a1124">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_AR">
@@ -461,7 +461,7 @@ dialog[open]{animation:rise .3s both}
         <div class="avatar" id="aboutAvatar">MS</div>
         <div>
           <h3 data-i18n="name">محمد صالح موسى</h3>
-          <div class="role ltr">Senior Flutter Developer<br>Programming Instructor</div>
+          <div class="role ltr">Senior Mobile App Developer | Flutter<br>Programming Instructor</div>
           <div class="loc" data-i18n="location">الرياض، المملكة العربية السعودية</div>
         </div>
       </div>
@@ -482,7 +482,7 @@ dialog[open]{animation:rise .3s both}
     <div class="about-copy">
       <span class="eyebrow">About the instructor</span>
       <h2 id="about-title" data-i18n="aboutTitle">تعلّم من مطوّر يبني تطبيقات حقيقية ويعلّمها</h2>
-      <p data-i18n="aboutP1"><strong>محمد صالح موسى</strong> مطوّر Flutter أول (Senior Flutter Developer) ومدرّب برمجة، ومؤسس CodePath Academy. لديه أكثر من 5 سنوات من الخبرة في تصميم وتطوير ونشر تطبيقات جوال متعددة المنصات، وقاد فرق تطوير، ويشرف على المطوّرين المبتدئين ويراجع جودة الكود.</p>
+      <p data-i18n="aboutP1"><strong>محمد صالح موسى</strong> مطوّر تطبيقات جوال أول متخصص في Flutter (Senior Mobile App Developer) ومدرّب برمجة، ومؤسس CodePath Academy. لديه أكثر من 5 سنوات من الخبرة في تصميم وتطوير ونشر تطبيقات جوال متعددة المنصات، وقاد فرق تطوير، ويشرف على المطوّرين المبتدئين ويراجع جودة الكود.</p>
       <p data-i18n="aboutP2">يعمل يومياً بالأدوات والمفاهيم التي يدرّسها في الأكاديمية: Clean Architecture و MVVM و SOLID، وإدارة الحالة بـ GetX و BLoC، وكتابة Unit Tests، والنشر على Google Play و App Store و AppGallery. لذلك يركّز في التدريس على ما يحتاجه المطوّر فعلاً في بيئة العمل، ويقود المتعلّم خطوة بخطوة من أول سطر كود حتى أول تطبيق منشور.</p>
       <div class="principles">
         <div class="principle"><span class="mono ltr">01 · Learn</span><h4 data-i18n="pr1t">افهم المفهوم</h4><p data-i18n="pr1">شرح واضح يبني الأساس قبل الانتقال لما بعده.</p></div>
@@ -776,7 +776,7 @@ const EN = {
   kpi1:"years of Flutter experience", kpi2v:"Bachelor's", kpi2:"Information and Communications Technology", kpi3:"app stores: Google Play, App Store, AppGallery",
   waInstructor:"WhatsApp",
   aboutTitle:"Learn from a developer who ships real apps",
-  aboutP1:"<strong>Mohammed Salih Musa</strong> is a Senior Flutter Developer, programming instructor and the founder of CodePath Academy. He has more than 5 years of experience designing, building and releasing cross-platform mobile apps, has led development teams, and mentors junior developers through code reviews.",
+  aboutP1:"<strong>Mohammed Salih Musa</strong> is a Senior Mobile App Developer specialising in Flutter, a programming instructor and the founder of CodePath Academy. He has more than 5 years of experience designing, building and releasing cross-platform mobile apps, has led development teams, and mentors junior developers through code reviews.",
   aboutP2:"The tools he teaches are the ones he uses every day: Clean Architecture, MVVM, SOLID, state management with GetX and BLoC, unit testing, and publishing to Google Play, the App Store and AppGallery. His teaching focuses on what developers really need on the job, guiding learners step by step from their first line of code to their first published app.",
   pr1t:"Understand the concept", pr1:"Clear explanations that build a solid base before moving on.",
   pr2t:"Practice hands-on", pr2:"Exercises after every lesson to lock in what you learned.",
@@ -870,7 +870,7 @@ function renderPortrait(){
     $("#aboutAvatar").innerHTML = `<img src="${esc(SITE.instructorPhoto)}" alt="" loading="lazy">`;
   } else {
     const name = lang === "en" ? EN.name : AR.name;
-    $("#heroPortrait").innerHTML = `<div class="monogram"><div class="initial"><span>${esc(t("initial"))}</span></div><strong>${esc(name)}</strong><small dir="ltr">Senior Flutter Developer</small><small>${esc(t("instructor"))}</small></div>`;
+    $("#heroPortrait").innerHTML = `<div class="monogram"><div class="initial"><span>${esc(t("initial"))}</span></div><strong>${esc(name)}</strong><small dir="ltr">Senior Mobile App Developer | Flutter</small><small>${esc(t("instructor"))}</small></div>`;
   }
 }
 
