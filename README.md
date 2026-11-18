@@ -42,6 +42,8 @@ To save every enquiry as a row in a Google Sheet:
    `googleSheetUrl: "https://script.google.com/macros/s/…/exec",`
 6. Commit and push. The "Demo form" badge disappears and enquiries land in the **Enquiries** tab, with a timestamp.
 
+**Email alerts:** the script emails the sheet owner for every new enquiry (set `NOTIFY_EMAIL` in the script to use another address). Run `testNotify` once from the Apps Script editor to approve the email permission.
+
 If you change the script later, use **Deploy → Manage deployments → Edit → New version** so the URL stays the same.
 
 ## Student projects section
