@@ -808,7 +808,8 @@ const FAQ = [
     en:"Yes. Every course ends with a practical project that brings together what you learned, plus hands-on exercises during the lessons."}],
   [{ar:"هل أحصل على شهادة؟", en:"Do I get a certificate?"},
    {ar:"تفاصيل الشهادات، إن وُجدت لدورة معينة، تُعلن مع تفاصيل تلك الدورة. تواصل معنا للاستفسار عن دورة محددة.",
-    en:"Certificate details, where offered, are announced with each course. Contact us to ask about a specific course."}],
+    en:"Certificate details, where offered, are announced with each course. Contact us to ask about a specific course."},
+   {hidden:true}],   // مخفي حالياً / hidden for now: delete {hidden:true} to show it again
   [{ar:"كيف أسجّل في دورة؟", en:"How do I register?"},
    {ar:"املأ نموذج الاستفسار في أسفل الصفحة أو راسلنا مباشرة على واتساب، وسنتواصل معك بتفاصيل الدورة وخطوات التسجيل.",
     en:"Fill in the enquiry form below or message us on WhatsApp, and we'll get back to you with course details and next steps."}],
@@ -968,7 +969,7 @@ function renderProjects(){
 }
 
 function renderFaq(){
-  $("#faqList").innerHTML = FAQ.map(([q,a]) => `<details><summary>${esc(L(q))}<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">${esc(L(a))}</div></details>`).join("");
+  $("#faqList").innerHTML = FAQ.filter(f => !(f[2] && f[2].hidden)).map(([q,a]) => `<details><summary>${esc(L(q))}<span class="pm" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">${esc(L(a))}</div></details>`).join("");
 }
 
 function renderContact(){
