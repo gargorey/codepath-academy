@@ -644,7 +644,8 @@ const SITE = {
     { name: "GitHub",    url: "" }
   ],
   instructorPhoto: "",                   // مثال: "assets/instructor.jpg"
-  formEndpoint: "",                      // Formspree URL. فارغ = وضع تجريبي / empty = demo mode
+  googleSheetUrl: "",                    // رابط Google Apps Script (ينتهي بـ /exec). فارغ = وضع تجريبي / empty = demo mode
+  showStudentProjects: false,            // true لإظهار معرض مشاريع الطلاب / true to show the student projects section
   defaultLang: "ar"
 };
 
@@ -1024,14 +1025,20 @@ form.addEventListener("submit", async e => {
   const bad = Object.keys(rules).filter(n => !check(n));
   if (bad.length){ status.innerHTML = `<div class="status bad">${esc(t("fixFields"))}</div>`; form.elements[bad[0]].focus(); return; }
   const data = Object.fromEntries(new FormData(form));
-  if (!SITE.formEndpoint){
+  if (!SITE.googleSheetUrl){
     status.innerHTML = `<div class="status info"><b>${esc(t("demoTitle"))}</b><span>${esc(t("demoText"))}</span><a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${waLink(summary(data))}">${esc(t("demoBtn"))}</a></div>`;
     return;
   }
   const btn = $("#submitBtn"), label = btn.textContent; btn.disabled = true; btn.textContent = t("sending");
   try {
-    const res = await fetch(SITE.formEndpoint, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify({...data, level:t("levels")[+data.level-1], lang})});
-    if (!res.ok) throw new Error(res.status);
+    const c = COURSES.find(x => x.id === data.course);
+    const row = { name:data.name, phone:data.phone, email:data.email,
+      course: c ? c.title.ar + " | " + c.title.en : UI.ar.unsure,
+      level: UI.ar.levels[+data.level-1] || "", message:data.message || "", lang, page:location.href };
+    /* text/plain body keeps this a "simple" request, which Google Apps Script accepts without a CORS preflight */
+    const res = await fetch(SITE.googleSheetUrl, {method:"POST", body:JSON.stringify(row)});
+    const out = await res.json();
+    if (!res.ok || out.result !== "success") throw new Error(out.error || res.status);
     form.reset();
     status.innerHTML = `<div class="status ok"><b>${esc(t("okTitle"))}</b><span>${esc(t("okText"))}</span></div>`;
   } catch {
@@ -1048,7 +1055,8 @@ function setLang(next, save){
   $("#langLabel").textContent = lang === "ar" ? "EN" : "ع";
   const lb = $("#langBtn"); lb.setAttribute("aria-label", t("langSwitch")); lb.lang = lang === "ar" ? "en" : "ar";
   applyStatic(); renderPortrait(); renderAbout(); renderCourses(); renderRoadmap(); renderProjects(); renderFaq(); renderContact(); renderFormOptions();
-  $("#demoBadge").hidden = !!SITE.formEndpoint;
+  $("#demoBadge").hidden = !!SITE.googleSheetUrl;
+  $("#projects").hidden = !SITE.showStudentProjects;
   menuBtn.setAttribute("aria-label", t(navLinks.classList.contains("open") ? "menuClose" : "menuOpen"));
   Object.keys(rules).forEach(n => { if (form.elements[n].closest(".field").classList.contains("invalid")) check(n); });
   status.innerHTML = "";

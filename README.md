@@ -28,15 +28,25 @@ The instructor text is in the `#about` section of the HTML. Keep it to verified 
 2. Set `instructorPhoto: "assets/instructor.jpg"` in `SITE`.
 3. The logo mark is an inline SVG in the header and footer. To use the official logo instead, replace the two `<svg>` blocks inside `.brand` with `<img src="assets/logo.svg" alt="" width="40" height="40">`, and update the favicon `<link rel="icon">` in the `<head>`.
 
-## Connecting the enquiry form
+## Connecting the enquiry form to Google Sheets
 
-Without a backend the form runs in **demo mode**: it validates the fields, clearly says nothing was sent, and offers a WhatsApp button with the enquiry already written out.
+Without a URL the form runs in **demo mode**: it validates the fields, says clearly that nothing was sent, and offers a WhatsApp button with the enquiry already written out.
 
-To receive submissions for real:
+To save every enquiry as a row in a Google Sheet:
 
-1. Create a free form at [Formspree](https://formspree.io) (or Getform, Basin, etc.) and copy its endpoint URL, e.g. `https://formspree.io/f/abcdwxyz`.
-2. Set `formEndpoint: "https://formspree.io/f/abcdwxyz"` in `SITE`.
-3. The "نموذج تجريبي" badge disappears and the form sends JSON to that endpoint, with real success and error messages.
+1. Create a new Google Sheet (for example "CodePath Academy – Enquiries").
+2. In the sheet, open **Extensions → Apps Script**.
+3. Delete what is in `Code.gs`, paste the contents of [`google-apps-script.gs`](google-apps-script.gs), and click **Save**.
+4. Click **Deploy → New deployment**, choose type **Web app**, set *Execute as* = **Me** and *Who has access* = **Anyone**, then **Deploy**. Approve the permissions Google asks for.
+5. Copy the **Web app URL** (it ends in `/exec`) and set it in `index.html`:
+   `googleSheetUrl: "https://script.google.com/macros/s/…/exec",`
+6. Commit and push. The "Demo form" badge disappears and enquiries land in the **Enquiries** tab, with a timestamp.
+
+If you change the script later, use **Deploy → Manage deployments → Edit → New version** so the URL stays the same.
+
+## Student projects section
+
+Hidden for now. Set `showStudentProjects: true` in `SITE` to show it again once you have real student work.
 
 ## Deploying
 
