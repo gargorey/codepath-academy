@@ -323,9 +323,19 @@ const ERR = {
   not_configured: "The admin password isn't set up yet. In Apps Script, add the ADMIN_PASSWORD script property (12+ characters) and deploy a new version.",
   not_found: "That registration is no longer in the sheet. Refreshing.",
 };
+const OLD_SCRIPT = "Your Apps Script is still running the old version, which has no dashboard. Paste the new google-apps-script.gs into Code.gs, then Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.";
+let checkedFor = "";
 async function api(action, extra = {}){
   if (DEMO) return demoApi(action, extra);
   let res, out;
+  // The old script saves every POST as a new enquiry, so check the version with a harmless GET first.
+  if (checkedFor !== endpoint) {
+    let info;
+    try { info = await (await fetch(endpoint)).json(); }
+    catch { throw Object.assign(new Error("Couldn't reach the Apps Script. Check the Apps Script URL on the sign-in screen."), { code:"network" }); }
+    if (!info || !info.dashboard) throw Object.assign(new Error(OLD_SCRIPT), { code:"old_script" });
+    checkedFor = endpoint;
+  }
   try {
     // text/plain body = "simple" request, so Apps Script answers without a CORS preflight
     res = await fetch(endpoint, { method:"POST", body: JSON.stringify({ action, password, ...extra }) });
@@ -335,8 +345,9 @@ async function api(action, extra = {}){
   }
   if (out.result !== "success") {
     const code = out.error || "error";
-    throw Object.assign(new Error(ERR[code] || (code === "Unknown action" ? "The Apps Script is an older version without the dashboard. Paste the new google-apps-script.gs and deploy a new version." : code)), { code });
+    throw Object.assign(new Error(ERR[code] || (code === "Unknown action" ? OLD_SCRIPT : code)), { code });
   }
+  if (action === "list" && !Array.isArray(out.rows)) throw Object.assign(new Error(OLD_SCRIPT), { code:"old_script" });
   return out;
 }
 
@@ -374,7 +385,7 @@ function showApp(){ $("#login").hidden = true; $("#app").hidden = false; $("#dem
 async function refresh(quiet){
   const b = $("#refreshBtn"); b.disabled = true; b.innerHTML = '<span class="spin"></span>';
   try { loaded(await api("list")); render(); if (!quiet) toast("Up to date"); }
-  catch (err) { if (err.code === "wrong_password" || err.code === "locked" || err.code === "not_configured") { store.del("cpa-admin-pw"); showLogin(err.message); } else toast(err.message, true); }
+  catch (err) { if (["wrong_password","locked","not_configured","old_script"].includes(err.code)) { store.del("cpa-admin-pw"); showLogin(err.message); } else toast(err.message, true); }
   finally { b.disabled = false; b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></svg>'; }
 }
 $("#refreshBtn").onclick = () => refresh();

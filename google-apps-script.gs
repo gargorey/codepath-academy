@@ -179,7 +179,7 @@ function testNotify() {
 }
 
 function doGet() {
-  return json({ result: 'success', info: 'CodePath Academy form endpoint is running.' });
+  return json({ result: 'success', info: 'CodePath Academy form endpoint is running.', dashboard: 2 });
 }
 
 function json(obj) {
