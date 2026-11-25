@@ -1,4 +1,6 @@
-# CodePath Academy website
+# Khatwa Code (خطوة كود) website
+
+Formerly "CodePath Academy". Renamed in November 2026 to avoid confusion with the US nonprofit CodePath (codepath.org). The repository name and GitHub Pages URL still say `codepath-academy`; rename the repository later if you want the URL to match.
 
 A static, bilingual (Arabic RTL / English LTR) single-page website. The globe button in the header switches language and remembers the choice. No build step and no framework: one `index.html` file with inline CSS and JavaScript, plus `og-image.png` for social sharing.
 
@@ -7,6 +9,7 @@ A static, bilingual (Arabic RTL / English LTR) single-page website. The globe bu
 | File | What it is |
 |---|---|
 | `index.html` | The whole site: header, hero, instructor, courses, learning path, why us, student projects, FAQ, contact form, footer. |
+| `brand/` | Logo and app icon (SVG and PNG, dark, light and transparent versions). |
 | `og-image.png` | 1200×630 image shown when the link is shared on WhatsApp, X, LinkedIn, etc. |
 | `admin.html` | Password-protected dashboard to read and manage registrations from the Google Sheet. |
 | `google-apps-script.gs` | The Google Apps Script behind the form and the dashboard. |
@@ -36,7 +39,7 @@ Without a URL the form runs in **demo mode**: it validates the fields, says clea
 
 To save every enquiry as a row in a Google Sheet:
 
-1. Create a new Google Sheet (for example "CodePath Academy – Enquiries").
+1. Create a new Google Sheet (for example "Khatwa Code – Enquiries").
 2. In the sheet, open **Extensions → Apps Script**.
 3. Delete what is in `Code.gs`, paste the contents of [`google-apps-script.gs`](google-apps-script.gs), and click **Save**.
 4. Click **Deploy → New deployment**, choose type **Web app**, set *Execute as* = **Me** and *Who has access* = **Anyone**, then **Deploy**. Approve the permissions Google asks for.
@@ -61,7 +64,11 @@ The page itself holds no data. It asks the Apps Script for the rows, and the scr
 3. **Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.** The URL stays the same, so the website form keeps working.
 4. Open `https://<your-site>/admin.html` (on GitHub Pages: https://gargorey.github.io/codepath-academy/admin.html) and sign in with that password.
 
-To change the password later, edit the script property; no redeploy needed. The sheet gets two new columns, **Status** and **Notes**, the first time the new script runs. Older rows show as *New*. Open `admin.html?demo` to try the dashboard with sample data.
+To change the password later, edit the script property; no redeploy needed. The sheet gets the extra columns **Status**, **Notes** and **Payment plan** the first time the new script runs. Older rows show as *New*. Open `admin.html?demo` to try the dashboard with sample data.
+
+## Prices and installments
+
+`PRICES` in `index.html` (and `PRICE` in `admin.html`) hold the prices in US dollars: $30 per course and $100 for the Full Diploma. The form asks how the student wants to pay: in full, or in installments. Installment requests are saved in the sheet's **Payment plan** column, flagged in the dashboard, and mean you contact the student to agree the payment schedule.
 
 ## Student projects section
 

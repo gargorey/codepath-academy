@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CodePath Academy</title>
-<meta name="description" content="CodePath Academy أكاديمية برمجة أونلاين يقدّمها المدرب محمد صالح موسى، Senior Mobile App Developer | Flutter. تعلّم البرمجة وتطوير تطبيقات الجوال بـ Flutter من الصفر حتى الاحتراف بالعربية والإنجليزية.">
+<title>Khatwa Code | خطوة كود</title>
+<meta name="description" content="خطوة كود (Khatwa Code) أكاديمية برمجة أونلاين يقدّمها المدرب محمد صالح موسى، Senior Mobile App Developer | Flutter. تعلّم البرمجة وتطوير تطبيقات الجوال بـ Flutter من الصفر حتى الاحتراف بالعربية والإنجليزية.">
 <meta name="theme-color" content="#0a1124" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f5f7fc" media="(prefers-color-scheme: light)">
 <script>(function(){try{var m=localStorage.getItem("cp-theme");if(m==="light"||m==="dark")document.documentElement.dataset.theme=m}catch(e){}})()</script>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_AR">
 <meta property="og:locale:alternate" content="en_US">
-<meta property="og:site_name" content="CodePath Academy">
-<meta property="og:title" content="CodePath Academy | Learn • Practice • Build">
+<meta property="og:site_name" content="Khatwa Code">
+<meta property="og:title" content="Khatwa Code | خطوة كود | Learn • Practice • Build">
 <meta property="og:description" content="ابدأ رحلتك في عالم البرمجة من الصفر حتى الاحتراف. Learn programming and Flutter from zero to professional.">
 <meta property="og:image" content="og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='12' fill='%230a1124'/%3E%3Cpath d='M17 15 9 24l8 9M31 15l8 9-8 9' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 31l8-14' stroke='%23eef3ff' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='12' fill='%230a1124'/%3E%3Cpath d='M14 15 7 24l7 9M34 15l7 9-7 9' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16.5 32.5h4.5v-5h4.5v-5h4.5v-5h2' fill='none' stroke='%23eef3ff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
@@ -367,6 +367,9 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.18)}
 .field.invalid input,.field.invalid select{border-color:var(--err)}
 .err{font-size:13px;color:var(--err)}
+.hint{font-size:13px;color:var(--dim)}
+.inst{font-size:13.5px;color:var(--muted)}
+.inst b{color:var(--fg);font-weight:600}
 textarea{min-height:110px;resize:vertical}
 .form-foot{grid-column:1/-1;display:grid;gap:12px}
 .status{border-radius:12px;padding:16px 18px;font-size:15px;display:grid;gap:12px}
@@ -463,9 +466,9 @@ dialog[open]{animation:rise .3s both}
 
 <header class="site-header" id="top">
   <div class="wrap nav">
-    <a class="brand" href="#home" aria-label="CodePath Academy">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="12" fill="#0d1730" stroke="url(#lg)" stroke-opacity=".6"/><path d="M17 15 9 24l8 9M31 15l8 9-8 9" fill="none" stroke="url(#lg)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 31l8-14" stroke="#eef3ff" stroke-width="3.2" stroke-linecap="round"/></svg>
-      <span class="brand-name"><b>CodePath Academy</b><small>Learn • Practice • Build</small></span>
+    <a class="brand" href="#home" aria-label="Khatwa Code">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="12" fill="#0d1730" stroke="url(#lg)" stroke-opacity=".6"/><path d="M14 15 7 24l7 9M34 15l7 9-7 9" fill="none" stroke="url(#lg)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 32.5h4.5v-5h4.5v-5h4.5v-5h2" fill="none" stroke="#eef3ff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-name"><b data-i18n="brandName">خطوة كود</b><small data-i18n="brandSub">Khatwa Code</small></span>
     </a>
     <nav data-i18n-aria="navMain" aria-label="القائمة الرئيسية">
       <ul class="nav-links" id="navLinks">
@@ -501,7 +504,7 @@ dialog[open]{animation:rise .3s both}
     <div class="hero-copy">
       <span class="pill"><span class="dot">online</span> <span data-i18n="heroPill">تعلّم البرمجة أونلاين بالعربية والإنجليزية</span></span>
       <h1 data-i18n="heroTitle">ابدأ رحلتك في عالم البرمجة <span class="grad-text">من الصفر حتى الاحتراف</span></h1>
-      <p class="hero-lead" data-i18n="heroLead">تعلّم عملي أونلاين، خطوة بخطوة، مع مشاريع حقيقية. من أساسيات البرمجة حتى نشر تطبيقات Flutter على المتاجر، مع المصطلحات التقنية بالإنجليزية كما ستستخدمها في سوق العمل.</p>
+      <p class="hero-lead" data-i18n="heroLead">يوتيوب يعلّمك، ونحن نتابعك حتى تُكمل وتبني مشروعاً حقيقياً. مراجعة أسبوعية لكودك، وجلسة أسئلة مباشرة كل أسبوع، ومجموعات صغيرة يتابعها المدرب بنفسه، من أساسيات البرمجة حتى نشر تطبيقات Flutter على المتاجر.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#courses"><span data-i18n="heroBtn1">استكشف الدورات</span>
           <svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a>
@@ -516,7 +519,7 @@ dialog[open]{animation:rise .3s both}
       <div class="float-chip fc-2" aria-hidden="true"><b>5+ yrs</b> experience</div>
       <div class="code-card" aria-hidden="true">
         <div class="code-top"><i></i><i></i><i></i><span>main.dart</span></div>
-<pre><span class="line" style="animation-delay:.3s"><span class="k">void</span> <span class="f">main</span>() {</span><span class="line" style="animation-delay:.5s">  <span class="k">final</span> path = [<span class="s">'Learn'</span>,</span><span class="line" style="animation-delay:.7s">    <span class="s">'Practice'</span>, <span class="s">'Build'</span>];</span><span class="line" style="animation-delay:.9s">  <span class="k">for</span> (<span class="k">final</span> step <span class="k">in</span> path) {</span><span class="line" style="animation-delay:1.1s">    <span class="f">print</span>(<span class="s">'CodePath → $step'</span>);</span><span class="line" style="animation-delay:1.3s">  }</span><span class="line" style="animation-delay:1.5s">} <span class="cursor"></span></span></pre>
+<pre><span class="line" style="animation-delay:.3s"><span class="k">void</span> <span class="f">main</span>() {</span><span class="line" style="animation-delay:.5s">  <span class="k">final</span> path = [<span class="s">'Learn'</span>,</span><span class="line" style="animation-delay:.7s">    <span class="s">'Practice'</span>, <span class="s">'Build'</span>];</span><span class="line" style="animation-delay:.9s">  <span class="k">for</span> (<span class="k">final</span> step <span class="k">in</span> path) {</span><span class="line" style="animation-delay:1.1s">    <span class="f">print</span>(<span class="s">'Khatwa → $step'</span>);</span><span class="line" style="animation-delay:1.3s">  }</span><span class="line" style="animation-delay:1.5s">} <span class="cursor"></span></span></pre>
       </div>
     </div>
   </div>
@@ -550,7 +553,7 @@ dialog[open]{animation:rise .3s both}
     <div class="about-copy">
       <span class="eyebrow">About the instructor</span>
       <h2 id="about-title" data-i18n="aboutTitle">تعلّم من مطوّر يبني تطبيقات حقيقية ويعلّمها</h2>
-      <p data-i18n="aboutP1"><strong>محمد صالح موسى</strong> مطوّر تطبيقات جوال أول متخصص في Flutter (Senior Mobile App Developer) ومدرّب برمجة، ومؤسس CodePath Academy. لديه أكثر من 5 سنوات من الخبرة في تصميم وتطوير ونشر تطبيقات جوال متعددة المنصات، وقاد فرق تطوير، ويشرف على المطوّرين المبتدئين ويراجع جودة الكود.</p>
+      <p data-i18n="aboutP1"><strong>محمد صالح موسى</strong> مطوّر تطبيقات جوال أول متخصص في Flutter (Senior Mobile App Developer) ومدرّب برمجة، ومؤسس أكاديمية خطوة كود (Khatwa Code). لديه أكثر من 5 سنوات من الخبرة في تصميم وتطوير ونشر تطبيقات جوال متعددة المنصات، وقاد فرق تطوير، ويشرف على المطوّرين المبتدئين ويراجع جودة الكود.</p>
       <p data-i18n="aboutP2">يعمل يومياً بالأدوات والمفاهيم التي يدرّسها في الأكاديمية: Clean Architecture و MVVM و SOLID، وإدارة الحالة بـ GetX و BLoC، وكتابة Unit Tests، والنشر على Google Play و App Store و AppGallery. لذلك يركّز في التدريس على ما يحتاجه المطوّر فعلاً في بيئة العمل، ويقود المتعلّم خطوة بخطوة من أول سطر كود حتى أول تطبيق منشور.</p>
       <div class="principles">
         <div class="principle"><span class="mono ltr">01 · Learn</span><h4 data-i18n="pr1t">افهم المفهوم</h4><p data-i18n="pr1">شرح واضح يبني الأساس قبل الانتقال لما بعده.</p></div>
@@ -593,16 +596,17 @@ dialog[open]{animation:rise .3s both}
 <section class="section" id="why" aria-labelledby="why-title">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Why CodePath</span>
-      <h2 id="why-title" data-i18n="whyTitle">لماذا تتعلّم معنا؟</h2>
+      <span class="eyebrow">Why Khatwa Code</span>
+      <h2 id="why-title" data-i18n="whyTitle">لسنا فيديوهات، نحن متابعة حتى النتيجة</h2>
+      <p data-i18n="whyLead">المحتوى المجاني موجود في كل مكان. ما ينقص أغلب المتعلّمين هو من يراجع كودهم ويتابعهم حتى يُكملوا. هذا ما ندفع له.</p>
     </div>
     <div class="why-grid">
       <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 7 8M11 5c-1 4-4 7-7 8M13 21l4-9 4 9M14.5 18h5"/></svg></span><h3 data-i18n="w1t">شرح عربي بمصطلحات إنجليزية</h3><p data-i18n="w1">تفهم الفكرة بلغتك، وتتعلّم المصطلح كما يُكتب في الكود والتوثيق، فلا تتوه حين تقرأ مصدراً إنجليزياً.</p></div>
-      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></span><h3 data-i18n="w2t">تمارين عملية</h3><p data-i18n="w2">كل مفهوم يتبعه تمرين تكتبه بنفسك، لأن البرمجة تُتعلّم بالممارسة لا بالمشاهدة فقط.</p></div>
-      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9l2 2-2 2M12 13h4"/></svg></span><h3 data-i18n="w3t">مشاريع حقيقية</h3><p data-i18n="w3">تنتهي كل دورة بمشروع متكامل يجمع ما تعلّمته، ويصلح أن يكون بداية ملف أعمالك.</p></div>
-      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 10 5-3v10l-5-3"/><rect x="3" y="6" width="13" height="12" rx="2"/></svg></span><h3 data-i18n="w4t">جلسات مباشرة أونلاين</h3><p data-i18n="w4">محاضرات تفاعلية مباشرة تسأل فيها وتناقش وتكتب الكود مع المدرب، من أي مكان.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></span><h3 data-i18n="w2t">مراجعة أسبوعية لكودك</h3><p data-i18n="w2">كل أسبوع يراجع المدرب ما كتبته ويعطيك ملاحظات عملية، كما يحدث في فرق التطوير الحقيقية.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 9l2 2-2 2M12 13h4"/></svg></span><h3 data-i18n="w3t">مشروع حقيقي على GitHub</h3><p data-i18n="w3">تنتهي كل دورة بمشروع متكامل تنشره على GitHub وتضيفه لملف أعمالك، لا مجرد شهادة حضور.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 10 5-3v10l-5-3"/><rect x="3" y="6" width="13" height="12" rx="2"/></svg></span><h3 data-i18n="w4t">جلسة أسئلة مباشرة كل أسبوع</h3><p data-i18n="w4">جلسة أونلاين أسبوعية تسأل فيها وتناقش وتحلّ ما علقت فيه مع المدرب مباشرة.</p></div>
       <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/></svg></span><h3 data-i18n="w5t">تسجيلات عند توفرها</h3><p data-i18n="w5">يمكنك الرجوع إلى تسجيلات المحاضرات عند توفرها لمراجعة ما فاتك أو تثبيت ما تعلّمته.</p></div>
-      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12Z"/><path d="M9 11h6M9 14h4"/></svg></span><h3 data-i18n="w6t">دعم للمتعلّمين</h3><p data-i18n="w6">متابعة للأسئلة والتمارين خلال الدورة، حتى لا تبقى عالقاً أمام خطأ لا تفهمه.</p></div>
+      <div class="why"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12Z"/><path d="M9 11h6M9 14h4"/></svg></span><h3 data-i18n="w6t">مجموعات صغيرة ومتابعة حتى تُكمل</h3><p data-i18n="w6">عدد محدود في كل دفعة، والمدرب يتابع تقدّم كل طالب بنفسه حتى لا يتوقف في منتصف الطريق.</p></div>
     </div>
   </div>
 </section>
@@ -668,6 +672,7 @@ dialog[open]{animation:rise .3s both}
           <div class="field full"><label for="f-email"><span data-i18n="fEmail">البريد الإلكتروني</span> <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required><span class="err" id="e-email"></span></div>
           <div class="field"><label for="f-course"><span data-i18n="fCourse">الدورة المطلوبة</span> <span class="req">*</span></label><select id="f-course" name="course" required></select><span class="err" id="e-course"></span></div>
           <div class="field"><label for="f-level"><span data-i18n="fLevel">مستواك الحالي</span> <span class="req">*</span></label><select id="f-level" name="level" required></select><span class="err" id="e-level"></span></div>
+          <div class="field full"><label for="f-plan"><span data-i18n="fPlan">طريقة الدفع</span> <span class="req">*</span></label><select id="f-plan" name="plan" required></select><span class="err" id="e-plan"></span><span class="hint" data-i18n="fPlanHint">اختر التقسيط إن أردت الدفع على دفعات، وسنتواصل معك لتحديد جدول الأقساط المناسب لك.</span></div>
           <div class="field full"><label for="f-msg" data-i18n="fMsg">رسالتك (اختياري)</label><textarea id="f-msg" name="message" data-i18n-ph="fMsgPh" placeholder="أخبرنا بهدفك من التعلّم أو أي سؤال لديك"></textarea></div>
           <div class="form-foot">
             <button class="btn btn-primary" type="submit" id="submitBtn" data-i18n="submit">أرسل الطلب</button>
@@ -682,14 +687,14 @@ dialog[open]{animation:rise .3s both}
 
 <footer class="site-footer">
   <div class="wrap foot">
-    <a class="brand" href="#home" aria-label="CodePath Academy">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="1" y="1" width="46" height="46" rx="12" fill="#0d1730" stroke="url(#lg)" stroke-opacity=".6"/><path d="M17 15 9 24l8 9M31 15l8 9-8 9" fill="none" stroke="url(#lg)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 31l8-14" stroke="#eef3ff" stroke-width="3.2" stroke-linecap="round"/></svg>
-      <span class="brand-name"><b>CodePath Academy</b><small>Learn • Practice • Build</small></span>
+    <a class="brand" href="#home" aria-label="Khatwa Code">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="1" y="1" width="46" height="46" rx="12" fill="#0d1730" stroke="url(#lg)" stroke-opacity=".6"/><path d="M14 15 7 24l7 9M34 15l7 9-7 9" fill="none" stroke="url(#lg)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 32.5h4.5v-5h4.5v-5h4.5v-5h2" fill="none" stroke="#eef3ff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-name"><b data-i18n="brandName">خطوة كود</b><small data-i18n="brandSub">Khatwa Code</small></span>
     </a>
     <nav data-i18n-aria="navFoot" aria-label="روابط التذييل">
       <a href="#courses" data-i18n="navCourses">الدورات</a><a href="#roadmap" data-i18n="navPath">مسار التعلم</a><a href="#faq" data-i18n="navFaq">الأسئلة الشائعة</a><a href="#contact" data-i18n="navContact">تواصل معنا</a>
     </nav>
-    <p>© <span id="year">2026</span> CodePath Academy</p>
+    <p>© <span id="year">2026</span> Khatwa Code</p>
   </div>
 </footer>
 
@@ -718,9 +723,10 @@ const SITE = {
   defaultLang: "ar"
 };
 
-/* Prices in US dollars: each course on its own, or the full diploma (all four courses). */
+/* Prices in US dollars: each course on its own, or the full diploma (all four courses).
+   Installments are available; the student picks them in the form and we agree the schedule on WhatsApp. */
 const PRICES = {
-  course:  { usd: 40 },
+  course:  { usd: 30 },
   diploma: { usd: 100 }
 };
 const DIPLOMA = {
@@ -842,23 +848,24 @@ const FAQ = [
    {ar:"املأ نموذج الاستفسار في أسفل الصفحة أو راسلنا مباشرة على واتساب، وسنتواصل معك بتفاصيل الدورة وخطوات التسجيل.",
     en:"Fill in the enquiry form below or message us on WhatsApp, and we'll get back to you with course details and next steps."}],
   [{ar:"ما الرسوم وطرق الدفع؟", en:"What are the fees and payment options?"},
-   {ar:"كل دورة 40 دولاراً، والدبلومة الكاملة بالدورات الأربع 100 دولار بدلاً من 160 دولاراً. نرسل لك طرق الدفع المتاحة عند التواصل معنا.",
-    en:"Each course is $40. The Full Diploma, with all four courses, is $100 instead of $160. We'll send you the payment options when you get in touch."}]
+   {ar:"كل دورة 30 دولاراً، والدبلومة الكاملة بالدورات الأربع 100 دولار بدلاً من 120 دولاراً. يمكنك الدفع مرة واحدة أو بالتقسيط: اختر التقسيط في نموذج التسجيل وسنتواصل معك لتحديد جدول الأقساط. نرسل لك طرق الدفع المتاحة عند التواصل معنا.",
+    en:"Each course is $30. The Full Diploma, with all four courses, is $100 instead of $120. You can pay in full or in installments: choose installments in the registration form and we'll contact you to agree the schedule. We'll send you the payment options when you get in touch."}]
 ];
 
 /* English text for the fixed parts of the page (the Arabic is read from the HTML) */
 const EN = {
+  brandName:"Khatwa Code", brandSub:"خطوة كود",
   themeLabel:"Switch light / dark mode", skip:"Skip to content", navMain:"Main menu", navFoot:"Footer links",
   navHome:"Home", navAbout:"About", navCourses:"Courses", navPath:"Learning Path", navFaq:"FAQ", navContact:"Contact", ctaRegister:"Register now",
   heroPill:"Learn to code online, in Arabic and English",
   heroTitle:'Start your coding journey <span class="grad-text">from zero to professional</span>',
-  heroLead:"Practical online learning, step by step, with real projects. From programming basics to publishing Flutter apps on the stores, with the technical terms you'll actually use at work.",
+  heroLead:"YouTube teaches you. We follow you until you finish and build a real project. Weekly code reviews, a live Q&A every week and small groups the instructor follows personally, from programming basics to publishing Flutter apps on the stores.",
   heroBtn1:"Explore courses", heroBtn2:"Meet the instructor",
   name:"Mohammed Salih Musa", location:"Riyadh, Saudi Arabia",
   kpi1:"years of mobile app development experience", kpi2v:"Bachelor's", kpi2:"Information and Communications Technology", kpi3:"app stores: Google Play, App Store, AppGallery",
   waInstructor:"WhatsApp",
   aboutTitle:"Learn from a developer who ships real apps",
-  aboutP1:"<strong>Mohammed Salih Musa</strong> is a Senior Mobile App Developer specialising in Flutter, a programming instructor and the founder of CodePath Academy. He has more than 5 years of experience designing, building and releasing cross-platform mobile apps, has led development teams, and mentors junior developers through code reviews.",
+  aboutP1:"<strong>Mohammed Salih Musa</strong> is a Senior Mobile App Developer specialising in Flutter, a programming instructor and the founder of Khatwa Code. He has more than 5 years of experience designing, building and releasing cross-platform mobile apps, has led development teams, and mentors junior developers through code reviews.",
   aboutP2:"The tools he teaches are the ones he uses every day: Clean Architecture, MVVM, SOLID, state management with GetX and BLoC, unit testing, and publishing to Google Play, the App Store and AppGallery. His teaching focuses on what developers really need on the job, guiding learners step by step from their first line of code to their first published app.",
   pr1t:"Understand the concept", pr1:"Clear explanations that build a solid base before moving on.",
   pr2t:"Practice hands-on", pr2:"Exercises after every lesson to lock in what you learned.",
@@ -868,13 +875,14 @@ const EN = {
   coursesLead:"From programming basics to production-grade Flutter apps. Each course builds on the one before, so start wherever fits your level.",
   pathTitle:"Learning path: from your first line of code to a published app",
   pathLead:"Five clear stages. Each one prepares you for the next and ends with a portfolio you can show employers.",
-  whyTitle:"Why learn with us?",
+  whyTitle:"Not just videos: we follow you to the result",
+  whyLead:"Free content is everywhere. What most learners are missing is someone who reviews their code and keeps them going until they finish. That is what you pay for.",
   w1t:"Arabic explanations, English terms", w1:"Understand ideas in Arabic while learning each term exactly as it appears in code and documentation, so English resources never feel foreign.",
-  w2t:"Practical exercises", w2:"Every concept is followed by an exercise you write yourself, because programming is learned by doing, not just watching.",
-  w3t:"Real projects", w3:"Each course ends with a complete project that ties everything together and can start your portfolio.",
-  w4t:"Live online sessions", w4:"Interactive live classes where you ask, discuss and write code with the instructor from anywhere.",
+  w2t:"Weekly code review", w2:"Every week the instructor reviews what you wrote and gives practical feedback, the way real development teams work.",
+  w3t:"A real project on GitHub", w3:"Each course ends with a complete project you publish on GitHub and add to your portfolio, not just a certificate of attendance.",
+  w4t:"Live Q&A every week", w4:"A weekly online session where you ask, discuss and work through whatever you're stuck on with the instructor.",
   w5t:"Recordings when available", w5:"Go back to lecture recordings, when available, to catch up or review.",
-  w6t:"Learner support", w6:"Help with questions and exercises during the course, so you're never stuck on an error you don't understand.",
+  w6t:"Small groups, followed to the finish", w6:"Limited seats per cohort, and the instructor tracks each learner's progress personally so nobody drops off halfway.",
   projTitle:"Student projects", projLead:"This is where projects built by academy students will be showcased.",
   projNotice:"The cards below are illustrative examples of the kind of project built in each course, not work by real students. They will be replaced with real student projects once the first cohorts finish.",
   faqTitle:"Frequently asked questions", faqLead:"Didn't find your answer? Message us on WhatsApp.", faqBtn:"Ask on WhatsApp",
@@ -882,12 +890,13 @@ const EN = {
   waTitle:"Fastest: WhatsApp", waLead:"Tap to chat now, or copy the number.", copy:"Copy number", waBtn:"Chat on WhatsApp",
   formTitle:"Enquiry & registration form", demo:"Demo form",
   fName:"Full name", fPhone:"Mobile / WhatsApp", fEmail:"Email", fCourse:"Course", fLevel:"Your current level", fMsg:"Message (optional)",
+  fPlan:"Payment", fPlanHint:"Choose installments if you'd like to pay in parts. We'll contact you to agree a payment schedule that suits you.",
   fMsgPh:"Tell us your goal or any question you have", submit:"Send request"
 };
 
 /* Strings used by the scripts below */
 const UI = {
-  ar:{ tbd:"يُحدَّد لاحقاً", duration:"المدة", price:"الرسوم", perCourse:"للدورة", fullDiploma:"الدورات الأربع في مسار واحد بالترتيب، مع مشروع في نهاية كل دورة.", diplomaBadge:"الأوفر", insteadOf:"بدلاً من", save:n=>`وفّر ${n}`, enrollDiploma:"سجّل في الدبلومة", diplomaOpt:"الدبلومة الكاملة (الدورات الأربع)", coursesIncluded:"تشمل", start:"موعد البدء", avail:"التوفر", topics:"محاور الدورة", finalProject:"المشروع الختامي",
+  ar:{ tbd:"يُحدَّد لاحقاً", duration:"المدة", price:"الرسوم", perCourse:"للدورة", instShort:"التقسيط متاح", instLong:"أو ادفعها <b>بالتقسيط</b>، ونتفق معك على جدول الدفعات.", choosePlan:"اختر طريقة الدفع", plans:["دفعة واحدة","بالتقسيط (نتواصل معك لتحديد جدول الأقساط)"], errPlan:"اختر طريقة الدفع.", sumPlan:"طريقة الدفع", okInst:"اخترت التقسيط، وسنتواصل معك لتحديد جدول الأقساط.", fullDiploma:"الدورات الأربع في مسار واحد بالترتيب، مع مشروع في نهاية كل دورة.", diplomaBadge:"الأوفر", insteadOf:"بدلاً من", save:n=>`وفّر ${n}`, enrollDiploma:"سجّل في الدبلومة", diplomaOpt:"الدبلومة الكاملة (الدورات الأربع)", coursesIncluded:"تشمل", start:"موعد البدء", avail:"التوفر", topics:"محاور الدورة", finalProject:"المشروع الختامي",
        details:"التفاصيل", enroll:"استفسر وسجّل", enrollLong:"سجّل اهتمامك بالدورة", askWa:"استفسر على واتساب", topicsCount:n=>`${n} محوراً + مشروع`,
        topicsLabel:"أبرز المحاور", close:"إغلاق", example:"مثال توضيحي", fromCourse:"من دورة", chooseCourse:"اختر الدورة", unsure:"لم أحدد بعد، أحتاج استشارة",
        chooseLevel:"اختر مستواك", levels:["لا توجد لدي خبرة سابقة","أعرف الأساسيات","لدي خبرة متوسطة","لدي خبرة متقدمة"],
@@ -900,7 +909,7 @@ const UI = {
        sumHead:"مرحباً، أرغب في التسجيل / الاستفسار:", sumName:"الاسم", sumPhone:"الجوال", sumEmail:"البريد", sumCourse:"الدورة", sumLevel:"المستوى", sumMsg:"رسالة",
        menuOpen:"فتح القائمة", menuClose:"إغلاق القائمة", seeCourse:"تفاصيل الدورة", portfolio:"ملف الأعمال", portfolioText:"مشاريع حقيقية تعرضها على أصحاب العمل.",
        photoAlt:"المدرب محمد صالح موسى", langSwitch:"Switch to English", instructor:"مدرّب برمجة", initial:"م" },
-  en:{ tbd:"To be announced", duration:"Duration", price:"Fee", perCourse:"per course", fullDiploma:"All four courses in order as one path, with a project at the end of each.", diplomaBadge:"Best value", insteadOf:"instead of", save:n=>`Save ${n}`, enrollDiploma:"Register for the diploma", diplomaOpt:"Full Diploma (all four courses)", coursesIncluded:"Includes", start:"Start date", avail:"Availability", topics:"Course topics", finalProject:"Final project",
+  en:{ tbd:"To be announced", duration:"Duration", price:"Fee", perCourse:"per course", instShort:"installments available", instLong:"Or pay <b>in installments</b>, on a schedule we agree with you.", choosePlan:"Choose how to pay", plans:["Pay in full","Installments (we'll contact you to set the schedule)"], errPlan:"Choose how you'd like to pay.", sumPlan:"Payment", okInst:"You chose installments, so we'll contact you to set the payment schedule.", fullDiploma:"All four courses in order as one path, with a project at the end of each.", diplomaBadge:"Best value", insteadOf:"instead of", save:n=>`Save ${n}`, enrollDiploma:"Register for the diploma", diplomaOpt:"Full Diploma (all four courses)", coursesIncluded:"Includes", start:"Start date", avail:"Availability", topics:"Course topics", finalProject:"Final project",
        details:"Details", enroll:"Enquire & register", enrollLong:"Register your interest", askWa:"Ask on WhatsApp", topicsCount:n=>`${n} topics + project`,
        topicsLabel:"Key topics", close:"Close", example:"Illustrative example", fromCourse:"From", chooseCourse:"Choose a course", unsure:"Not sure yet, I'd like advice",
        chooseLevel:"Choose your level", levels:["No prior experience","I know the basics","Intermediate","Advanced"],
@@ -977,6 +986,7 @@ function renderDiploma(){
     <div class="buy">
       <div class="amount"><b class="ltr">${usd(p.usd)}</b><s class="ltr" aria-label="${esc(t("insteadOf"))} ${usd(full.usd)}">${usd(full.usd)}</s></div>
       <span class="save">${esc(t("save")(usd(full.usd - p.usd)))}</span>
+      <span class="inst">${t("instLong")}</span>
       <a class="btn btn-primary" href="#contact" data-enroll="${DIPLOMA.id}">${esc(t("enrollDiploma"))}</a>
     </div>`;
 }
@@ -991,7 +1001,7 @@ function renderCourses(){
       <h3 id="c-${c.id}">${esc(L(c.title))}${secondary}</h3>
       <p class="ov">${esc(L(c.overview))}</p>
       <ul class="chips" aria-label="${esc(t("topicsLabel"))}">${shown.map(x => `<li>${esc(x[1])}</li>`).join("")}${more>0?`<li class="more">+${more}</li>`:""}</ul>
-      <div class="course-meta"><span>${icon.clock} ${esc(t("duration"))}: ${esc(L(c.duration) || t("tbd"))}</span><span>${icon.code} ${esc(t("topicsCount")(c.topics.length))}</span><span class="price"><span class="ltr">${usd(PRICES.course.usd)}</span> <small>${esc(t("perCourse"))}</small></span></div>
+      <div class="course-meta"><span>${icon.clock} ${esc(t("duration"))}: ${esc(L(c.duration) || t("tbd"))}</span><span>${icon.code} ${esc(t("topicsCount")(c.topics.length))}</span><span class="price"><span class="ltr">${usd(PRICES.course.usd)}</span> <small>${esc(t("perCourse"))} · ${esc(t("instShort"))}</small></span></div>
       <div class="course-actions">
         <a class="btn btn-ghost btn-sm" href="#course-${c.id}">${esc(t("details"))}</a>
         <a class="btn btn-primary btn-sm" href="#contact" data-enroll="${c.id}">${esc(t("enroll"))}</a>
@@ -1039,6 +1049,9 @@ function renderFormOptions(){
     `<option value="unsure">${esc(t("unsure"))}</option>`;
   lv.innerHTML = `<option value="">${esc(t("chooseLevel"))}</option>` + t("levels").map((l,i) => `<option value="${i+1}">${esc(l)}</option>`).join("");
   cs.value = cv; lv.selectedIndex = li < 0 ? 0 : li;
+  const pl = $("#f-plan"), pi = pl.selectedIndex;
+  pl.innerHTML = `<option value="">${esc(t("choosePlan"))}</option>` + t("plans").map((l,i) => `<option value="${i+1}">${esc(l)}</option>`).join("");
+  pl.selectedIndex = pi < 0 ? 0 : pi;
 }
 
 /* Course detail dialog (#course-<id>) */
@@ -1056,7 +1069,7 @@ function openCourse(id){
       <p style="color:var(--muted)">${esc(L(c.overview))}</p>
     </div>
     <div class="dlg-body">
-      <div class="facts">${fact("duration",L(c.duration))}${fact("price",priceText(PRICES.course))}${fact("start",L(c.startDate))}${fact("avail",L(c.availability))}</div>
+      <div class="facts">${fact("duration",L(c.duration))}${fact("price",priceText(PRICES.course) + " · " + t("instShort"))}${fact("start",L(c.startDate))}${fact("avail",L(c.availability))}</div>
       <div><h4>${esc(t("topics"))}</h4><ul class="topic-list">${c.topics.map(x => lang==="ar" ? `<li><span>${esc(x[0])}</span><bdi>${esc(x[1])}</bdi></li>` : `<li><span>${esc(x[1])}</span></li>`).join("")}</ul></div>
       <div><h4>${esc(t("finalProject"))}</h4><p class="dlg-project">${esc(L(c.project))}</p></div>
       <div class="course-actions">
@@ -1104,7 +1117,8 @@ const rules = {
   phone: v => /^\+?[0-9\s-]{8,16}$/.test(v.trim()) || t("errPhone"),
   email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || t("errEmail"),
   course:v => !!v || t("errCourse"),
-  level: v => !!v || t("errLevel")
+  level: v => !!v || t("errLevel"),
+  plan:  v => !!v || t("errPlan")
 };
 function check(name){
   const el = form.elements[name], r = rules[name](el.value), ok = r === true;
@@ -1121,7 +1135,7 @@ Object.keys(rules).forEach(n => {
 function summary(d){
   const c = COURSES.find(x => x.id === d.course);
   return [t("sumHead"), `${t("sumName")}: ${d.name}`, `${t("sumPhone")}: ${d.phone}`, `${t("sumEmail")}: ${d.email}`,
-    `${t("sumCourse")}: ${d.course === DIPLOMA.id ? t("diplomaOpt") + " – " + priceText(PRICES.diploma) : c ? L(c.title) + " – " + priceText(PRICES.course) : t("unsure")}`, `${t("sumLevel")}: ${t("levels")[+d.level - 1] || ""}`,
+    `${t("sumCourse")}: ${d.course === DIPLOMA.id ? t("diplomaOpt") + " – " + priceText(PRICES.diploma) : c ? L(c.title) + " – " + priceText(PRICES.course) : t("unsure")}`, `${t("sumLevel")}: ${t("levels")[+d.level - 1] || ""}`, `${t("sumPlan")}: ${t("plans")[+d.plan - 1] || ""}`,
     d.message ? `${t("sumMsg")}: ${d.message}` : ""].filter(Boolean).join("\n");
 }
 form.addEventListener("submit", async e => {
@@ -1139,13 +1153,14 @@ form.addEventListener("submit", async e => {
     const row = { name:data.name, phone:data.phone, email:data.email,
       course: data.course === DIPLOMA.id ? UI.ar.diplomaOpt + " | " + UI.en.diplomaOpt
             : c ? c.title.ar + " | " + c.title.en : UI.ar.unsure,
-      level: UI.ar.levels[+data.level-1] || "", message:data.message || "", lang, page:location.href };
+      level: UI.ar.levels[+data.level-1] || "", message:data.message || "", lang, page:location.href,
+      plan: data.plan === "2" ? "بالتقسيط | Installments" : "دفعة واحدة | Pay in full" };
     /* text/plain body keeps this a "simple" request, which Google Apps Script accepts without a CORS preflight */
     const res = await fetch(SITE.googleSheetUrl, {method:"POST", body:JSON.stringify(row)});
     const out = await res.json();
     if (!res.ok || out.result !== "success") throw new Error(out.error || res.status);
     form.reset();
-    status.innerHTML = `<div class="status ok"><b>${esc(t("okTitle"))}</b><span>${esc(t("okText"))}</span></div>`;
+    status.innerHTML = `<div class="status ok"><b>${esc(t("okTitle"))}</b><span>${esc(t("okText"))}${data.plan === "2" ? " " + esc(t("okInst")) : ""}</span></div>`;
   } catch {
     status.innerHTML = `<div class="status bad"><b>${esc(t("badTitle"))}</b><span>${esc(t("badText"))}</span><a class="btn btn-wa btn-sm" target="_blank" rel="noopener" href="${waLink(summary(data))}">${esc(t("badBtn"))}</a></div>`;
   } finally { btn.disabled = false; btn.textContent = label; }
