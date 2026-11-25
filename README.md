@@ -64,7 +64,7 @@ The page itself holds no data. It asks the Apps Script for the rows, and the scr
 3. **Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.** The URL stays the same, so the website form keeps working.
 4. Open `https://<your-site>/admin.html` (on GitHub Pages: https://gargorey.github.io/codepath-academy/admin.html) and sign in with that password.
 
-To change the password later, edit the script property; no redeploy needed. The sheet gets the extra columns **Status**, **Notes** and **Payment plan** the first time the new script runs. Older rows show as *New*. Open `admin.html?demo` to try the dashboard with sample data.
+To change the password later, edit the script property; no redeploy needed. To point the dashboard at another Apps Script deployment, use the **Script link** button in its header: it tests the link before saving it. The dashboard also warns you when the website form (`googleSheetUrl` in index.html) sends to a different link than the dashboard reads from. The sheet gets the extra columns **Status**, **Notes** and **Payment plan** the first time the new script runs. Older rows show as *New*. Open `admin.html?demo` to try the dashboard with sample data.
 
 ## Prices and installments
 
