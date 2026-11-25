@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Registrations · CodePath Academy</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a1124'/%3E%3Cpath d='M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16' stroke='%2322d3ee' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#0a1124; --surface:#111d3a; --surface-2:#16244a; --hover:rgba(150,180,255,.06);
+  --line:rgba(150,180,255,.14); --line-strong:rgba(150,180,255,.26);
+  --fg:#eef3ff; --muted:#a3b0cf; --dim:#7584a8;
+  --cyan:#22d3ee; --blue:#3b82f6; --violet:#8b5cf6; --on-accent:#06101f;
+  --ok:#34d399; --warn:#fbbf24; --err:#f87171; --gray:#94a3b8;
+  --scrim:rgba(5,9,20,.72); --shadow:0 20px 60px rgba(0,0,0,.45);
+  --font:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f5f7fc; --surface:#ffffff; --surface-2:#f1f5fb; --hover:rgba(30,50,110,.04);
+    --line:rgba(30,50,110,.12); --line-strong:rgba(30,50,110,.22);
+    --fg:#0d1530; --muted:#46526e; --dim:#67728c;
+    --cyan:#0e8fae; --blue:#2563eb; --violet:#7c3aed; --on-accent:#ffffff;
+    --ok:#047857; --warn:#b45309; --err:#dc2626; --gray:#64748b;
+    --scrim:rgba(15,23,42,.45); --shadow:0 20px 60px rgba(20,35,80,.18);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f5f7fc; --surface:#ffffff; --surface-2:#f1f5fb; --hover:rgba(30,50,110,.04);
+  --line:rgba(30,50,110,.12); --line-strong:rgba(30,50,110,.22);
+  --fg:#0d1530; --muted:#46526e; --dim:#67728c;
+  --cyan:#0e8fae; --blue:#2563eb; --violet:#7c3aed; --on-accent:#ffffff;
+  --ok:#047857; --warn:#b45309; --err:#dc2626; --gray:#64748b;
+  --scrim:rgba(15,23,42,.45); --shadow:0 20px 60px rgba(20,35,80,.18);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--cyan)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+@media (max-width:640px){.wrap{padding:0 16px}}
+
+/* buttons & inputs */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 14px;border-radius:10px;border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;font-weight:500;font-size:14px;text-decoration:none;color:var(--fg);white-space:nowrap}
+.btn:hover{background:var(--surface-2)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.primary{background:var(--cyan);border-color:transparent;color:var(--on-accent);font-weight:600}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.danger{color:var(--err);border-color:color-mix(in srgb,var(--err) 40%,transparent)}
+.btn.danger.armed{background:var(--err);color:#fff;border-color:transparent}
+.btn.icon{width:38px;padding:0}
+.btn svg{width:18px;height:18px;flex:none}
+.input,select.input,textarea.input{height:38px;padding:0 12px;border-radius:10px;border:1px solid var(--line-strong);background:var(--surface);min-width:0;max-width:100%}
+textarea.input{height:auto;min-height:96px;padding:10px 12px;resize:vertical;width:100%}
+.input:focus-visible,.btn:focus-visible,tr:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+label.lbl{display:block;font-size:13px;color:var(--muted);margin:0 0 6px;font-weight:500}
+
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.login-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.brand svg{width:32px;height:32px;flex:none}
+.login h1{font-size:22px;margin:20px 0 6px}
+.login p{color:var(--muted);margin:0 0 20px;font-size:14px}
+.login .input{width:100%}
+.login .row{margin-bottom:14px}
+.check{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin:4px 0 18px}
+.login .btn.primary{width:100%;height:42px}
+.msg{font-size:14px;border-radius:10px;padding:10px 12px;margin-bottom:14px}
+.msg.bad{background:color-mix(in srgb,var(--err) 14%,transparent);color:var(--err)}
+.adv{margin-top:18px;font-size:13px;color:var(--dim)}
+.adv summary{cursor:pointer}
+.adv .input{margin-top:8px;font-family:var(--mono);font-size:12px}
+.demo-link{display:block;text-align:center;margin-top:16px;font-size:13px;color:var(--dim)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:64px}
+.top .brand span small{display:block;font-weight:500;font-size:12px;color:var(--dim)}
+.top .spacer{flex:1}
+.top .sync{font-size:13px;color:var(--dim)}
+@media (max-width:720px){.top .sync,.hide-sm{display:none}}
+@media (max-width:560px){.top .wrap{gap:8px}.top .brand span small,.top .brand svg{display:none}.top .btn{padding:0 10px}.top .btn.icon{width:34px;padding:0}.badge-demo{font-size:11px}}
+.badge-demo{font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+
+/* stats */
+main.wrap{padding-top:24px;padding-bottom:60px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;text-align:start;cursor:pointer;width:100%}
+.stat:hover{border-color:var(--line-strong)}
+.stat.on{border-color:var(--cyan)}
+.stat .k{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.stat .v{font-size:30px;font-weight:600;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
+.stat .s{font-size:12px;color:var(--dim)}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+
+.panels{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-bottom:20px}
+@media (max-width:900px){.panels{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.panel h2{font-size:14px;font-weight:600;margin:0 0 12px;color:var(--muted)}
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:14px;background:none;border:0;padding:0;text-align:start;cursor:pointer}
+.bar .track{grid-column:1/-1;height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar .fill{height:100%;border-radius:99px;background:var(--cyan)}
+.bar .n{font-variant-numeric:tabular-nums;color:var(--muted)}
+.bar .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar.on .name{color:var(--cyan);font-weight:600}
+.spark{display:flex;align-items:flex-end;gap:3px;height:86px}
+.spark div{flex:1;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px;opacity:.85;position:relative}
+.spark div:hover{opacity:1}
+.spark-axis{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:6px}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.toolbar .search{flex:1 1 260px;position:relative}
+.toolbar .search input{width:100%;padding-inline-start:36px}
+.toolbar .search svg{position:absolute;inset-inline-start:11px;top:10px;width:18px;height:18px;color:var(--dim)}
+.toolbar .count{font-size:13px;color:var(--dim);margin-inline-start:auto}
+@media (max-width:640px){.toolbar select.input{flex:1 1 40%}.toolbar .count{width:100%;margin:0}}
+
+/* table */
+.table-wrap{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--dim);font-weight:600;text-align:start;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--hover)}
+tbody tr:last-child td{border-bottom:0}
+td .sub{font-size:13px;color:var(--dim)}
+td.when{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+td.phone{font-family:var(--mono);font-size:13px;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.empty{padding:48px 20px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--fg);font-size:16px;margin-bottom:4px}
+@media (max-width:760px){
+  thead{display:none}
+  table,tbody,tr,td{display:block}
+  tr{padding:12px 14px;border-bottom:1px solid var(--line);display:grid!important;grid-template-columns:1fr auto;gap:2px 10px}
+  td{padding:0;border:0}
+  td.c-name{grid-column:1}
+  td.c-status{grid-column:2;grid-row:1}
+  td.c-course,td.c-level{grid-column:1/-1;font-size:13px;color:var(--muted)}
+  td.c-level{display:none}
+  td.phone{grid-column:1}
+  td.when{grid-column:2;grid-row:3;text-align:end;font-size:12px}
+}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:20;opacity:0;transition:opacity .2s}
+.scrim.show{opacity:1}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(520px,100%);background:var(--surface);border-inline-start:1px solid var(--line);z-index:21;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .22s ease;box-shadow:var(--shadow)}
+.drawer.show{transform:none}
+.drawer header{display:flex;align-items:flex-start;gap:12px;padding:20px 20px 16px;border-bottom:1px solid var(--line)}
+.drawer header h3{margin:0;font-size:20px;line-height:1.3;word-break:break-word}
+.drawer header .sub{color:var(--dim);font-size:13px;margin-top:2px}
+.drawer .body{flex:1;overflow:auto;padding:20px}
+.drawer footer{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.btn.wa{background:#25d366;color:#05230f;border-color:transparent;font-weight:600}
+dl{display:grid;grid-template-columns:110px 1fr;gap:10px 14px;margin:0 0 22px;font-size:14px}
+dt{color:var(--dim)}
+dd{margin:0;word-break:break-word}
+dd.mono{font-family:var(--mono);font-size:13px}
+.quote{background:var(--surface-2);border-radius:10px;padding:12px 14px;white-space:pre-wrap;margin:0 0 22px;font-size:14px}
+.field{margin-bottom:16px}
+.status-grid{display:flex;flex-wrap:wrap;gap:6px}
+.status-grid button{border:1px solid var(--line-strong);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--muted)}
+.status-grid button[aria-pressed="true"]{color:var(--c);border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);font-weight:600}
+.saved{font-size:13px;color:var(--ok)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;box-shadow:var(--shadow)}
+.toast.bad{background:var(--err);color:#fff}
+.spin{width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}.spin{animation-duration:2s}}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<section class="login" id="login" hidden>
+  <form class="login-card" id="loginForm" autocomplete="on">
+    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a1124"/><path d="M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>CodePath Academy</div>
+    <h1>Registrations dashboard</h1>
+    <p>Sign in with the admin password you set in Apps Script.</p>
+    <div class="msg bad" id="loginMsg" hidden></div>
+    <input type="text" name="username" value="admin" autocomplete="username" hidden>
+    <div class="row"><label class="lbl" for="pw">Admin password</label><input class="input" id="pw" type="password" autocomplete="current-password" required></div>
+    <label class="check"><input type="checkbox" id="remember"> Keep me signed in on this device</label>
+    <button class="btn primary" id="loginBtn" type="submit">Sign in</button>
+    <details class="adv"><summary>Apps Script URL</summary><input class="input" id="endpoint" spellcheck="false" style="width:100%"></details>
+    <a class="demo-link" href="?demo">Preview with sample data</a>
+  </form>
+</section>
+
+<!-- App -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="wrap">
+      <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a1124"/><path d="M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Registrations<small>CodePath Academy</small></span></div>
+      <span class="badge-demo" id="demoBadge" hidden>Sample data</span>
+      <span class="spacer"></span>
+      <span class="sync" id="sync"></span>
+      <button class="btn icon" id="refreshBtn" title="Refresh" aria-label="Refresh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></svg></button>
+      <button class="btn" id="csvBtn" title="Download the filtered list as CSV"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg><span class="hide-sm">Export CSV</span></button>
+      <button class="btn icon" id="themeBtn" title="Switch theme" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button class="btn" id="logoutBtn" title="Sign out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l-5-5 5-5M5 12h11"/></svg><span class="hide-sm">Sign out</span></button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="stats" id="stats"></div>
+    <div class="panels">
+      <div class="panel"><h2>By course</h2><div class="bars" id="byCourse"></div></div>
+      <div class="panel"><h2>New registrations, last 30 days</h2><div class="spark" id="spark"></div><div class="spark-axis"><span id="sparkFrom"></span><span>Today</span></div></div>
+    </div>
+
+    <div class="toolbar">
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="input" id="q" type="search" placeholder="Search name, phone, email, notes" aria-label="Search"></label>
+      <select class="input" id="fCourse" aria-label="Course"></select>
+      <select class="input" id="fStatus" aria-label="Status"></select>
+      <select class="input" id="fSort" aria-label="Sort">
+        <option value="new">Newest first</option><option value="old">Oldest first</option><option value="name">Name A–Z</option>
+      </select>
+      <span class="count" id="count"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Name</th><th>Phone</th><th>Course</th><th>Level</th><th>Status</th><th>Received</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden></div>
+    </div>
+  </main>
+</div>
+
+<!-- Detail drawer -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dName" hidden>
+  <header>
+    <div style="flex:1;min-width:0"><h3 id="dName" dir="auto"></h3><div class="sub" id="dWhen"></div></div>
+    <button class="btn icon" id="closeBtn" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+  <div class="body">
+    <div class="actions" id="dActions"></div>
+    <dl id="dList"></dl>
+    <div id="dMsgWrap"><label class="lbl">Message</label><div class="quote" id="dMsg" dir="auto"></div></div>
+    <div class="field"><label class="lbl">Status</label><div class="status-grid" id="dStatus"></div></div>
+    <div class="field"><label class="lbl" for="dNotes">Private notes</label><textarea class="input" id="dNotes" dir="auto" placeholder="Call outcome, payment, start date…"></textarea></div>
+  </div>
+  <footer>
+    <button class="btn primary" id="saveNotes">Save notes</button>
+    <span class="saved" id="savedMsg" hidden>Saved</span>
+    <span style="flex:1"></span>
+    <button class="btn danger" id="delBtn">Delete</button>
+  </footer>
+</aside>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ---------- Settings ---------- */
+// Same Web app URL as SITE.googleSheetUrl in index.html. It can also be changed on the sign-in screen.
+const DEFAULT_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSGENDWuRNmCoFQy_b4h19Sjrlbg2pK5HTpt4poHuaeAO5-0r3xxdpiG6MunQD2BDE/exec";
+
+const STATUS_COLOR = { "New":"var(--cyan)", "Contacted":"var(--blue)", "Enrolled":"var(--ok)", "Waitlist":"var(--warn)", "Not interested":"var(--gray)" };
+const LEVEL_EN = { "لا توجد لدي خبرة سابقة":"No prior experience", "أعرف الأساسيات":"Knows the basics", "لدي خبرة متوسطة":"Intermediate", "لدي خبرة متقدمة":"Advanced" };
+const COURSE_UNSURE = "Not sure yet";
+
+/* ---------- Small helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store = {
+  get(k){ try { return sessionStorage.getItem(k) ?? localStorage.getItem(k); } catch { return null; } },
+  set(k, v, keep){ try { (keep ? localStorage : sessionStorage).setItem(k, v); } catch {} },
+  del(k){ try { sessionStorage.removeItem(k); localStorage.removeItem(k); } catch {} }
+};
+const courseLabel = c => { c = String(c || ""); if (!c) return "—"; const p = c.split(" | "); return p[1] || (/[؀-ۿ]/.test(c) && c.length < 30 ? COURSE_UNSURE : c); };
+const levelLabel = l => LEVEL_EN[l] || l || "—";
+const fmtDate = ts => ts ? new Date(ts).toLocaleString(undefined, {day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"}) : "—";
+const ago = ts => {
+  if (!ts) return "";
+  const m = Math.round((Date.now() - ts) / 60000);
+  if (m < 1) return "just now"; if (m < 60) return m + " min ago";
+  const h = Math.round(m / 60); if (h < 24) return h + " h ago";
+  const d = Math.round(h / 24); if (d < 31) return d + (d === 1 ? " day ago" : " days ago");
+  return new Date(ts).toLocaleDateString(undefined, {day:"numeric", month:"short", year:"numeric"});
+};
+const digits = p => String(p || "").replace(/[^0-9]/g, "");
+const pill = s => `<span class="pill" style="--c:${STATUS_COLOR[s] || "var(--gray)"}">${esc(s)}</span>`;
+let toastT;
+function toast(msg, bad){ const t = $("#toast"); t.textContent = msg; t.className = "toast" + (bad ? " bad" : ""); t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3200); }
+
+/* ---------- Theme ---------- */
+(() => { const t = store.get("cpa-admin-theme"); if (t) document.documentElement.dataset.theme = t; })();
+$("#themeBtn").onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  const next = cur === "light" ? "dark" : "light";
+  document.documentElement.dataset.theme = next; store.set("cpa-admin-theme", next, true);
+};
+
+/* ---------- API ---------- */
+const DEMO = new URLSearchParams(location.search).has("demo");
+let endpoint = store.get("cpa-admin-endpoint") || DEFAULT_ENDPOINT;
+let password = store.get("cpa-admin-pw") || "";
+const ERR = {
+  wrong_password: "That password is not right.",
+  locked: "Too many wrong passwords. The dashboard is locked for 15 minutes.",
+  not_configured: "The admin password isn't set up yet. In Apps Script, add the ADMIN_PASSWORD script property (12+ characters) and deploy a new version.",
+  not_found: "That registration is no longer in the sheet. Refreshing.",
+};
+async function api(action, extra = {}){
+  if (DEMO) return demoApi(action, extra);
+  let res, out;
+  try {
+    // text/plain body = "simple" request, so Apps Script answers without a CORS preflight
+    res = await fetch(endpoint, { method:"POST", body: JSON.stringify({ action, password, ...extra }) });
+    out = await res.json();
+  } catch {
+    throw Object.assign(new Error("Couldn't reach the Apps Script. If you just updated the script, make sure you deployed a new version."), { code:"network" });
+  }
+  if (out.result !== "success") {
+    const code = out.error || "error";
+    throw Object.assign(new Error(ERR[code] || (code === "Unknown action" ? "The Apps Script is an older version without the dashboard. Paste the new google-apps-script.gs and deploy a new version." : code)), { code });
+  }
+  return out;
+}
+
+/* ---------- State ---------- */
+let rows = [], statuses = Object.keys(STATUS_COLOR), lastSync = 0, current = null;
+const filt = { q:"", course:"", status:"", sort:"new", recent:false };
+
+/* ---------- Login ---------- */
+function showLogin(msg){
+  $("#app").hidden = true; $("#login").hidden = false;
+  $("#endpoint").value = endpoint;
+  const m = $("#loginMsg"); m.hidden = !msg; m.textContent = msg || "";
+  setTimeout(() => $("#pw").focus(), 0);
+}
+$("#loginForm").onsubmit = async e => {
+  e.preventDefault();
+  const btn = $("#loginBtn");
+  password = $("#pw").value; endpoint = $("#endpoint").value.trim() || DEFAULT_ENDPOINT;
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Signing in';
+  try {
+    const out = await api("list");
+    const keep = $("#remember").checked;
+    store.del("cpa-admin-pw"); store.set("cpa-admin-pw", password, keep);
+    if (endpoint !== DEFAULT_ENDPOINT) store.set("cpa-admin-endpoint", endpoint, true); else store.del("cpa-admin-endpoint");
+    $("#pw").value = "";
+    loaded(out); showApp();
+  } catch (err) {
+    password = ""; showLogin(err.message);
+  } finally { btn.disabled = false; btn.textContent = "Sign in"; }
+};
+$("#logoutBtn").onclick = () => { store.del("cpa-admin-pw"); password = ""; rows = []; closeDrawer(); if (DEMO) location.search = ""; else showLogin(); };
+
+function showApp(){ $("#login").hidden = true; $("#app").hidden = false; $("#demoBadge").hidden = !DEMO; $("#logoutBtn").lastElementChild.textContent = DEMO ? "Exit preview" : "Sign out"; render(); }
+
+async function refresh(quiet){
+  const b = $("#refreshBtn"); b.disabled = true; b.innerHTML = '<span class="spin"></span>';
+  try { loaded(await api("list")); render(); if (!quiet) toast("Up to date"); }
+  catch (err) { if (err.code === "wrong_password" || err.code === "locked" || err.code === "not_configured") { store.del("cpa-admin-pw"); showLogin(err.message); } else toast(err.message, true); }
+  finally { b.disabled = false; b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></svg>'; }
+}
+$("#refreshBtn").onclick = () => refresh();
+function loaded(out){ rows = out.rows || []; if (out.statuses) statuses = out.statuses; lastSync = Date.now(); }
+setInterval(() => { if (!$("#app").hidden) $("#sync").textContent = "Synced " + ago(lastSync); }, 30000);
+
+/* ---------- Render ---------- */
+const WEEK = 7 * 864e5;
+function render(){
+  $("#sync").textContent = "Synced " + ago(lastSync);
+  const total = rows.length;
+  const count = s => rows.filter(r => r.status === s).length;
+  const week = rows.filter(r => Date.now() - r.ts < WEEK).length;
+  const prevWeek = rows.filter(r => Date.now() - r.ts >= WEEK && Date.now() - r.ts < 2 * WEEK).length;
+  const tiles = [
+    { k:"Total registrations", v: total, s: "All time", f:{} },
+    { k:"New, not contacted", v: count("New"), s: "Waiting for a reply", c:STATUS_COLOR.New, f:{status:"New"} },
+    { k:"Last 7 days", v: week, s: prevWeek ? `${prevWeek} the week before` : "None the week before", f:{recent:true} },
+    { k:"Enrolled", v: count("Enrolled"), s: total ? Math.round(count("Enrolled") / total * 100) + "% of all" : "—", c:STATUS_COLOR.Enrolled, f:{status:"Enrolled"} },
+  ];
+  const isOn = f => (f.status || "") === filt.status && !!f.recent === filt.recent && !filt.course && !filt.q && (f.status || f.recent);
+  $("#stats").innerHTML = tiles.map((t, i) => `<button class="stat${isOn(t.f) ? " on" : ""}" data-i="${i}"><div class="k">${t.c ? `<span class="dot" style="color:${t.c}"></span>` : ""}${esc(t.k)}</div><div class="v">${t.v}</div><div class="s">${esc(t.s)}</div></button>`).join("");
+  $("#stats").querySelectorAll(".stat").forEach(b => b.onclick = () => { const f = tiles[b.dataset.i].f; const on = isOn(f); Object.assign(filt, { status: on ? "" : (f.status || ""), recent: on ? false : !!f.recent, course:"", q:"" }); $("#q").value = ""; render(); });
+
+  // By course
+  const by = {}; rows.forEach(r => { const c = courseLabel(r.course); by[c] = (by[c] || 0) + 1; });
+  const list = Object.entries(by).sort((a, b) => b[1] - a[1]);
+  const max = Math.max(1, ...list.map(x => x[1]));
+  $("#byCourse").innerHTML = list.length ? list.map(([c, n]) => `<button class="bar${filt.course === c ? " on" : ""}" data-c="${esc(c)}" title="Show only ${esc(c)}"><span class="name">${esc(c)}</span><span class="n">${n}</span><span class="track"><span class="fill" style="display:block;width:${n / max * 100}%"></span></span></button>`).join("") : '<div class="empty" style="padding:20px 0">No registrations yet.</div>';
+  $("#byCourse").querySelectorAll(".bar").forEach(b => b.onclick = () => { filt.course = filt.course === b.dataset.c ? "" : b.dataset.c; $("#fCourse").value = filt.course; render(); });
+
+  // Last 30 days
+  const days = 30, start = new Date(); start.setHours(0,0,0,0); start.setDate(start.getDate() - (days - 1));
+  const bins = Array(days).fill(0);
+  rows.forEach(r => { const i = Math.floor((r.ts - start) / 864e5); if (i >= 0 && i < days) bins[i]++; });
+  const bmax = Math.max(1, ...bins);
+  $("#spark").innerHTML = bins.map((n, i) => { const d = new Date(start); d.setDate(d.getDate() + i); return `<div style="height:${n / bmax * 100}%" title="${d.toLocaleDateString(undefined,{day:"numeric",month:"short"})}: ${n}"></div>`; }).join("");
+  $("#sparkFrom").textContent = start.toLocaleDateString(undefined, {day:"numeric", month:"short"});
+
+  // Filters
+  const courses = list.map(x => x[0]).sort();
+  $("#fCourse").innerHTML = `<option value="">All courses</option>` + courses.map(c => `<option${c === filt.course ? " selected" : ""}>${esc(c)}</option>`).join("");
+  $("#fStatus").innerHTML = `<option value="">All statuses</option>` + statuses.map(s => `<option${s === filt.status ? " selected" : ""}>${esc(s)}</option>`).join("");
+  renderRows();
+}
+
+function filtered(){
+  const q = filt.q.trim().toLowerCase(), qd = digits(q);
+  let out = rows.filter(r =>
+    (!filt.course || courseLabel(r.course) === filt.course) &&
+    (!filt.status || r.status === filt.status) &&
+    (!filt.recent || Date.now() - r.ts < WEEK) &&
+    (!q || [r.name, r.email, r.notes, r.message, r.course].some(v => String(v).toLowerCase().includes(q)) || (qd.length >= 3 && digits(r.phone).includes(qd))));
+  const by = { new:(a,b) => b.ts - a.ts, old:(a,b) => a.ts - b.ts, name:(a,b) => a.name.localeCompare(b.name) }[filt.sort];
+  return out.sort(by);
+}
+
+function renderRows(){
+  const list = filtered();
+  $("#count").textContent = list.length === rows.length ? `${rows.length} registrations` : `${list.length} of ${rows.length}`;
+  $("#rows").innerHTML = list.map(r => `<tr tabindex="0" data-ts="${r.ts}" data-row="${r.row}">
+    <td class="c-name"><div dir="auto">${esc(r.name || "—")}</div><div class="sub" dir="auto">${esc(r.email)}</div></td>
+    <td class="phone" dir="ltr">${esc(r.phone)}</td>
+    <td class="c-course">${esc(courseLabel(r.course))}</td>
+    <td class="c-level">${esc(levelLabel(r.level))}</td>
+    <td class="c-status">${pill(r.status)}</td>
+    <td class="when" title="${esc(fmtDate(r.ts))}">${esc(ago(r.ts))}</td></tr>`).join("");
+  const empty = $("#empty");
+  empty.hidden = list.length > 0;
+  empty.innerHTML = rows.length ? `<b>No matches</b>Try a different search or <a href="#" id="clearF">clear the filters</a>.` : `<b>No registrations yet</b>New enquiries from the website form will appear here.`;
+  const cf = $("#clearF"); if (cf) cf.onclick = e => { e.preventDefault(); Object.assign(filt, {q:"", course:"", status:"", recent:false}); $("#q").value = ""; render(); };
+  $("#rows").querySelectorAll("tr").forEach(tr => {
+    const open = () => openDrawer(rows.find(r => String(r.ts) === tr.dataset.ts && String(r.row) === tr.dataset.row));
+    tr.onclick = open; tr.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } };
+  });
+}
+
+$("#q").oninput = e => { filt.q = e.target.value; renderRows(); };
+$("#fCourse").onchange = e => { filt.course = e.target.value; render(); };
+$("#fStatus").onchange = e => { filt.status = e.target.value; filt.recent = false; render(); };
+$("#fSort").onchange = e => { filt.sort = e.target.value; renderRows(); };
+
+/* ---------- Drawer ---------- */
+let lastFocus;
+function openDrawer(r){
+  if (!r) return;
+  current = r; lastFocus = document.activeElement;
+  $("#dName").textContent = r.name || "—";
+  $("#dWhen").textContent = "Received " + fmtDate(r.ts);
+  const ph = digits(r.phone);
+  const hi = encodeURIComponent(`مرحباً ${r.name || ""}، شكراً لتسجيلك في CodePath Academy.`);
+  $("#dActions").innerHTML =
+    (ph ? `<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/${ph}?text=${hi}">WhatsApp</a><a class="btn" href="tel:+${ph}">Call</a>` : "") +
+    (r.email ? `<a class="btn" href="mailto:${esc(r.email)}?subject=${encodeURIComponent("CodePath Academy")}">Email</a>` : "") +
+    `<button class="btn" id="copyBtn">Copy details</button>`;
+  $("#copyBtn").onclick = () => { navigator.clipboard?.writeText(summary(r)).then(() => toast("Copied"), () => toast("Couldn't copy", true)); };
+  const items = [
+    ["Phone", r.phone, "mono"], ["Email", r.email], ["Course", courseLabel(r.course)],
+    ["Level", levelLabel(r.level)], ["Form language", r.lang === "en" ? "English" : r.lang === "ar" ? "Arabic" : r.lang],
+  ];
+  $("#dList").innerHTML = items.filter(x => x[1]).map(([k, v, c]) => `<dt>${esc(k)}</dt><dd${c ? ` class="${c}" dir="ltr"` : ' dir="auto"'}>${esc(v)}</dd>`).join("");
+  $("#dMsgWrap").hidden = !r.message; $("#dMsg").textContent = r.message;
+  drawStatus();
+  $("#dNotes").value = r.notes || ""; $("#savedMsg").hidden = true;
+  resetDel();
+  $("#scrim").hidden = false; $("#drawer").hidden = false;
+  requestAnimationFrame(() => { $("#scrim").classList.add("show"); $("#drawer").classList.add("show"); $("#closeBtn").focus(); });
+}
+function drawStatus(){
+  $("#dStatus").innerHTML = statuses.map(s => `<button style="--c:${STATUS_COLOR[s] || "var(--gray)"}" aria-pressed="${s === current.status}" data-s="${esc(s)}">${esc(s)}</button>`).join("");
+  $("#dStatus").querySelectorAll("button").forEach(b => b.onclick = () => setStatus(b.dataset.s));
+}
+function closeDrawer(){
+  if ($("#drawer").hidden) return;
+  $("#scrim").classList.remove("show"); $("#drawer").classList.remove("show");
+  setTimeout(() => { $("#scrim").hidden = true; $("#drawer").hidden = true; }, 220);
+  current = null; lastFocus?.focus?.();
+}
+$("#closeBtn").onclick = closeDrawer; $("#scrim").onclick = closeDrawer;
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+
+async function setStatus(s){
+  const r = current; if (!r || s === r.status) return;
+  const prev = r.status; r.status = s; drawStatus(); render();
+  try { await api("update", { row:r.row, ts:r.ts, status:s }); toast(`Marked as ${s}`); }
+  catch (err) { r.status = prev; if (current === r) drawStatus(); render(); toast(err.message, true); if (err.code === "not_found") refresh(true); }
+}
+$("#saveNotes").onclick = async () => {
+  const r = current; if (!r) return;
+  const notes = $("#dNotes").value, btn = $("#saveNotes");
+  btn.disabled = true;
+  try { await api("update", { row:r.row, ts:r.ts, notes }); r.notes = notes; $("#savedMsg").hidden = false; setTimeout(() => $("#savedMsg").hidden = true, 2000); renderRows(); }
+  catch (err) { toast(err.message, true); if (err.code === "not_found") refresh(true); }
+  finally { btn.disabled = false; }
+};
+let delTimer;
+function resetDel(){ const b = $("#delBtn"); b.classList.remove("armed"); b.textContent = "Delete"; b.disabled = false; clearTimeout(delTimer); }
+$("#delBtn").onclick = async () => {
+  const b = $("#delBtn"), r = current; if (!r) return;
+  if (!b.classList.contains("armed")) { b.classList.add("armed"); b.textContent = "Delete permanently?"; delTimer = setTimeout(resetDel, 4000); return; }
+  clearTimeout(delTimer); b.disabled = true; b.textContent = "Deleting…";
+  try {
+    await api("delete", { row:r.row, ts:r.ts });
+    rows = rows.filter(x => x !== r);
+    rows.forEach(x => { if (x.row > r.row) x.row--; });   // the sheet shifted up by one
+    closeDrawer(); render(); toast("Deleted");
+  } catch (err) { resetDel(); toast(err.message, true); if (err.code === "not_found") refresh(true); }
+};
+function summary(r){ return [`Name: ${r.name}`, `Phone: ${r.phone}`, `Email: ${r.email}`, `Course: ${courseLabel(r.course)}`, `Level: ${levelLabel(r.level)}`, `Status: ${r.status}`, r.message && `Message: ${r.message}`, r.notes && `Notes: ${r.notes}`, `Received: ${fmtDate(r.ts)}`].filter(Boolean).join("\n"); }
+
+/* ---------- CSV ---------- */
+$("#csvBtn").onclick = () => {
+  const list = filtered();
+  const cell = v => { v = String(v ?? ""); if (/^[=+\-@]/.test(v)) v = "'" + v; return /[",\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; };
+  const head = ["Received", "Name", "Phone", "Email", "Course", "Level", "Status", "Message", "Notes", "Form language"];
+  const lines = [head, ...list.map(r => [r.ts ? new Date(r.ts).toISOString().replace("T", " ").slice(0, 16) : "", r.name, r.phone, r.email, courseLabel(r.course), levelLabel(r.level), r.status, r.message, r.notes, r.lang])].map(l => l.map(cell).join(","));
+  const blob = new Blob(["﻿" + lines.join("\r\n")], { type:"text/csv;charset=utf-8" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `codepath-registrations-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+
+/* ---------- Sample data (?demo) – nothing is sent anywhere ---------- */
+let demoRows;
+function demoApi(action, d){
+  if (!demoRows) {
+    const C = ["أساسيات البرمجة | Programming Fundamentals", "البرمجة كائنية التوجه | Object-Oriented Programming (OOP)", "تطوير تطبيقات Flutter: المستوى المبتدئ | Flutter Development – Beginner", "تطوير تطبيقات Flutter: المستوى المتقدم | Flutter Development – Advanced", "لست متأكداً"];
+    const L = Object.keys(LEVEL_EN);
+    const N = ["Sample Student A","طالب تجريبي ب","Sample Student C","طالبة تجريبية د","Sample Student E","طالب تجريبي و","Sample Student G","طالبة تجريبية ح","Sample Student I","طالب تجريبي ي","Sample Student K","طالبة تجريبية ل","Sample Student M","طالب تجريبي ن"];
+    const S = ["New","New","Contacted","Enrolled","New","Waitlist","Contacted","Not interested","Enrolled","New","Contacted","New","Enrolled","New"];
+    const ago = [0.1, 0.6, 1.2, 2, 3.5, 5, 6, 9, 12, 15, 19, 23, 27, 40];
+    demoRows = N.map((n, i) => ({ row: N.length - i + 1, ts: Date.now() - ago[i] * 864e5 - i * 3.7e6, name:n,
+      phone:"+966 50 000 00" + String(i).padStart(2, "0"), email:`student${i + 1}@example.com`, course:C[(i * 3) % 5], level:L[i % 4],
+      message: i % 3 ? "" : (i % 2 ? "I want to build my first mobile app." : "أرغب في معرفة موعد بدء الدورة القادمة."),
+      lang: i % 2 ? "ar" : "en", page:"", status:S[i], notes: i === 3 ? "Paid. Starts next cohort." : "" }));
+  }
+  return new Promise((ok, fail) => setTimeout(() => {
+    if (action === "list") return ok({ result:"success", rows: demoRows.map(r => ({...r})), statuses: Object.keys(STATUS_COLOR) });
+    const r = demoRows.find(x => x.ts === d.ts);
+    if (!r) return fail(Object.assign(new Error(ERR.not_found), { code:"not_found" }));
+    if (action === "delete") { demoRows = demoRows.filter(x => x !== r); demoRows.forEach(x => { if (x.row > r.row) x.row--; }); }
+    if (action === "update") { if (d.status != null) r.status = d.status; if (d.notes != null) r.notes = d.notes; }
+    ok({ result:"success" });
+  }, 250));
+}
+
+/* ---------- Start ---------- */
+if (DEMO) { api("list").then(out => { loaded(out); showApp(); }); }
+else if (password) { api("list").then(out => { loaded(out); showApp(); }).catch(err => { if (err.code !== "network") store.del("cpa-admin-pw"); showLogin(err.message); }); }
+else showLogin();
+</script>
+</body>
+</html>
