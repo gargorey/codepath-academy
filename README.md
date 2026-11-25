@@ -8,6 +8,8 @@ A static, bilingual (Arabic RTL / English LTR) single-page website. The globe bu
 |---|---|
 | `index.html` | The whole site: header, hero, instructor, courses, learning path, why us, student projects, FAQ, contact form, footer. |
 | `og-image.png` | 1200×630 image shown when the link is shared on WhatsApp, X, LinkedIn, etc. |
+| `admin.html` | Password-protected dashboard to read and manage registrations from the Google Sheet. |
+| `google-apps-script.gs` | The Google Apps Script behind the form and the dashboard. |
 
 ## Editing content
 
@@ -45,6 +47,21 @@ To save every enquiry as a row in a Google Sheet:
 **Email alerts:** the script emails the sheet owner for every new enquiry (set `NOTIFY_EMAIL` in the script to use another address). In Apps Script → Project Settings, tick *Show "appsscript.json"*, replace that file with [`appsscript.json`](appsscript.json) from this repo, then run `testNotify` once from the editor to approve the permissions.
 
 If you change the script later, use **Deploy → Manage deployments → Edit → New version** so the URL stays the same.
+
+## Registrations dashboard (`admin.html`)
+
+A private page for reading and managing the registrations in the Google Sheet: totals, new-this-week, a by-course breakdown, a 30-day chart, search and filters, a detail panel with WhatsApp / call / email buttons, a status for each student (New, Contacted, Enrolled, Waitlist, Not interested), private notes, delete, and CSV export.
+
+The page itself holds no data. It asks the Apps Script for the rows, and the script only answers when the admin password is right (20 wrong tries lock it for 15 minutes). The page is marked `noindex`.
+
+**Set it up once:**
+
+1. In the sheet, open **Extensions → Apps Script**, replace `Code.gs` with the new [`google-apps-script.gs`](google-apps-script.gs), and click **Save**.
+2. **Project Settings (⚙️) → Script Properties → Add script property**: Property `ADMIN_PASSWORD`, Value a long password only you know (at least 12 characters). Save.
+3. **Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.** The URL stays the same, so the website form keeps working.
+4. Open `https://<your-site>/admin.html` (on GitHub Pages: https://gargorey.github.io/codepath-academy/admin.html) and sign in with that password.
+
+To change the password later, edit the script property; no redeploy needed. The sheet gets two new columns, **Status** and **Notes**, the first time the new script runs. Older rows show as *New*. Open `admin.html?demo` to try the dashboard with sample data.
 
 ## Student projects section
 
