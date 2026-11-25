@@ -1,5 +1,5 @@
 /**
- * CodePath Academy – enquiry form → Google Sheet
+ * Khatwa Code (خطوة كود) – enquiry form → Google Sheet
  *
  * Setup (once):
  * 1. Create a Google Sheet, then Extensions → Apps Script.
@@ -23,9 +23,9 @@ const SHEET_NAME = 'Enquiries';
 // Where new-enquiry emails go. Leave empty to use the Google account that owns this script.
 // Several addresses: 'a@example.com,b@example.com'
 const NOTIFY_EMAIL = '';
-const HEADERS = ['Timestamp', 'Name', 'Phone / WhatsApp', 'Email', 'Course', 'Level', 'Message', 'Language', 'Page', 'Status', 'Notes'];
+const HEADERS = ['Timestamp', 'Name', 'Phone / WhatsApp', 'Email', 'Course', 'Level', 'Message', 'Language', 'Page', 'Status', 'Notes', 'Payment plan'];
 const STATUSES = ['New', 'Contacted', 'Enrolled', 'Waitlist', 'Not interested'];
-const COL = { status: 10, notes: 11 };
+const COL = { status: 10, notes: 11, plan: 12 };
 
 const clean = v => String(v == null ? '' : v).slice(0, 2000).replace(/^[=+\-@]/, "'$&"); // stop formula injection
 
@@ -34,7 +34,7 @@ function getSheet() {
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
   const width = sheet.getLastRow() === 0 ? 0 : sheet.getLastColumn();
-  if (width < HEADERS.length) {   // new sheet, or an older sheet without Status / Notes columns
+  if (width < HEADERS.length) {   // new sheet, or an older sheet without the Status / Notes / Payment plan columns
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
     sheet.setFrozenRows(1);
   }
@@ -51,7 +51,7 @@ function doPost(e) {
   try {
     const sheet = getSheet();
     sheet.appendRow([new Date(), clean(d.name), clean(d.phone), clean(d.email), clean(d.course),
-                     clean(d.level), clean(d.message), clean(d.lang), clean(d.page), 'New', '']);
+                     clean(d.level), clean(d.message), clean(d.lang), clean(d.page), 'New', '', clean(d.plan)]);
     notify(d, sheet.getParent());
     return json({ result: 'success' });
   } catch (err) {
@@ -121,7 +121,7 @@ function listRows() {
     ts: r[0] instanceof Date ? r[0].getTime() : 0,
     name: str(r[1]), phone: str(r[2]), email: str(r[3]), course: str(r[4]), level: str(r[5]),
     message: str(r[6]), lang: str(r[7]), page: str(r[8]),
-    status: str(r[9]) || 'New', notes: str(r[10])
+    status: str(r[9]) || 'New', notes: str(r[10]), plan: str(r[11])
   })).filter(x => x.ts || x.name || x.email || x.phone);
 }
 
@@ -151,6 +151,7 @@ function notify(d, ss) {
       ['البريد / Email', d.email],
       ['الدورة / Course', d.course],
       ['المستوى / Level', d.level],
+      ['الدفع / Payment', d.plan || '—'],
       ['الرسالة / Message', d.message || '—'],
       ['اللغة / Language', d.lang]
     ];
@@ -158,13 +159,13 @@ function notify(d, ss) {
     const wa = 'https://wa.me/' + String(d.phone || '').replace(/[^0-9]/g, '');
     const html =
       '<div style="font-family:Arial,sans-serif;font-size:14px;color:#111">' +
-      '<h2 style="margin:0 0 12px">طلب جديد من موقع CodePath Academy</h2>' +
+      '<h2 style="margin:0 0 12px">طلب جديد من موقع خطوة كود (Khatwa Code)</h2>' +
       '<table cellpadding="6" style="border-collapse:collapse">' +
       rows.map(r => '<tr><td style="color:#666;white-space:nowrap">' + r[0] + '</td><td><b>' + esc(r[1]) + '</b></td></tr>').join('') +
       '</table>' +
       '<p><a href="' + wa + '">Reply on WhatsApp</a> · <a href="' + ss.getUrl() + '">Open the sheet</a></p></div>';
     const plain = rows.map(r => r[0] + ': ' + (r[1] || '')).join('\n') + '\n\nWhatsApp: ' + wa + '\nSheet: ' + ss.getUrl();
-    const options = { htmlBody: html, name: 'CodePath Academy' };
+    const options = { htmlBody: html, name: 'Khatwa Code' };
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email || '')) options.replyTo = d.email;
     MailApp.sendEmail(to, 'طلب جديد: ' + (d.name || '') + ' – ' + (d.course || ''), plain, options);
   } catch (err) {
@@ -174,12 +175,12 @@ function notify(d, ss) {
 
 // Run this once from the editor (select "testNotify" → Run) to approve email permission and receive a sample email.
 function testNotify() {
-  notify({ name: 'Test', phone: '+966500000000', email: '', course: 'Test course', level: 'Test', message: 'Sample notification', lang: 'ar' },
+  notify({ name: 'Test', phone: '+966500000000', email: '', course: 'Test course', level: 'Test', plan: 'بالتقسيط | Installments', message: 'Sample notification', lang: 'ar' },
          SpreadsheetApp.getActiveSpreadsheet());
 }
 
 function doGet() {
-  return json({ result: 'success', info: 'CodePath Academy form endpoint is running.', dashboard: 2 });
+  return json({ result: 'success', info: 'Khatwa Code form endpoint is running.', dashboard: 3 });
 }
 
 function json(obj) {

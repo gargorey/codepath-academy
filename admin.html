@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
-<title>Registrations · CodePath Academy</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a1124'/%3E%3Cpath d='M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16' stroke='%2322d3ee' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>Registrations · Khatwa Code</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a1124'/%3E%3Cpath d='M9 10l-5 6 5 6M23 10l5 6-5 6M11 21.5h3v-3.3h3v-3.3h3v-3.3h1.5' stroke='%2322d3ee' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
@@ -140,6 +140,7 @@ tbody tr{cursor:pointer}
 tbody tr:hover{background:var(--hover)}
 tbody tr:last-child td{border-bottom:0}
 td .sub{font-size:13px;color:var(--dim)}
+.tag-inst{display:inline-block;margin-inline-start:6px;font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 45%,transparent)}
 td.when{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
 td.phone{font-family:var(--mono);font-size:13px;white-space:nowrap}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
@@ -193,7 +194,7 @@ dd.mono{font-family:var(--mono);font-size:13px}
 <!-- Login -->
 <section class="login" id="login" hidden>
   <form class="login-card" id="loginForm" autocomplete="on">
-    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a1124"/><path d="M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>CodePath Academy</div>
+    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a1124"/><path d="M9 10l-5 6 5 6M23 10l5 6-5 6M11 21.5h3v-3.3h3v-3.3h3v-3.3h1.5" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Khatwa Code</div>
     <h1>Registrations dashboard</h1>
     <p>Sign in with the admin password you set in Apps Script.</p>
     <div class="msg bad" id="loginMsg" hidden></div>
@@ -210,7 +211,7 @@ dd.mono{font-family:var(--mono);font-size:13px}
 <div id="app" hidden>
   <header class="top">
     <div class="wrap">
-      <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a1124"/><path d="M9 11l-4 5 4 5M23 11l4 5-4 5M18 8l-4 16" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Registrations<small>CodePath Academy</small></span></div>
+      <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0a1124"/><path d="M9 10l-5 6 5 6M23 10l5 6-5 6M11 21.5h3v-3.3h3v-3.3h3v-3.3h1.5" stroke="#22d3ee" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Registrations<small>Khatwa Code</small></span></div>
       <span class="badge-demo" id="demoBadge" hidden>Sample data</span>
       <span class="spacer"></span>
       <span class="sync" id="sync"></span>
@@ -281,7 +282,9 @@ const STATUS_COLOR = { "New":"var(--cyan)", "Contacted":"var(--blue)", "Enrolled
 const LEVEL_EN = { "لا توجد لدي خبرة سابقة":"No prior experience", "أعرف الأساسيات":"Knows the basics", "لدي خبرة متوسطة":"Intermediate", "لدي خبرة متقدمة":"Advanced" };
 const COURSE_UNSURE = "Not sure yet";
 // Same prices as PRICES in index.html (US dollars)
-const PRICE = { course: 40, diploma: 100 };
+const PRICE = { course: 30, diploma: 100 };
+const isInstallments = r => /Installments|تقسيط/.test(String(r.plan || ""));
+const planLabel = r => r.plan ? (isInstallments(r) ? "Installments" : "Pay in full") : "";
 const isDiploma = c => /Full Diploma|الدبلومة/.test(String(c || ""));
 const priceOf = c => isDiploma(c) ? PRICE.diploma : (String(c || "").includes(" | ") ? PRICE.course : 0);
 
@@ -307,7 +310,7 @@ const ago = ts => {
 const digits = p => String(p || "").replace(/[^0-9]/g, "");
 const pill = s => `<span class="pill" style="--c:${STATUS_COLOR[s] || "var(--gray)"}">${esc(s)}</span>`;
 let toastT;
-function toast(msg, bad){ const t = $("#toast"); t.textContent = msg; t.className = "toast" + (bad ? " bad" : ""); t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3200); }
+function toast(msg, bad, ms = 3200){ const t = $("#toast"); t.textContent = msg; t.className = "toast" + (bad ? " bad" : ""); t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, ms); }
 
 /* ---------- Theme ---------- */
 (() => { const t = store.get("cpa-admin-theme"); if (t) document.documentElement.dataset.theme = t; })();
@@ -328,7 +331,7 @@ const ERR = {
   not_found: "That registration is no longer in the sheet. Refreshing.",
 };
 const OLD_SCRIPT = "Your Apps Script is still running the old version, which has no dashboard. Paste the new google-apps-script.gs into Code.gs, then Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.";
-let checkedFor = "";
+let checkedFor = "", scriptVersion = 0;
 async function api(action, extra = {}){
   if (DEMO) return demoApi(action, extra);
   let res, out;
@@ -338,7 +341,7 @@ async function api(action, extra = {}){
     try { info = await (await fetch(endpoint)).json(); }
     catch { throw Object.assign(new Error("Couldn't reach the Apps Script. Check the Apps Script URL on the sign-in screen."), { code:"network" }); }
     if (!info || !info.dashboard) throw Object.assign(new Error(OLD_SCRIPT), { code:"old_script" });
-    checkedFor = endpoint;
+    checkedFor = endpoint; scriptVersion = Number(info.dashboard) || 0;
   }
   try {
     // text/plain body = "simple" request, so Apps Script answers without a CORS preflight
@@ -384,7 +387,7 @@ $("#loginForm").onsubmit = async e => {
 };
 $("#logoutBtn").onclick = () => { store.del("cpa-admin-pw"); password = ""; rows = []; closeDrawer(); if (DEMO) location.search = ""; else showLogin(); };
 
-function showApp(){ $("#login").hidden = true; $("#app").hidden = false; $("#demoBadge").hidden = !DEMO; $("#logoutBtn").lastElementChild.textContent = DEMO ? "Exit preview" : "Sign out"; render(); }
+function showApp(){ if (!DEMO && scriptVersion && scriptVersion < 3) setTimeout(() => toast("Your Apps Script is one version behind, so the new Payment (installments) choice isn't being saved. Paste the new google-apps-script.gs and deploy a New version.", true, 15000), 400); $("#login").hidden = true; $("#app").hidden = false; $("#demoBadge").hidden = !DEMO; $("#logoutBtn").lastElementChild.textContent = DEMO ? "Exit preview" : "Sign out"; render(); }
 
 async function refresh(quiet){
   const b = $("#refreshBtn"); b.disabled = true; b.innerHTML = '<span class="spin"></span>';
@@ -453,7 +456,7 @@ function renderRows(){
   $("#rows").innerHTML = list.map(r => `<tr tabindex="0" data-ts="${r.ts}" data-row="${r.row}">
     <td class="c-name"><div dir="auto">${esc(r.name || "—")}</div><div class="sub" dir="auto">${esc(r.email)}</div></td>
     <td class="phone" dir="ltr">${esc(r.phone)}</td>
-    <td class="c-course">${esc(courseLabel(r.course))}</td>
+    <td class="c-course">${esc(courseLabel(r.course))}${isInstallments(r) ? '<span class="tag-inst">Installments</span>' : ""}</td>
     <td class="c-level">${esc(levelLabel(r.level))}</td>
     <td class="c-status">${pill(r.status)}</td>
     <td class="when" title="${esc(fmtDate(r.ts))}">${esc(ago(r.ts))}</td></tr>`).join("");
@@ -480,14 +483,14 @@ function openDrawer(r){
   $("#dName").textContent = r.name || "—";
   $("#dWhen").textContent = "Received " + fmtDate(r.ts);
   const ph = digits(r.phone);
-  const hi = encodeURIComponent(`مرحباً ${r.name || ""}، شكراً لتسجيلك في CodePath Academy.`);
+  const hi = encodeURIComponent(`مرحباً ${r.name || ""}، شكراً لتسجيلك في خطوة كود (Khatwa Code).`);
   $("#dActions").innerHTML =
     (ph ? `<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/${ph}?text=${hi}">WhatsApp</a><a class="btn" href="tel:+${ph}">Call</a>` : "") +
-    (r.email ? `<a class="btn" href="mailto:${esc(r.email)}?subject=${encodeURIComponent("CodePath Academy")}">Email</a>` : "") +
+    (r.email ? `<a class="btn" href="mailto:${esc(r.email)}?subject=${encodeURIComponent("Khatwa Code")}">Email</a>` : "") +
     `<button class="btn" id="copyBtn">Copy details</button>`;
   $("#copyBtn").onclick = () => { navigator.clipboard?.writeText(summary(r)).then(() => toast("Copied"), () => toast("Couldn't copy", true)); };
   const items = [
-    ["Phone", r.phone, "mono"], ["Email", r.email], ["Course", courseLabel(r.course)], ["Price", priceOf(r.course) ? "$" + priceOf(r.course) : ""],
+    ["Phone", r.phone, "mono"], ["Email", r.email], ["Course", courseLabel(r.course)], ["Price", priceOf(r.course) ? "$" + priceOf(r.course) : ""], ["Payment", isInstallments(r) ? "Installments: contact the student to set the schedule" : planLabel(r)],
     ["Level", levelLabel(r.level)], ["Form language", r.lang === "en" ? "English" : r.lang === "ar" ? "Arabic" : r.lang],
   ];
   $("#dList").innerHTML = items.filter(x => x[1]).map(([k, v, c]) => `<dt>${esc(k)}</dt><dd${c ? ` class="${c}" dir="ltr"` : ' dir="auto"'}>${esc(v)}</dd>`).join("");
@@ -538,17 +541,17 @@ $("#delBtn").onclick = async () => {
     closeDrawer(); render(); toast("Deleted");
   } catch (err) { resetDel(); toast(err.message, true); if (err.code === "not_found") refresh(true); }
 };
-function summary(r){ return [`Name: ${r.name}`, `Phone: ${r.phone}`, `Email: ${r.email}`, `Course: ${courseLabel(r.course)}`, `Level: ${levelLabel(r.level)}`, `Status: ${r.status}`, r.message && `Message: ${r.message}`, r.notes && `Notes: ${r.notes}`, `Received: ${fmtDate(r.ts)}`].filter(Boolean).join("\n"); }
+function summary(r){ return [`Name: ${r.name}`, `Phone: ${r.phone}`, `Email: ${r.email}`, `Course: ${courseLabel(r.course)}`, `Level: ${levelLabel(r.level)}`, r.plan && `Payment: ${planLabel(r)}`, `Status: ${r.status}`, r.message && `Message: ${r.message}`, r.notes && `Notes: ${r.notes}`, `Received: ${fmtDate(r.ts)}`].filter(Boolean).join("\n"); }
 
 /* ---------- CSV ---------- */
 $("#csvBtn").onclick = () => {
   const list = filtered();
   const cell = v => { v = String(v ?? ""); if (/^[=+\-@]/.test(v)) v = "'" + v; return /[",\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; };
-  const head = ["Received", "Name", "Phone", "Email", "Course", "Level", "Status", "Message", "Notes", "Form language"];
-  const lines = [head, ...list.map(r => [r.ts ? new Date(r.ts).toISOString().replace("T", " ").slice(0, 16) : "", r.name, r.phone, r.email, courseLabel(r.course), levelLabel(r.level), r.status, r.message, r.notes, r.lang])].map(l => l.map(cell).join(","));
+  const head = ["Received", "Name", "Phone", "Email", "Course", "Level", "Payment", "Status", "Message", "Notes", "Form language"];
+  const lines = [head, ...list.map(r => [r.ts ? new Date(r.ts).toISOString().replace("T", " ").slice(0, 16) : "", r.name, r.phone, r.email, courseLabel(r.course), levelLabel(r.level), planLabel(r), r.status, r.message, r.notes, r.lang])].map(l => l.map(cell).join(","));
   const blob = new Blob(["﻿" + lines.join("\r\n")], { type:"text/csv;charset=utf-8" });
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-  a.download = `codepath-registrations-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+  a.download = `khatwa-code-registrations-${new Date().toISOString().slice(0, 10)}.csv`; a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 };
 
@@ -564,7 +567,7 @@ function demoApi(action, d){
     demoRows = N.map((n, i) => ({ row: N.length - i + 1, ts: Date.now() - ago[i] * 864e5 - i * 3.7e6, name:n,
       phone:"+966 50 000 00" + String(i).padStart(2, "0"), email:`student${i + 1}@example.com`, course:C[(i * 3) % 6], level:L[i % 4],
       message: i % 3 ? "" : (i % 2 ? "I want to build my first mobile app." : "أرغب في معرفة موعد بدء الدورة القادمة."),
-      lang: i % 2 ? "ar" : "en", page:"", status:S[i], notes: i === 3 ? "Paid. Starts next cohort." : "" }));
+      lang: i % 2 ? "ar" : "en", page:"", plan: i % 4 === 1 ? "بالتقسيط | Installments" : "دفعة واحدة | Pay in full", status:S[i], notes: i === 3 ? "Paid. Starts next cohort." : "" }));
   }
   return new Promise((ok, fail) => setTimeout(() => {
     if (action === "list") return ok({ result:"success", rows: demoRows.map(r => ({...r})), statuses: Object.keys(STATUS_COLOR) });
