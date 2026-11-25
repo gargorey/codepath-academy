@@ -263,7 +263,23 @@ section{scroll-margin-top:88px}
 .course-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:auto;padding-top:16px;border-top:1px dashed var(--line-strong);font-size:14px;color:var(--muted)}
 .course-meta span{display:inline-flex;align-items:center;gap:6px}
 .course-meta svg{width:16px;height:16px;color:var(--dim)}
+.course-meta .price{color:var(--fg);font-weight:600}
+.course-meta .price small{font-weight:400;color:var(--muted)}
 .course-actions{display:flex;gap:10px;flex-wrap:wrap}
+/* full diploma bundle */
+.diploma{position:relative;margin-top:20px;display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center;padding:30px;border-radius:var(--r);border:1px solid transparent;background:linear-gradient(rgb(var(--panel-rgb) / .95),rgb(var(--panel-rgb) / .95)) padding-box,var(--grad) border-box;box-shadow:0 30px 60px -30px rgba(59,130,246,.45);min-width:0}
+.diploma .badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;color:var(--on-accent);background:var(--grad)}
+.diploma h3{font-size:26px;margin:12px 0 6px}
+.diploma .sub{color:var(--muted);margin:0 0 16px}
+.diploma ol{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:d}
+.diploma ol li{display:flex;align-items:center;gap:10px;font-size:15px;counter-increment:d;min-width:0}
+.diploma ol li::before{content:counter(d);flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;font-family:var(--mono);font-size:12px;color:var(--cyan);border:1px solid var(--line-strong)}
+.diploma .buy{display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:var(--r-sm);background:rgb(var(--tint-rgb) / .04);border:1px solid var(--line)}
+.diploma .amount{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px}
+.diploma .amount b{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.02em}
+.diploma .amount s{color:var(--dim);font-size:18px}
+.diploma .save{align-self:flex-start;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;color:var(--ok);background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3)}
+@media (max-width:820px){.diploma{grid-template-columns:1fr;padding:22px}.diploma h3{font-size:22px}}
 .course-actions .btn{flex:1}
 
 /* roadmap */
@@ -559,6 +575,7 @@ dialog[open]{animation:rise .3s both}
       <p data-i18n="coursesLead">من أساسيات البرمجة إلى تطبيقات Flutter بمستوى الإنتاج. كل دورة تبني على ما قبلها، فابدأ من حيث يناسب مستواك.</p>
     </div>
     <div class="course-grid" id="courseGrid"></div>
+    <div class="diploma" id="diplomaCard"></div>
   </div>
 </section>
 
@@ -701,6 +718,17 @@ const SITE = {
   defaultLang: "ar"
 };
 
+/* Prices in US dollars: each course on its own, or the full diploma (all four courses). */
+const PRICES = {
+  course:  { usd: 40 },
+  diploma: { usd: 100 }
+};
+const DIPLOMA = {
+  id: "diploma",
+  title: { ar: "الدبلومة الكاملة", en: "Full Diploma" },
+  sub:   { ar: "من أساسيات البرمجة حتى Flutter المتقدم", en: "From programming basics to advanced Flutter" }
+};
+
 const COURSES = [
   { id:"fundamentals", lv:"beg", track:"Foundations",
     title:{ar:"أساسيات البرمجة", en:"Programming Fundamentals"},
@@ -710,7 +738,7 @@ const COURSES = [
               en:"The starting point for anyone new to programming. Learn to think like a developer, break a problem into clear steps, and turn them into working code."},
     topics:[["المنطق والخوارزميات","Logic & Algorithms"],["المتغيرات","Variables"],["أنواع البيانات","Data Types"],["العوامل","Operators"],["الشروط","Conditions"],["الحلقات","Loops"],["المصفوفات","Arrays"],["الدوال","Functions"],["حل المشكلات","Problem Solving"]],
     project:{ar:"مشروع Console صغير يجمع كل ما تعلّمته في الدورة.", en:"A small console project that brings together everything from the course."},
-    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
+    duration:{ar:"",en:""}, price:null, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
   { id:"oop", lv:"mid", track:"Foundations",
     title:{ar:"البرمجة كائنية التوجه", en:"Object-Oriented Programming (OOP)"},
     level:{ar:"مبتدئ / متوسط", en:"Beginner / Intermediate"},
@@ -719,7 +747,7 @@ const COURSES = [
               en:"Move from writing step-by-step instructions to designing organised, scalable programs using the concepts behind most modern languages and frameworks."},
     topics:[["الأصناف","Classes"],["الكائنات","Objects"],["دوال البناء","Constructors"],["الدوال","Methods"],["التغليف","Encapsulation"],["الوراثة","Inheritance"],["تعدد الأشكال","Polymorphism"],["التجريد","Abstraction"],["الواجهات","Interfaces"],["مقدمة في مبادئ SOLID","SOLID Intro"]],
     project:{ar:"مشروع عملي مبني بأسلوب OOP من التصميم حتى التنفيذ.", en:"A practical project built the OOP way, from design to implementation."},
-    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
+    duration:{ar:"",en:""}, price:null, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
   { id:"flutter-beginner", lv:"beg", track:"Mobile",
     title:{ar:"تطوير تطبيقات Flutter: المستوى المبتدئ", en:"Flutter Development – Beginner"},
     level:{ar:"مبتدئ", en:"Beginner"},
@@ -728,7 +756,7 @@ const COURSES = [
               en:"Start building mobile apps for Android and iOS from one codebase, from Dart basics to an app that talks to an API and stores data."},
     topics:[["أساسيات لغة Dart","Dart Fundamentals"],["تجهيز بيئة العمل","Flutter Setup"],["العناصر","Widgets"],["التخطيط","Layouts"],["التنقل بين الشاشات","Navigation"],["النماذج والتحقق","Forms & Validation"],["القوائم","Lists"],["إدارة الحالة الأساسية","State Management"],["التعامل مع الخوادم","REST APIs"],["تحليل البيانات","JSON"],["البرمجة غير المتزامنة","Async Programming"],["التخزين المحلي","Local Storage"]],
     project:{ar:"تطبيق جوال عملي متكامل يستخدم API ويحفظ البيانات محلياً.", en:"A complete, practical mobile app that uses an API and stores data locally."},
-    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
+    duration:{ar:"",en:""}, price:null, startDate:{ar:"",en:""}, availability:{ar:"",en:""} },
   { id:"flutter-advanced", lv:"adv", track:"Mobile",
     title:{ar:"تطوير تطبيقات Flutter: المستوى المتقدم", en:"Flutter Development – Advanced"},
     level:{ar:"متقدم", en:"Advanced"},
@@ -737,7 +765,7 @@ const COURSES = [
               en:"For developers already building with Flutter who want production-grade skills: clean architecture, testing, performance and store publishing."},
     topics:[["بنية التطبيقات","App Architecture"],["البنية النظيفة","Clean Architecture"],["مبادئ SOLID","SOLID"],["خيارات إدارة الحالة","GetX / BLoC / Riverpod"],["حقن الاعتماديات","Dependency Injection"],["ربط الـ API ومعالجة الأخطاء","API & Error Handling"],["خدمات Firebase","Firebase"],["الإشعارات","Notifications"],["المدفوعات والاشتراكات","Payments & Subscriptions"],["الاختبارات","Testing"],["تحسين الأداء","Performance"],["التكامل والنشر المستمر","CI/CD"],["النشر على المتاجر","Publishing"]],
     project:{ar:"مشروع بمواصفات الإنتاج (Production-style) من البنية حتى النشر.", en:"A production-style project, from architecture to release."},
-    duration:{ar:"",en:""}, price:{ar:"",en:""}, startDate:{ar:"",en:""}, availability:{ar:"",en:""} }
+    duration:{ar:"",en:""}, price:null, startDate:{ar:"",en:""}, availability:{ar:"",en:""} }
 ];
 
 /* From the instructor's CV */
@@ -814,8 +842,8 @@ const FAQ = [
    {ar:"املأ نموذج الاستفسار في أسفل الصفحة أو راسلنا مباشرة على واتساب، وسنتواصل معك بتفاصيل الدورة وخطوات التسجيل.",
     en:"Fill in the enquiry form below or message us on WhatsApp, and we'll get back to you with course details and next steps."}],
   [{ar:"ما الرسوم وطرق الدفع؟", en:"What are the fees and payment options?"},
-   {ar:"تُرسل الرسوم وطرق الدفع المتاحة عند التواصل معنا، لأنها قد تختلف حسب الدورة وموعدها.",
-    en:"Fees and payment options are shared when you contact us, as they can vary by course and cohort."}]
+   {ar:"كل دورة 40 دولاراً، والدبلومة الكاملة بالدورات الأربع 100 دولار بدلاً من 160 دولاراً. نرسل لك طرق الدفع المتاحة عند التواصل معنا.",
+    en:"Each course is $40. The Full Diploma, with all four courses, is $100 instead of $160. We'll send you the payment options when you get in touch."}]
 ];
 
 /* English text for the fixed parts of the page (the Arabic is read from the HTML) */
@@ -859,7 +887,7 @@ const EN = {
 
 /* Strings used by the scripts below */
 const UI = {
-  ar:{ tbd:"يُحدَّد لاحقاً", duration:"المدة", price:"الرسوم", start:"موعد البدء", avail:"التوفر", topics:"محاور الدورة", finalProject:"المشروع الختامي",
+  ar:{ tbd:"يُحدَّد لاحقاً", duration:"المدة", price:"الرسوم", perCourse:"للدورة", fullDiploma:"الدورات الأربع في مسار واحد بالترتيب، مع مشروع في نهاية كل دورة.", diplomaBadge:"الأوفر", insteadOf:"بدلاً من", save:n=>`وفّر ${n}`, enrollDiploma:"سجّل في الدبلومة", diplomaOpt:"الدبلومة الكاملة (الدورات الأربع)", coursesIncluded:"تشمل", start:"موعد البدء", avail:"التوفر", topics:"محاور الدورة", finalProject:"المشروع الختامي",
        details:"التفاصيل", enroll:"استفسر وسجّل", enrollLong:"سجّل اهتمامك بالدورة", askWa:"استفسر على واتساب", topicsCount:n=>`${n} محوراً + مشروع`,
        topicsLabel:"أبرز المحاور", close:"إغلاق", example:"مثال توضيحي", fromCourse:"من دورة", chooseCourse:"اختر الدورة", unsure:"لم أحدد بعد، أحتاج استشارة",
        chooseLevel:"اختر مستواك", levels:["لا توجد لدي خبرة سابقة","أعرف الأساسيات","لدي خبرة متوسطة","لدي خبرة متقدمة"],
@@ -872,7 +900,7 @@ const UI = {
        sumHead:"مرحباً، أرغب في التسجيل / الاستفسار:", sumName:"الاسم", sumPhone:"الجوال", sumEmail:"البريد", sumCourse:"الدورة", sumLevel:"المستوى", sumMsg:"رسالة",
        menuOpen:"فتح القائمة", menuClose:"إغلاق القائمة", seeCourse:"تفاصيل الدورة", portfolio:"ملف الأعمال", portfolioText:"مشاريع حقيقية تعرضها على أصحاب العمل.",
        photoAlt:"المدرب محمد صالح موسى", langSwitch:"Switch to English", instructor:"مدرّب برمجة", initial:"م" },
-  en:{ tbd:"To be announced", duration:"Duration", price:"Fee", start:"Start date", avail:"Availability", topics:"Course topics", finalProject:"Final project",
+  en:{ tbd:"To be announced", duration:"Duration", price:"Fee", perCourse:"per course", fullDiploma:"All four courses in order as one path, with a project at the end of each.", diplomaBadge:"Best value", insteadOf:"instead of", save:n=>`Save ${n}`, enrollDiploma:"Register for the diploma", diplomaOpt:"Full Diploma (all four courses)", coursesIncluded:"Includes", start:"Start date", avail:"Availability", topics:"Course topics", finalProject:"Final project",
        details:"Details", enroll:"Enquire & register", enrollLong:"Register your interest", askWa:"Ask on WhatsApp", topicsCount:n=>`${n} topics + project`,
        topicsLabel:"Key topics", close:"Close", example:"Illustrative example", fromCourse:"From", chooseCourse:"Choose a course", unsure:"Not sure yet, I'd like advice",
        chooseLevel:"Choose your level", levels:["No prior experience","I know the basics","Intermediate","Advanced"],
@@ -934,7 +962,27 @@ function renderAbout(){
   $("#apps").innerHTML = APPS.map(a => `<a class="app" href="${esc(a.url)}" target="_blank" rel="noopener"><b class="ltr">${esc(a.name)}</b><small>${esc(L(a.desc))}</small><span class="store ltr">${esc(a.store)} ↗</span></a>`).join("");
 }
 
+const usd = n => "$" + n;
+const priceText = p => usd(p.usd);
+const diplomaFull = () => ({ usd: PRICES.course.usd * COURSES.length });
+
+function renderDiploma(){
+  const p = PRICES.diploma, full = diplomaFull();
+  $("#diplomaCard").innerHTML = `<div>
+      <span class="badge">${esc(t("diplomaBadge"))}</span>
+      <h3>${esc(L(DIPLOMA.title))}${lang === "ar" ? `<span class="en-title ltr">${esc(DIPLOMA.title.en)}</span>` : ""}</h3>
+      <p class="sub">${esc(L(DIPLOMA.sub))}. ${esc(t("fullDiploma"))}</p>
+      <ol aria-label="${esc(t("coursesIncluded"))}">${COURSES.map(c => `<li><span>${esc(L(c.title))}</span></li>`).join("")}</ol>
+    </div>
+    <div class="buy">
+      <div class="amount"><b class="ltr">${usd(p.usd)}</b><s class="ltr" aria-label="${esc(t("insteadOf"))} ${usd(full.usd)}">${usd(full.usd)}</s></div>
+      <span class="save">${esc(t("save")(usd(full.usd - p.usd)))}</span>
+      <a class="btn btn-primary" href="#contact" data-enroll="${DIPLOMA.id}">${esc(t("enrollDiploma"))}</a>
+    </div>`;
+}
+
 function renderCourses(){
+  renderDiploma();
   $("#courseGrid").innerHTML = COURSES.map(c => {
     const shown = c.topics.slice(0,6), more = c.topics.length - shown.length;
     const secondary = lang === "ar" ? `<span class="en-title ltr">${esc(c.title.en)}</span>` : "";
@@ -943,7 +991,7 @@ function renderCourses(){
       <h3 id="c-${c.id}">${esc(L(c.title))}${secondary}</h3>
       <p class="ov">${esc(L(c.overview))}</p>
       <ul class="chips" aria-label="${esc(t("topicsLabel"))}">${shown.map(x => `<li>${esc(x[1])}</li>`).join("")}${more>0?`<li class="more">+${more}</li>`:""}</ul>
-      <div class="course-meta"><span>${icon.clock} ${esc(t("duration"))}: ${esc(L(c.duration) || t("tbd"))}</span><span>${icon.code} ${esc(t("topicsCount")(c.topics.length))}</span></div>
+      <div class="course-meta"><span>${icon.clock} ${esc(t("duration"))}: ${esc(L(c.duration) || t("tbd"))}</span><span>${icon.code} ${esc(t("topicsCount")(c.topics.length))}</span><span class="price"><span class="ltr">${usd(PRICES.course.usd)}</span> <small>${esc(t("perCourse"))}</small></span></div>
       <div class="course-actions">
         <a class="btn btn-ghost btn-sm" href="#course-${c.id}">${esc(t("details"))}</a>
         <a class="btn btn-primary btn-sm" href="#contact" data-enroll="${c.id}">${esc(t("enroll"))}</a>
@@ -985,7 +1033,10 @@ function renderContact(){
 
 function renderFormOptions(){
   const cs = $("#f-course"), lv = $("#f-level"), cv = cs.value, li = lv.selectedIndex;
-  cs.innerHTML = `<option value="">${esc(t("chooseCourse"))}</option>` + COURSES.map(c => `<option value="${c.id}">${esc(L(c.title))}</option>`).join("") + `<option value="unsure">${esc(t("unsure"))}</option>`;
+  cs.innerHTML = `<option value="">${esc(t("chooseCourse"))}</option>` +
+    `<option value="${DIPLOMA.id}">${esc(t("diplomaOpt"))} — ${esc(priceText(PRICES.diploma))}</option>` +
+    COURSES.map(c => `<option value="${c.id}">${esc(L(c.title))} — ${esc(priceText(PRICES.course))}</option>`).join("") +
+    `<option value="unsure">${esc(t("unsure"))}</option>`;
   lv.innerHTML = `<option value="">${esc(t("chooseLevel"))}</option>` + t("levels").map((l,i) => `<option value="${i+1}">${esc(l)}</option>`).join("");
   cs.value = cv; lv.selectedIndex = li < 0 ? 0 : li;
 }
@@ -1005,7 +1056,7 @@ function openCourse(id){
       <p style="color:var(--muted)">${esc(L(c.overview))}</p>
     </div>
     <div class="dlg-body">
-      <div class="facts">${fact("duration",L(c.duration))}${fact("price",L(c.price))}${fact("start",L(c.startDate))}${fact("avail",L(c.availability))}</div>
+      <div class="facts">${fact("duration",L(c.duration))}${fact("price",priceText(PRICES.course))}${fact("start",L(c.startDate))}${fact("avail",L(c.availability))}</div>
       <div><h4>${esc(t("topics"))}</h4><ul class="topic-list">${c.topics.map(x => lang==="ar" ? `<li><span>${esc(x[0])}</span><bdi>${esc(x[1])}</bdi></li>` : `<li><span>${esc(x[1])}</span></li>`).join("")}</ul></div>
       <div><h4>${esc(t("finalProject"))}</h4><p class="dlg-project">${esc(L(c.project))}</p></div>
       <div class="course-actions">
@@ -1070,7 +1121,7 @@ Object.keys(rules).forEach(n => {
 function summary(d){
   const c = COURSES.find(x => x.id === d.course);
   return [t("sumHead"), `${t("sumName")}: ${d.name}`, `${t("sumPhone")}: ${d.phone}`, `${t("sumEmail")}: ${d.email}`,
-    `${t("sumCourse")}: ${c ? L(c.title) : t("unsure")}`, `${t("sumLevel")}: ${t("levels")[+d.level - 1] || ""}`,
+    `${t("sumCourse")}: ${d.course === DIPLOMA.id ? t("diplomaOpt") + " – " + priceText(PRICES.diploma) : c ? L(c.title) + " – " + priceText(PRICES.course) : t("unsure")}`, `${t("sumLevel")}: ${t("levels")[+d.level - 1] || ""}`,
     d.message ? `${t("sumMsg")}: ${d.message}` : ""].filter(Boolean).join("\n");
 }
 form.addEventListener("submit", async e => {
@@ -1086,7 +1137,8 @@ form.addEventListener("submit", async e => {
   try {
     const c = COURSES.find(x => x.id === data.course);
     const row = { name:data.name, phone:data.phone, email:data.email,
-      course: c ? c.title.ar + " | " + c.title.en : UI.ar.unsure,
+      course: data.course === DIPLOMA.id ? UI.ar.diplomaOpt + " | " + UI.en.diplomaOpt
+            : c ? c.title.ar + " | " + c.title.en : UI.ar.unsure,
       level: UI.ar.levels[+data.level-1] || "", message:data.message || "", lang, page:location.href };
     /* text/plain body keeps this a "simple" request, which Google Apps Script accepts without a CORS preflight */
     const res = await fetch(SITE.googleSheetUrl, {method:"POST", body:JSON.stringify(row)});

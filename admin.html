@@ -280,6 +280,10 @@ const DEFAULT_ENDPOINT = "https://script.google.com/macros/s/AKfycbxSGENDWuRNmCo
 const STATUS_COLOR = { "New":"var(--cyan)", "Contacted":"var(--blue)", "Enrolled":"var(--ok)", "Waitlist":"var(--warn)", "Not interested":"var(--gray)" };
 const LEVEL_EN = { "لا توجد لدي خبرة سابقة":"No prior experience", "أعرف الأساسيات":"Knows the basics", "لدي خبرة متوسطة":"Intermediate", "لدي خبرة متقدمة":"Advanced" };
 const COURSE_UNSURE = "Not sure yet";
+// Same prices as PRICES in index.html (US dollars)
+const PRICE = { course: 40, diploma: 100 };
+const isDiploma = c => /Full Diploma|الدبلومة/.test(String(c || ""));
+const priceOf = c => isDiploma(c) ? PRICE.diploma : (String(c || "").includes(" | ") ? PRICE.course : 0);
 
 /* ---------- Small helpers ---------- */
 const $ = s => document.querySelector(s);
@@ -404,7 +408,7 @@ function render(){
     { k:"Total registrations", v: total, s: "All time", f:{} },
     { k:"New, not contacted", v: count("New"), s: "Waiting for a reply", c:STATUS_COLOR.New, f:{status:"New"} },
     { k:"Last 7 days", v: week, s: prevWeek ? `${prevWeek} the week before` : "None the week before", f:{recent:true} },
-    { k:"Enrolled", v: count("Enrolled"), s: total ? Math.round(count("Enrolled") / total * 100) + "% of all" : "—", c:STATUS_COLOR.Enrolled, f:{status:"Enrolled"} },
+    { k:"Enrolled", v: count("Enrolled"), s: (total ? Math.round(count("Enrolled") / total * 100) + "% of all · " : "") + "$" + rows.filter(r => r.status === "Enrolled").reduce((a, r) => a + priceOf(r.course), 0) + " in fees", c:STATUS_COLOR.Enrolled, f:{status:"Enrolled"} },
   ];
   const isOn = f => (f.status || "") === filt.status && !!f.recent === filt.recent && !filt.course && !filt.q && (f.status || f.recent);
   $("#stats").innerHTML = tiles.map((t, i) => `<button class="stat${isOn(t.f) ? " on" : ""}" data-i="${i}"><div class="k">${t.c ? `<span class="dot" style="color:${t.c}"></span>` : ""}${esc(t.k)}</div><div class="v">${t.v}</div><div class="s">${esc(t.s)}</div></button>`).join("");
@@ -483,7 +487,7 @@ function openDrawer(r){
     `<button class="btn" id="copyBtn">Copy details</button>`;
   $("#copyBtn").onclick = () => { navigator.clipboard?.writeText(summary(r)).then(() => toast("Copied"), () => toast("Couldn't copy", true)); };
   const items = [
-    ["Phone", r.phone, "mono"], ["Email", r.email], ["Course", courseLabel(r.course)],
+    ["Phone", r.phone, "mono"], ["Email", r.email], ["Course", courseLabel(r.course)], ["Price", priceOf(r.course) ? "$" + priceOf(r.course) : ""],
     ["Level", levelLabel(r.level)], ["Form language", r.lang === "en" ? "English" : r.lang === "ar" ? "Arabic" : r.lang],
   ];
   $("#dList").innerHTML = items.filter(x => x[1]).map(([k, v, c]) => `<dt>${esc(k)}</dt><dd${c ? ` class="${c}" dir="ltr"` : ' dir="auto"'}>${esc(v)}</dd>`).join("");
@@ -552,13 +556,13 @@ $("#csvBtn").onclick = () => {
 let demoRows;
 function demoApi(action, d){
   if (!demoRows) {
-    const C = ["أساسيات البرمجة | Programming Fundamentals", "البرمجة كائنية التوجه | Object-Oriented Programming (OOP)", "تطوير تطبيقات Flutter: المستوى المبتدئ | Flutter Development – Beginner", "تطوير تطبيقات Flutter: المستوى المتقدم | Flutter Development – Advanced", "لست متأكداً"];
+    const C = ["الدبلومة الكاملة (الدورات الأربع) | Full Diploma (all four courses)", "أساسيات البرمجة | Programming Fundamentals", "البرمجة كائنية التوجه | Object-Oriented Programming (OOP)", "تطوير تطبيقات Flutter: المستوى المبتدئ | Flutter Development – Beginner", "تطوير تطبيقات Flutter: المستوى المتقدم | Flutter Development – Advanced", "لست متأكداً"];
     const L = Object.keys(LEVEL_EN);
     const N = ["Sample Student A","طالب تجريبي ب","Sample Student C","طالبة تجريبية د","Sample Student E","طالب تجريبي و","Sample Student G","طالبة تجريبية ح","Sample Student I","طالب تجريبي ي","Sample Student K","طالبة تجريبية ل","Sample Student M","طالب تجريبي ن"];
     const S = ["New","New","Contacted","Enrolled","New","Waitlist","Contacted","Not interested","Enrolled","New","Contacted","New","Enrolled","New"];
     const ago = [0.1, 0.6, 1.2, 2, 3.5, 5, 6, 9, 12, 15, 19, 23, 27, 40];
     demoRows = N.map((n, i) => ({ row: N.length - i + 1, ts: Date.now() - ago[i] * 864e5 - i * 3.7e6, name:n,
-      phone:"+966 50 000 00" + String(i).padStart(2, "0"), email:`student${i + 1}@example.com`, course:C[(i * 3) % 5], level:L[i % 4],
+      phone:"+966 50 000 00" + String(i).padStart(2, "0"), email:`student${i + 1}@example.com`, course:C[(i * 3) % 6], level:L[i % 4],
       message: i % 3 ? "" : (i % 2 ? "I want to build my first mobile app." : "أرغب في معرفة موعد بدء الدورة القادمة."),
       lang: i % 2 ? "ar" : "en", page:"", status:S[i], notes: i === 3 ? "Paid. Starts next cohort." : "" }));
   }
