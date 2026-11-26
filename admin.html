@@ -152,7 +152,7 @@ tbody tr{cursor:pointer}
 tbody tr:hover{background:var(--hover)}
 tbody tr:last-child td{border-bottom:0}
 td .sub{font-size:13px;color:var(--dim)}
-.tag-inst{display:inline-block;margin-inline-start:6px;font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 45%,transparent)}
+.tag-inst{display:inline-block;white-space:nowrap;font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 45%,transparent)}
 td.when{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
 td.phone{font-family:var(--mono);font-size:13px;white-space:nowrap}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
@@ -168,6 +168,8 @@ td.phone{font-family:var(--mono);font-size:13px;white-space:nowrap}
   td.c-status{grid-column:2;grid-row:1}
   td.c-course,td.c-level{grid-column:1/-1;font-size:13px;color:var(--muted)}
   td.c-level{display:none}
+  td.c-pay{grid-column:1/-1}
+  td.c-pay .sub{display:none}
   td.phone{grid-column:1}
   td.when{grid-column:2;grid-row:3;text-align:end;font-size:12px}
 }
@@ -247,6 +249,7 @@ dd.mono{font-family:var(--mono);font-size:13px}
       <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="input" id="q" type="search" placeholder="Search name, phone, email, notes" aria-label="Search"></label>
       <select class="input" id="fCourse" aria-label="Course"></select>
       <select class="input" id="fStatus" aria-label="Status"></select>
+      <select class="input" id="fPay" aria-label="Payment"><option value="">All payments</option><option value="inst">Installments</option><option value="full">Pay in full</option><option value="none">Not recorded</option></select>
       <select class="input" id="fSort" aria-label="Sort">
         <option value="new">Newest first</option><option value="old">Oldest first</option><option value="name">Name A–Z</option>
       </select>
@@ -255,7 +258,7 @@ dd.mono{font-family:var(--mono);font-size:13px}
 
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Name</th><th>Phone</th><th>Course</th><th>Level</th><th>Status</th><th>Received</th></tr></thead>
+        <thead><tr><th>Name</th><th>Phone</th><th>Course</th><th>Payment</th><th>Level</th><th>Status</th><th>Received</th></tr></thead>
         <tbody id="rows"></tbody>
       </table>
       <div class="empty" id="empty" hidden></div>
@@ -389,7 +392,7 @@ async function api(action, extra = {}){
 
 /* ---------- State ---------- */
 let rows = [], statuses = Object.keys(STATUS_COLOR), lastSync = 0, current = null;
-const filt = { q:"", course:"", status:"", sort:"new", recent:false };
+const filt = { q:"", course:"", status:"", pay:"", sort:"new", recent:false };
 
 /* ---------- Login ---------- */
 function showLogin(msg){
@@ -473,6 +476,7 @@ function filtered(){
   let out = rows.filter(r =>
     (!filt.course || courseLabel(r.course) === filt.course) &&
     (!filt.status || r.status === filt.status) &&
+    (!filt.pay || (filt.pay === "inst" ? isInstallments(r) : filt.pay === "full" ? (!!r.plan && !isInstallments(r)) : !r.plan)) &&
     (!filt.recent || Date.now() - r.ts < WEEK) &&
     (!q || [r.name, r.email, r.notes, r.message, r.course].some(v => String(v).toLowerCase().includes(q)) || (qd.length >= 3 && digits(r.phone).includes(qd))));
   const by = { new:(a,b) => b.ts - a.ts, old:(a,b) => a.ts - b.ts, name:(a,b) => a.name.localeCompare(b.name) }[filt.sort];
@@ -485,14 +489,15 @@ function renderRows(){
   $("#rows").innerHTML = list.map(r => `<tr tabindex="0" data-ts="${r.ts}" data-row="${r.row}">
     <td class="c-name"><div dir="auto">${esc(r.name || "—")}</div><div class="sub" dir="auto">${esc(r.email)}</div></td>
     <td class="phone" dir="ltr">${esc(r.phone)}</td>
-    <td class="c-course">${esc(courseLabel(r.course))}${isInstallments(r) ? '<span class="tag-inst">Installments</span>' : ""}</td>
+    <td class="c-course">${esc(courseLabel(r.course))}</td>
+    <td class="c-pay">${isInstallments(r) ? '<span class="tag-inst">Installments</span>' : r.plan ? '<span class="sub">Pay in full</span>' : '<span class="sub">—</span>'}</td>
     <td class="c-level">${esc(levelLabel(r.level))}</td>
     <td class="c-status">${pill(r.status)}</td>
     <td class="when" title="${esc(fmtDate(r.ts))}">${esc(ago(r.ts))}</td></tr>`).join("");
   const empty = $("#empty");
   empty.hidden = list.length > 0;
   empty.innerHTML = rows.length ? `<b>No matches</b>Try a different search or <a href="#" id="clearF">clear the filters</a>.` : `<b>No registrations yet</b>New enquiries from the website form will appear here.`;
-  const cf = $("#clearF"); if (cf) cf.onclick = e => { e.preventDefault(); Object.assign(filt, {q:"", course:"", status:"", recent:false}); $("#q").value = ""; render(); };
+  const cf = $("#clearF"); if (cf) cf.onclick = e => { e.preventDefault(); Object.assign(filt, {q:"", course:"", status:"", pay:"", recent:false}); $("#q").value = ""; $("#fPay").value = ""; render(); };
   $("#rows").querySelectorAll("tr").forEach(tr => {
     const open = () => openDrawer(rows.find(r => String(r.ts) === tr.dataset.ts && String(r.row) === tr.dataset.row));
     tr.onclick = open; tr.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } };
@@ -503,6 +508,7 @@ $("#q").oninput = e => { filt.q = e.target.value; renderRows(); };
 $("#fCourse").onchange = e => { filt.course = e.target.value; render(); };
 $("#fStatus").onchange = e => { filt.status = e.target.value; filt.recent = false; render(); };
 $("#fSort").onchange = e => { filt.sort = e.target.value; renderRows(); };
+$("#fPay").onchange = e => { filt.pay = e.target.value; renderRows(); };
 
 /* ---------- Drawer ---------- */
 let lastFocus;
