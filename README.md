@@ -62,7 +62,7 @@ The page itself holds no data. It asks the Apps Script for the rows, and the scr
 1. In the sheet, open **Extensions → Apps Script**, replace `Code.gs` with the new [`google-apps-script.gs`](google-apps-script.gs), and click **Save**.
 2. **Project Settings (⚙️) → Script Properties → Add script property**: Property `ADMIN_PASSWORD`, Value a long password only you know (at least 12 characters). Save.
 3. **Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.** The URL stays the same, so the website form keeps working.
-4. Open `https://<your-site>/admin.html` (on GitHub Pages: https://gargorey.github.io/codepath-academy/admin.html) and sign in with that password.
+4. Open `https://<your-site>/admin.html` (https://khatwacode.com/admin.html) and sign in with that password.
 
 To change the password later, edit the script property; no redeploy needed. To point the dashboard at another Apps Script deployment, use the **Script link** button in its header: it tests the link before saving it. The dashboard also warns you when the website form (`googleSheetUrl` in index.html) sends to a different link than the dashboard reads from. The sheet gets the extra columns **Status**, **Notes** and **Payment plan** the first time the new script runs. Older rows show as *New*. Open `admin.html?demo` to try the dashboard with sample data.
 
@@ -81,6 +81,8 @@ Any static host works. The quickest options:
 - **Netlify Drop**: drag the folder onto https://app.netlify.com/drop.
 - **GitHub Pages**: push the folder to a repository, then Settings → Pages → deploy from the `main` branch.
 - **Vercel / Cloudflare Pages**: import the repository; no build command, output directory is the root.
+
+The site lives at **https://khatwacode.com** (domain registered at Namecheap). DNS: four A records for `@` to 185.199.108.153, .109.153, .110.153 and .111.153, and a CNAME for `www` to `gargorey.github.io`. The custom domain is set in the repository under Settings → Pages; the `CNAME` file records it.
 
 After deploying, change `og:image` in the `<head>` to the full URL (for example `https://your-domain.com/og-image.png`), because social networks need an absolute link.
 
