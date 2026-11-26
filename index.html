@@ -670,8 +670,7 @@ dialog[open]{animation:rise .3s both}
           <div class="field"><label for="f-name"><span data-i18n="fName">الاسم الكامل</span> <span class="req">*</span></label><input id="f-name" name="name" autocomplete="name" required><span class="err" id="e-name"></span></div>
           <div class="field"><label for="f-phone"><span data-i18n="fPhone">رقم الجوال / واتساب</span> <span class="req">*</span></label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+966 5x xxx xxxx" required><span class="err" id="e-phone"></span></div>
           <div class="field full"><label for="f-email"><span data-i18n="fEmail">البريد الإلكتروني</span> <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required><span class="err" id="e-email"></span></div>
-          <div class="field"><label for="f-course"><span data-i18n="fCourse">الدورة المطلوبة</span> <span class="req">*</span></label><select id="f-course" name="course" required></select><span class="err" id="e-course"></span></div>
-          <div class="field"><label for="f-level"><span data-i18n="fLevel">مستواك الحالي</span> <span class="req">*</span></label><select id="f-level" name="level" required></select><span class="err" id="e-level"></span></div>
+          <div class="field full"><label for="f-course"><span data-i18n="fCourse">الدورة المطلوبة</span> <span class="req">*</span></label><select id="f-course" name="course" required></select><span class="err" id="e-course"></span></div>
           <div class="field full"><label for="f-plan"><span data-i18n="fPlan">طريقة الدفع</span> <span class="req">*</span></label><select id="f-plan" name="plan" required></select><span class="err" id="e-plan"></span><span class="hint" data-i18n="fPlanHint">اختر التقسيط إن أردت الدفع على دفعات، وسنتواصل معك لتحديد جدول الأقساط المناسب لك.</span></div>
           <div class="field full"><label for="f-msg" data-i18n="fMsg">رسالتك (اختياري)</label><textarea id="f-msg" name="message" data-i18n-ph="fMsgPh" placeholder="أخبرنا بهدفك من التعلّم أو أي سؤال لديك"></textarea></div>
           <div class="form-foot">
@@ -829,8 +828,8 @@ const FAQ = [
    {ar:"للمبتدئين تماماً، ولطلاب الجامعات والخرّيجين، وللمهنيين الذين يريدون الانتقال إلى مجال البرمجة، ولكل من يهتم بتعلّمها. كل دورة موضّح مستواها لتختار ما يناسبك.",
     en:"Complete beginners, university students and graduates, professionals switching careers, and anyone interested in learning to code. Each course shows its level so you can pick the right one."}],
   [{ar:"هل أحتاج خبرة سابقة؟", en:"Do I need prior experience?"},
-   {ar:"دورة أساسيات البرمجة لا تتطلب أي خبرة. دورة OOP تفترض معرفة الأساسيات، ودورة Flutter للمبتدئين تبدأ معك من أساسيات Dart، أما دورة Flutter المتقدمة فموجّهة لمن يبني تطبيقات Flutter بالفعل. إن لم تكن متأكداً، اذكر مستواك في نموذج التسجيل وسنقترح عليك نقطة البداية.",
-    en:"Programming Fundamentals needs no experience. OOP assumes you know the basics, Flutter Beginner starts from Dart fundamentals, and Flutter Advanced is for people already building Flutter apps. Not sure? Tell us your level in the form and we'll suggest where to start."}],
+   {ar:"دورة أساسيات البرمجة لا تتطلب أي خبرة. دورة OOP تفترض معرفة الأساسيات، ودورة Flutter للمبتدئين تبدأ معك من أساسيات Dart، أما دورة Flutter المتقدمة فموجّهة لمن يبني تطبيقات Flutter بالفعل. إن لم تكن متأكداً، اختر «لم أحدد بعد، أحتاج استشارة» في نموذج التسجيل وسنقترح عليك نقطة البداية.",
+    en:"Programming Fundamentals needs no experience. OOP assumes you know the basics, Flutter Beginner starts from Dart fundamentals, and Flutter Advanced is for people already building Flutter apps. Not sure? Choose \"Not sure yet\" in the form and we'll suggest where to start."}],
   [{ar:"كيف تُقدَّم الدورات؟", en:"How are the courses delivered?"},
    {ar:"الدورات أونلاين بالكامل عبر جلسات مباشرة، يمكنك حضورها من أي مكان. تُرسل تفاصيل المنصة والمواعيد للمسجلين قبل بداية كل دورة.",
     en:"Fully online through live sessions you can join from anywhere. Platform details and schedules are sent to registered learners before each course starts."}],
@@ -1042,13 +1041,12 @@ function renderContact(){
 }
 
 function renderFormOptions(){
-  const cs = $("#f-course"), lv = $("#f-level"), cv = cs.value, li = lv.selectedIndex;
+  const cs = $("#f-course"), cv = cs.value;
   cs.innerHTML = `<option value="">${esc(t("chooseCourse"))}</option>` +
     `<option value="${DIPLOMA.id}">${esc(t("diplomaOpt"))} — ${esc(priceText(PRICES.diploma))}</option>` +
     COURSES.map(c => `<option value="${c.id}">${esc(L(c.title))} — ${esc(priceText(PRICES.course))}</option>`).join("") +
     `<option value="unsure">${esc(t("unsure"))}</option>`;
-  lv.innerHTML = `<option value="">${esc(t("chooseLevel"))}</option>` + t("levels").map((l,i) => `<option value="${i+1}">${esc(l)}</option>`).join("");
-  cs.value = cv; lv.selectedIndex = li < 0 ? 0 : li;
+  cs.value = cv;
   const pl = $("#f-plan"), pi = pl.selectedIndex;
   pl.innerHTML = `<option value="">${esc(t("choosePlan"))}</option>` + t("plans").map((l,i) => `<option value="${i+1}">${esc(l)}</option>`).join("");
   pl.selectedIndex = pi < 0 ? 0 : pi;
@@ -1117,7 +1115,6 @@ const rules = {
   phone: v => /^\+?[0-9\s-]{8,16}$/.test(v.trim()) || t("errPhone"),
   email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || t("errEmail"),
   course:v => !!v || t("errCourse"),
-  level: v => !!v || t("errLevel"),
   plan:  v => !!v || t("errPlan")
 };
 function check(name){
@@ -1135,7 +1132,7 @@ Object.keys(rules).forEach(n => {
 function summary(d){
   const c = COURSES.find(x => x.id === d.course);
   return [t("sumHead"), `${t("sumName")}: ${d.name}`, `${t("sumPhone")}: ${d.phone}`, `${t("sumEmail")}: ${d.email}`,
-    `${t("sumCourse")}: ${d.course === DIPLOMA.id ? t("diplomaOpt") + " – " + priceText(PRICES.diploma) : c ? L(c.title) + " – " + priceText(PRICES.course) : t("unsure")}`, `${t("sumLevel")}: ${t("levels")[+d.level - 1] || ""}`, `${t("sumPlan")}: ${t("plans")[+d.plan - 1] || ""}`,
+    `${t("sumCourse")}: ${d.course === DIPLOMA.id ? t("diplomaOpt") + " – " + priceText(PRICES.diploma) : c ? L(c.title) + " – " + priceText(PRICES.course) : t("unsure")}`, `${t("sumPlan")}: ${t("plans")[+d.plan - 1] || ""}`,
     d.message ? `${t("sumMsg")}: ${d.message}` : ""].filter(Boolean).join("\n");
 }
 form.addEventListener("submit", async e => {
@@ -1153,7 +1150,7 @@ form.addEventListener("submit", async e => {
     const row = { name:data.name, phone:data.phone, email:data.email,
       course: data.course === DIPLOMA.id ? UI.ar.diplomaOpt + " | " + UI.en.diplomaOpt
             : c ? c.title.ar + " | " + c.title.en : UI.ar.unsure,
-      level: UI.ar.levels[+data.level-1] || "", message:data.message || "", lang, page:location.href,
+      level: "", message:data.message || "", lang, page:location.href,
       plan: data.plan === "2" ? "بالتقسيط | Installments" : "دفعة واحدة | Pay in full" };
     /* text/plain body keeps this a "simple" request, which Google Apps Script accepts without a CORS preflight */
     const res = await fetch(SITE.googleSheetUrl, {method:"POST", body:JSON.stringify(row)});
